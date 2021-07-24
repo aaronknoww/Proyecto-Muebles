@@ -1,3 +1,13 @@
 .vs/
 x64/
 Muebles CA.sln
+Muebles Model/Muebles Model.vcxproj
+Muebles Model/Muebles Model.vcxproj.filters
+Muebles Model/Muebles Model.vcxproj.user
+MueblesController/MueblesController.vcxproj
+MueblesController/MueblesController.vcxproj.filters
+MueblesController/MueblesController.vcxproj.user
+Muebles CA pantallas/Muebles CA pantallas.vcxproj
+Muebles CA pantallas/Muebles CA pantallas.vcxproj.filters
+Muebles CA pantallas/Muebles CA pantallas.vcxproj.user
+

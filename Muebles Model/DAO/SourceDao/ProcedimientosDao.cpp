@@ -5,8 +5,9 @@
 
 void MueblesModel::ProcedimientosDao::procedimientoDeposito(Double monto, String^ fecha)
 {
-
+	String^ muestra;
 	comandoSql->Connection = abrirConexion();
+	muestra = "CALL deposito(" + monto + "," + fecha + ");";
 	comandoSql->CommandText = "CALL deposito(" + monto + "," + fecha + ");";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
@@ -24,8 +25,9 @@ void MueblesModel::ProcedimientosDao::procedimientoRetiro(Double monto, String^ 
 
 void MueblesModel::ProcedimientosDao::procedimientoCompra(String^ nombre, String^ descripcion, String^ fecha, Double costo, String^ descompra)
 {
+
 	comandoSql->Connection = abrirConexion();
-	comandoSql->CommandText = "CALL compra(" + nombre + "," + descripcion + "," + fecha + "," + costo + "," + descompra + "); ";
+	comandoSql->CommandText = "CALL compra(" + nombre + "," + descripcion + "," + fecha + "," + costo + "," + descompra + ");";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
 }

@@ -20,8 +20,10 @@ namespace MueblesController
 	public:
 		ControladorGeneral();
 		Boolean esNumero(Char); //-----------------> Regresa true si recibe algun número.
-		String^ suma(String^, String^);
-		
+		String^ suma(String^, String^);//----------> Suma dos valores string, para eso se utilizan Double.
+		String^ resta(String^, String^);//---------> Resta dos valores string, para eso los combierte en Double.
+		Boolean vacio(String^);//------------------> Recibe una cadena e indica si esta se encuentra vacia.
+		String^ cadenaSql(String^);//--------------> Convierte una cadena normal a una que reconoce MySQL, le agrega ' '
 	};
 
 }

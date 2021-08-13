@@ -8,6 +8,7 @@ namespace MueblesCApantallas {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MueblesController;
 
 	/// <summary>
 	/// Resumen de CompraForm
@@ -18,9 +19,15 @@ namespace MueblesCApantallas {
 		CompraForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			
+			procedimiento = gcnew ProcedimentosController();
+			controlador = gcnew ControladorGeneral();
+			this->lblGetDinero->Text = procedimiento->getCapitalActual();
+			this->lblGetRestante->Text = this->lblGetDinero->Text;
+			fechaActual = fechaActual.Now;
+			this->lblGetFecha->Text = fechaActual.ToShortDateString();// Para mostrar la fehca actual al usuario
+			punto = false;
+			contador = 0;
 		}
 
 	protected:
@@ -64,6 +71,14 @@ namespace MueblesCApantallas {
 
 
 	private:
+
+		ProcedimentosController^ procedimiento;
+		ControladorGeneral^ controlador;
+		Boolean punto;
+		DateTime fechaActual;
+		Int16 contador;
+
+		//System::ComponentModel::Container^ components;
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
@@ -124,13 +139,13 @@ namespace MueblesCApantallas {
 			this->txbSetNomMue->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txbSetNomMue->Location = System::Drawing::Point(307, 46);
+			this->txbSetNomMue->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txbSetNomMue->MaxLength = 30;
 			this->txbSetNomMue->Name = L"txbSetNomMue";
 			this->txbSetNomMue->Size = System::Drawing::Size(320, 32);
 			this->txbSetNomMue->TabIndex = 17;
-			this->txbSetNomMue->Text = L"01234567890123456789";
+			this->txbSetNomMue->Text = L"visual";
 			this->txbSetNomMue->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
-			this->txbSetNomMue->TextChanged += gcnew System::EventHandler(this, &CompraForm::txbSetNomMue_TextChanged);
 			// 
 			// lblDescMue
 			// 
@@ -140,7 +155,7 @@ namespace MueblesCApantallas {
 			this->lblDescMue->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblDescMue->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblDescMue->Location = System::Drawing::Point(102, 100);
+			this->lblDescMue->Location = System::Drawing::Point(101, 100);
 			this->lblDescMue->Name = L"lblDescMue";
 			this->lblDescMue->Size = System::Drawing::Size(189, 32);
 			this->lblDescMue->TabIndex = 20;
@@ -155,13 +170,14 @@ namespace MueblesCApantallas {
 			this->txbSetDescMue->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txbSetDescMue->Location = System::Drawing::Point(307, 101);
+			this->txbSetDescMue->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txbSetDescMue->MaxLength = 60;
 			this->txbSetDescMue->Multiline = true;
 			this->txbSetDescMue->Name = L"txbSetDescMue";
 			this->txbSetDescMue->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->txbSetDescMue->Size = System::Drawing::Size(320, 76);
 			this->txbSetDescMue->TabIndex = 19;
-			this->txbSetDescMue->Text = L"0123456789012345678901234567890123456789";
+			this->txbSetDescMue->Text = L"mueble tipo studio";
 			this->txbSetDescMue->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// gbMueble
@@ -175,10 +191,12 @@ namespace MueblesCApantallas {
 			this->gbMueble->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gbMueble->ForeColor = System::Drawing::Color::Peru;
-			this->gbMueble->Location = System::Drawing::Point(11, 56);
+			this->gbMueble->Location = System::Drawing::Point(11, 57);
+			this->gbMueble->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbMueble->Name = L"gbMueble";
+			this->gbMueble->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbMueble->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->gbMueble->Size = System::Drawing::Size(638, 200);
+			this->gbMueble->Size = System::Drawing::Size(637, 199);
 			this->gbMueble->TabIndex = 21;
 			this->gbMueble->TabStop = false;
 			this->gbMueble->Text = L"Datos del mueble";
@@ -191,7 +209,7 @@ namespace MueblesCApantallas {
 			this->lblCosto->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblCosto->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblCosto->Location = System::Drawing::Point(174, 39);
+			this->lblCosto->Location = System::Drawing::Point(173, 39);
 			this->lblCosto->Name = L"lblCosto";
 			this->lblCosto->Size = System::Drawing::Size(112, 32);
 			this->lblCosto->TabIndex = 22;
@@ -205,13 +223,16 @@ namespace MueblesCApantallas {
 			this->txbSetCosto->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->txbSetCosto->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->txbSetCosto->Location = System::Drawing::Point(302, 40);
-			this->txbSetCosto->MaxLength = 30;
+			this->txbSetCosto->Location = System::Drawing::Point(301, 39);
+			this->txbSetCosto->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->txbSetCosto->MaxLength = 8;
 			this->txbSetCosto->Name = L"txbSetCosto";
 			this->txbSetCosto->Size = System::Drawing::Size(320, 32);
 			this->txbSetCosto->TabIndex = 21;
-			this->txbSetCosto->Text = L"01234567890123456789";
+			this->txbSetCosto->Text = L"1000";
 			this->txbSetCosto->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->txbSetCosto->TextChanged += gcnew System::EventHandler(this, &CompraForm::txbSetCosto_TextChanged);
+			this->txbSetCosto->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &CompraForm::txbSetCosto_KeyPress);
 			// 
 			// lblFechaCompra
 			// 
@@ -250,14 +271,15 @@ namespace MueblesCApantallas {
 			this->txbSetDescCompra->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->txbSetDescCompra->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->txbSetDescCompra->Location = System::Drawing::Point(302, 155);
+			this->txbSetDescCompra->Location = System::Drawing::Point(301, 155);
+			this->txbSetDescCompra->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txbSetDescCompra->MaxLength = 60;
 			this->txbSetDescCompra->Multiline = true;
 			this->txbSetDescCompra->Name = L"txbSetDescCompra";
 			this->txbSetDescCompra->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->txbSetDescCompra->Size = System::Drawing::Size(320, 76);
 			this->txbSetDescCompra->TabIndex = 21;
-			this->txbSetDescCompra->Text = L"0123456789012345678901234567890123456789";
+			this->txbSetDescCompra->Text = L"prueba del visual";
 			this->txbSetDescCompra->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// gbCompra
@@ -273,7 +295,9 @@ namespace MueblesCApantallas {
 				static_cast<System::Byte>(0)));
 			this->gbCompra->ForeColor = System::Drawing::Color::Green;
 			this->gbCompra->Location = System::Drawing::Point(13, 294);
+			this->gbCompra->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbCompra->Name = L"gbCompra";
+			this->gbCompra->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbCompra->Size = System::Drawing::Size(632, 249);
 			this->gbCompra->TabIndex = 24;
 			this->gbCompra->TabStop = false;
@@ -286,7 +310,8 @@ namespace MueblesCApantallas {
 			this->dtpSetfecha->CalendarMonthBackground = System::Drawing::SystemColors::MenuHighlight;
 			this->dtpSetfecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F));
 			this->dtpSetfecha->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dtpSetfecha->Location = System::Drawing::Point(302, 97);
+			this->dtpSetfecha->Location = System::Drawing::Point(301, 97);
+			this->dtpSetfecha->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dtpSetfecha->Name = L"dtpSetfecha";
 			this->dtpSetfecha->Size = System::Drawing::Size(320, 39);
 			this->dtpSetfecha->TabIndex = 24;
@@ -299,7 +324,7 @@ namespace MueblesCApantallas {
 			this->lblGetDinero->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblGetDinero->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblGetDinero->Location = System::Drawing::Point(864, 67);
+			this->lblGetDinero->Location = System::Drawing::Point(864, 66);
 			this->lblGetDinero->Name = L"lblGetDinero";
 			this->lblGetDinero->Size = System::Drawing::Size(155, 33);
 			this->lblGetDinero->TabIndex = 26;
@@ -327,7 +352,7 @@ namespace MueblesCApantallas {
 			this->lblGetFecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblGetFecha->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblGetFecha->Location = System::Drawing::Point(864, 131);
+			this->lblGetFecha->Location = System::Drawing::Point(864, 130);
 			this->lblGetFecha->Name = L"lblGetFecha";
 			this->lblGetFecha->Size = System::Drawing::Size(199, 33);
 			this->lblGetFecha->TabIndex = 28;
@@ -341,7 +366,7 @@ namespace MueblesCApantallas {
 			this->labelFecha->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 16.2F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelFecha->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->labelFecha->Location = System::Drawing::Point(683, 131);
+			this->labelFecha->Location = System::Drawing::Point(683, 130);
 			this->labelFecha->Name = L"labelFecha";
 			this->labelFecha->Size = System::Drawing::Size(115, 32);
 			this->labelFecha->TabIndex = 27;
@@ -383,12 +408,14 @@ namespace MueblesCApantallas {
 			this->btnComprar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnComprar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnComprar->Location = System::Drawing::Point(13, 573);
+			this->btnComprar->Location = System::Drawing::Point(13, 574);
+			this->btnComprar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnComprar->Name = L"btnComprar";
 			this->btnComprar->Size = System::Drawing::Size(180, 50);
 			this->btnComprar->TabIndex = 31;
 			this->btnComprar->Text = L"Comprar";
 			this->btnComprar->UseVisualStyleBackColor = false;
+			this->btnComprar->Click += gcnew System::EventHandler(this, &CompraForm::btnComprar_Click);
 			// 
 			// btnLimpiar
 			// 
@@ -398,12 +425,14 @@ namespace MueblesCApantallas {
 			this->btnLimpiar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnLimpiar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnLimpiar->Location = System::Drawing::Point(219, 573);
+			this->btnLimpiar->Location = System::Drawing::Point(219, 574);
+			this->btnLimpiar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnLimpiar->Name = L"btnLimpiar";
 			this->btnLimpiar->Size = System::Drawing::Size(180, 50);
 			this->btnLimpiar->TabIndex = 32;
 			this->btnLimpiar->Text = L"Limpiar";
 			this->btnLimpiar->UseVisualStyleBackColor = false;
+			this->btnLimpiar->Click += gcnew System::EventHandler(this, &CompraForm::btnLimpiar_Click);
 			// 
 			// btnMostrar
 			// 
@@ -413,7 +442,8 @@ namespace MueblesCApantallas {
 			this->btnMostrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnMostrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnMostrar->Location = System::Drawing::Point(426, 573);
+			this->btnMostrar->Location = System::Drawing::Point(427, 574);
+			this->btnMostrar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnMostrar->Name = L"btnMostrar";
 			this->btnMostrar->Size = System::Drawing::Size(219, 50);
 			this->btnMostrar->TabIndex = 33;
@@ -437,6 +467,7 @@ namespace MueblesCApantallas {
 			this->Controls->Add(this->labelCapital);
 			this->Controls->Add(this->gbCompra);
 			this->Controls->Add(this->gbMueble);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"CompraForm";
 			this->Text = L"Compra";
 			this->gbMueble->ResumeLayout(false);
@@ -448,7 +479,110 @@ namespace MueblesCApantallas {
 
 		}
 #pragma endregion
-	private: System::Void txbSetNomMue_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	
+private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	
+	this->txbSetNomMue->Clear();
+	this->txbSetDescMue->Clear();
+	this->txbSetCosto->Clear();
+	this->dtpSetfecha->Text = fechaActual.ToShortTimeString();
+	this->txbSetDescCompra->Clear();
+	contador = 0;
+	punto = false;
+	
+	
+	
+}
+private: System::Void btnComprar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	
+	if ((controlador->vacio(this->txbSetNomMue->Text)) || (controlador->vacio(this->txbSetCosto->Text)))
+	{
+		// Entra porque falta al menos un dato de llenar.
+
+		if ((controlador->vacio(this->txbSetNomMue->Text)) && (controlador->vacio(this->txbSetCosto->Text)))
+			MessageBox::Show("Es necesario llenar el campo nombre y costo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else if(controlador->vacio(this->txbSetNomMue->Text))
+			MessageBox::Show("Ha necesario llenar el campo nombre", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			MessageBox::Show("Ha necesario llenar el campo costo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
+	else
+	{
+		System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos", "Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+		if (respuesta == System::Windows::Forms::DialogResult::Yes)
+		{
+			// Entra porque el usuario confirma que los datos son correctos.
+
+			if (procedimiento->comprar(this->txbSetNomMue->Text, this->txbSetDescMue->Text,
+				this->dtpSetfecha->Value, this->txbSetCosto->Text, this->txbSetDescCompra->Text))
+			{
+				// Entra aqui porque no ocurrio ningun error.
+				MessageBox::Show("Se registro tu compra correctamente", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+				this->txbSetNomMue->Clear();
+				this->txbSetDescMue->Clear();
+				this->txbSetCosto->Clear();
+				this->dtpSetfecha->Text = fechaActual.ToShortTimeString();
+				this->txbSetDescCompra->Clear();
+				contador = 0;
+				punto = false;
+
+				return;
+			}
+			else
+			{
+				MessageBox::Show("Ocurrio un error al insertar en la base de datos", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		
+
+		
+		}
+		else
+			return;
+	
+	}
+}
+
+private: System::Void txbSetCosto_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) 
+{
+	// En este evento se verifica que la tecla presionada sea un numero.
+	if (contador < 2)
+	{
+
+		if (controlador->esNumero(e->KeyChar))
+		{
+			if (punto)
+				contador++;
+			// entra cuando ingresa un numero.
+			return;
+		}
+		else if (e->KeyChar == 46 && punto == false)
+		{
+			//entra la primera vez que detecta un punto.
+			punto = true;
+			return;
+
+		}
+	}
+	e->Handled = true;
+	return;
+
+}
+private: System::Void txbSetCosto_TextChanged(System::Object^ sender, System::EventArgs^ e)
+{
+	// En este evento a medida que va cambiando el texto de costo, se va reflejando en el capital restante
+
+	String^ cadena = controlador->resta(this->lblGetDinero->Text, this->txbSetCosto->Text); //---> resta num1-num2
+	this->txbSetCosto->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+	
+	if (String::Compare(cadena, "E0001") != 0)
+		this->lblGetRestante->Text = cadena; //----------------> Si el metodo resta no contiene errores envia la suma de los numeros.
+	else
+		this->lblGetRestante->Text = this->lblGetDinero->Text; //--> Entra cuando uno de los numeros a sumar ingresa vacio.
+
+
+}
 };
 }

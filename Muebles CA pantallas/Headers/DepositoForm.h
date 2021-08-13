@@ -313,9 +313,9 @@ private: System::Void textBoxDeposito_TextChanged(System::Object^ sender, System
 
 	this->textBoxDeposito->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 	if (String::Compare(cadena, "E0000") != 0)
-			this->lblGetActual->Text = cadena; //---> Si el metodo suma no contiene errores envia la suma de los numeros.
+			this->lblGetActual->Text = cadena; //----------------> Si el metodo suma no contiene errores envia la suma de los numeros.
 	else
-		this->lblGetActual->Text = this->lblGetDinero->Text; //-----> Entra cuando uno de los numeros a sumar ingresa vacio.
+		this->lblGetActual->Text = this->lblGetDinero->Text; //--> Entra cuando uno de los numeros a sumar ingresa vacio.
 
 	
 }

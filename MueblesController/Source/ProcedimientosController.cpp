@@ -61,3 +61,36 @@ Boolean MueblesController::ProcedimentosController::retiro(String^ retiro, DateT
 
 	
 }
+
+Boolean MueblesController::ProcedimentosController::comprar(String^ nombre, String^ desMue, DateTime^ fecha, String^ costo, String^ desCom)
+{
+	ProcedimientosDao proCompra;
+	
+	Double resultado;
+	//System::Collections::Generic::array<System::String^>^ tipos fecha->GetDateTimeFormats();
+	
+	auto tipos = fecha->GetDateTimeFormats();
+	String^ formato = tipos[80];// Se obtiene un formato que concuerda con un datetime de mysql 
+	
+	
+
+	resultado = resultado.Parse(costo);
+
+	
+
+	try
+	{
+		proCompra.procedimientoCompra(f.cadenaSql(nombre), f.cadenaSql(desMue), f.cadenaSql(formato), resultado, f.cadenaSql(desCom));
+		
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+	
+	
+	
+}

@@ -578,7 +578,25 @@ private: System::Void txbSetCosto_TextChanged(System::Object^ sender, System::Ev
 	this->txbSetCosto->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 	
 	if (String::Compare(cadena, "E0001") != 0)
-		this->lblGetRestante->Text = cadena; //----------------> Si el metodo resta no contiene errores envia la suma de los numeros.
+	{
+		// Si el metodo resta no contiene errores envia la resta de los numeros.
+		Double numero;
+
+		numero = numero.Parse(cadena); // Se convierte la cadena a double, para poder hacer comparacion.
+		if (numero > 0)
+		{
+			this->lblGetRestante->ForeColor = System::Drawing::Color::MediumSeaGreen;
+			this->lblGetRestante->Text = cadena; 
+
+		}
+		else
+		{
+			this->lblGetRestante->ForeColor = System::Drawing::Color::Red;
+			this->lblGetRestante->Text = cadena;
+		}
+	
+		
+	}
 	else
 		this->lblGetRestante->Text = this->lblGetDinero->Text; //--> Entra cuando uno de los numeros a sumar ingresa vacio.
 

@@ -1,8 +1,12 @@
 #pragma once
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/VistaDto.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/ComprasRealizadas.h"
+#include "MueblesConexion.h"
+
+
+
 // Aquí se mandan llamar todas las VISTAS creadas en la Base de Datos, en MySQL.
 
-#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/VistaDto.h"
-#include "MueblesConexion.h"
 
 using namespace System;
 using namespace System::IO;
@@ -22,6 +26,7 @@ namespace MueblesModel
 	private:
 	
 		property List<VistaDto^>^ _listaGenerica;
+		property List<ComprasRealizadas^>^ _listaComprasRealizadas;
 		
 	public:
 		
@@ -29,6 +34,7 @@ namespace MueblesModel
 		List<VistaDto^>^ vistaInventario();
 		List<VistaDto^>^ vistaMovimientosFinancieros();
 		List<VistaDto^>^ vistaRegistroMuebles();
+		List<ComprasRealizadas^>^ vistaCompraRealizada();
 		
 	
 	};

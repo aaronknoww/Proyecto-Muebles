@@ -3,7 +3,7 @@
 using namespace System;
 namespace MueblesModel
 {
-	ref class AlmacenDto
+	public ref class AlmacenDto
 	{
 	private:
 		property int	_idAlmacen;

@@ -4,7 +4,7 @@ using namespace System;
 
 namespace MueblesModel
 {
-	ref class ComprasDto
+	public ref class ComprasDto
 	{
 	private:
 		property int	 _id;

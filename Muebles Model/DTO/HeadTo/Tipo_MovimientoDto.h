@@ -2,7 +2,7 @@
 
 using namespace System;
 
-ref class Tipo_MovimientoDto
+public ref class Tipo_MovimientoDto
 {
 private:
 	

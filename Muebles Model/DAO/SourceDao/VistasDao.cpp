@@ -6,6 +6,7 @@
 MueblesModel::VistasDao::VistasDao()
 {
 	_listaGenerica = gcnew List<VistaDto^>;
+	_listaComprasRealizadas = gcnew List<ComprasRealizadas^>;
 }
 
 List<MueblesModel::VistaDto^>^ MueblesModel::VistasDao::vistaInventario()
@@ -124,7 +125,7 @@ List<MueblesModel::ComprasRealizadas^>^ MueblesModel::VistasDao::vistaCompraReal
 		_listaComprasRealizadas[i]->setId(lectorSql->GetInt32(0));
 		_listaComprasRealizadas[i]->setNombre(lectorSql->GetString(1));
 		_listaComprasRealizadas[i]->setDesMueble(lectorSql->GetString(2)); 
-		_listaComprasRealizadas[i]->setFecha(lectorSql->GetDateTime(3));
+		_listaComprasRealizadas[i]->setFecha(Convert::ToDateTime(lectorSql->GetString(3))); //DateTime^ fecha = Convert::ToDateTime(prueba);
 		_listaComprasRealizadas[i]->setCosto(lectorSql->GetDouble(4)); 
 		_listaComprasRealizadas[i]->setDesCompra(lectorSql->GetString(5));
 		i++;

@@ -10,7 +10,7 @@ namespace MueblesCApantallas {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace MueblesController;
-	
+		
 
 	/// <summary>
 	/// Resumen de CompraForm
@@ -106,10 +106,10 @@ namespace MueblesCApantallas {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lblNomMueble = (gcnew System::Windows::Forms::Label());
 			this->txbSetNomMue = (gcnew System::Windows::Forms::TextBox());
 			this->lblDescMue = (gcnew System::Windows::Forms::Label());
@@ -170,7 +170,6 @@ namespace MueblesCApantallas {
 			this->txbSetNomMue->Name = L"txbSetNomMue";
 			this->txbSetNomMue->Size = System::Drawing::Size(286, 32);
 			this->txbSetNomMue->TabIndex = 1;
-			this->txbSetNomMue->Text = L"visual";
 			this->txbSetNomMue->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			// 
 			// lblDescMue
@@ -203,7 +202,6 @@ namespace MueblesCApantallas {
 			this->txbSetDescMue->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->txbSetDescMue->Size = System::Drawing::Size(286, 76);
 			this->txbSetDescMue->TabIndex = 2;
-			this->txbSetDescMue->Text = L"mueble tipo studio";
 			// 
 			// gbMueble
 			// 
@@ -254,7 +252,6 @@ namespace MueblesCApantallas {
 			this->txbSetCosto->Name = L"txbSetCosto";
 			this->txbSetCosto->Size = System::Drawing::Size(280, 32);
 			this->txbSetCosto->TabIndex = 3;
-			this->txbSetCosto->Text = L"1000";
 			this->txbSetCosto->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->txbSetCosto->TextChanged += gcnew System::EventHandler(this, &CompraForm::txbSetCosto_TextChanged);
 			this->txbSetCosto->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &CompraForm::txbSetCosto_KeyPress);
@@ -304,7 +301,6 @@ namespace MueblesCApantallas {
 			this->txbSetDescCompra->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->txbSetDescCompra->Size = System::Drawing::Size(280, 76);
 			this->txbSetDescCompra->TabIndex = 5;
-			this->txbSetDescCompra->Text = L"prueba del visual";
 			// 
 			// gbCompra
 			// 
@@ -469,15 +465,15 @@ namespace MueblesCApantallas {
 			this->dgvVistaCom->AllowUserToResizeRows = false;
 			this->dgvVistaCom->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCellsExceptHeader;
 			this->dgvVistaCom->BackgroundColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle5->BackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::DarkGoldenrod;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaCom->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::DarkGoldenrod;
+			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaCom->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this->dgvVistaCom->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvVistaCom->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->nombreMue,
@@ -487,25 +483,26 @@ namespace MueblesCApantallas {
 			this->dgvVistaCom->GridColor = System::Drawing::Color::Goldenrod;
 			this->dgvVistaCom->Location = System::Drawing::Point(526, 295);
 			this->dgvVistaCom->Name = L"dgvVistaCom";
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle7->BackColor = System::Drawing::SystemColors::WindowFrame;
+			dataGridViewCellStyle7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::InactiveCaption;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaCom->RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7->ForeColor = System::Drawing::SystemColors::InactiveCaption;
+			dataGridViewCellStyle7->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle7->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle7->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaCom->RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
 			this->dgvVistaCom->RowHeadersVisible = false;
 			this->dgvVistaCom->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			dataGridViewCellStyle8->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::DarkGoldenrod;
-			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->dgvVistaCom->RowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle8->ForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle8->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
+				static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(137)));
+			dataGridViewCellStyle8->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->dgvVistaCom->RowsDefaultCellStyle = dataGridViewCellStyle8;
 			this->dgvVistaCom->RowTemplate->Height = 24;
 			this->dgvVistaCom->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaCom->Size = System::Drawing::Size(615, 329);
@@ -514,8 +511,8 @@ namespace MueblesCApantallas {
 			// 
 			// nombreMue
 			// 
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle6;
 			this->nombreMue->HeaderText = L"Nombre";
 			this->nombreMue->MinimumWidth = 6;
 			this->nombreMue->Name = L"nombreMue";
@@ -756,9 +753,11 @@ private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^
 									
 			//Procedimiento almacenado para hacer un alter table.
 			ejecutarEditar();
-			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::Hand);
+			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
 			limpiar();
 			this->btnComprar->Enabled = true;
+			
+		
 		
 
 		}
@@ -782,7 +781,7 @@ private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^
 private: System::Void dgvVistaCom_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) 
 {
 	datos->Clear();// Elimina todo lo que haya en la lista de datos.
-	this->btnComprar->Enabled = false;// No permite registrar copia mientras se esta editando. 
+	this->btnComprar->Enabled = false;// No permite registrar compras mientras se esta editando. 
 
 	// Se copian los datos de la fila seleccionada a los textboxs de la pantalla.
 

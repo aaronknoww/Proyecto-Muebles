@@ -41,6 +41,10 @@ System::Boolean MueblesCApantallas::CompraForm::ejecutarEditar()
 	else
 	{
 		// Ejecuta procedimiento
+		
+		
+		procedimiento->updateCompra(datos[5], txbSetNomMue->Text, txbSetDescMue->Text,
+			dtpSetfecha->Value.ToShortDateString(), txbSetCosto->Text, txbSetDescCompra->Text);
 		return true;
 	}
 

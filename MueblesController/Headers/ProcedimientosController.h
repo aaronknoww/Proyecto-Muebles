@@ -12,6 +12,7 @@ using namespace System::Globalization;// Para poder usar cultureType
 using namespace std;
 using namespace MueblesModel;
 
+
 namespace MueblesController
 {
 	public ref class ProcedimentosController
@@ -25,6 +26,7 @@ namespace MueblesController
 		Boolean depositar(String^, DateTime^);//---> Manda llamar al stored procedure deposito. Utilizando Model DAO
 		Boolean retiro(String^, DateTime^);//------> Manda llamar al stored procedure retirar. Utilizando Model DAO
 		Boolean comprar(String^, String^, DateTime^, String^, String^); //--> manda llamar al stored procedure compra.
+		Boolean updateCompra(String^, String^, String^, String^, String^, String^);
 	};
 
 }

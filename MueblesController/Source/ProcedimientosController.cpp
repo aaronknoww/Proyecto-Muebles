@@ -94,3 +94,28 @@ Boolean MueblesController::ProcedimentosController::comprar(String^ nombre, Stri
 	
 	
 }
+
+Boolean MueblesController::ProcedimentosController::updateCompra(String^ id, String^ nombreMue, String^ DesMue, String^ fecha, String^ costo, String^desCompra)
+{
+	ProcedimientosDao proUpdate;
+	
+	DateTime^ fech= gcnew DateTime;
+	fech=fech->Parse(fecha);
+
+	auto tipo = fech->GetDateTimeFormats();
+	fecha = tipo[80];
+
+	try
+	{
+		proUpdate.procedimietnoUpdateCompra(Int32::Parse(id), f.cadenaSql(nombreMue), f.cadenaSql(DesMue),
+			f.cadenaSql(fecha), Double::Parse(costo), f.cadenaSql(desCompra));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+}

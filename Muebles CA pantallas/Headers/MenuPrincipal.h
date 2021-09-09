@@ -2,6 +2,7 @@
 #include "DepositoForm.h"
 #include "RetiroForm.h"
 #include "CompraForm.h"
+#include "VentaForm.h"
 #pragma once
 
 namespace MueblesCApantallas {
@@ -182,6 +183,7 @@ namespace MueblesCApantallas {
 			this->botonVenta->TabIndex = 4;
 			this->botonVenta->Text = L"Venta";
 			this->botonVenta->UseVisualStyleBackColor = false;
+			this->botonVenta->Click += gcnew System::EventHandler(this, &MenuPrincipal::botonVenta_Click);
 			// 
 			// botonCompra
 			// 
@@ -346,6 +348,11 @@ private: System::Void botonRetiro_Click(System::Object^ sender, System::EventArg
 private: System::Void botonCompra_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	abrirFormaHija(gcnew CompraForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
+}
+private: System::Void botonVenta_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	
+	abrirFormaHija(gcnew VentaForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
 }
 };
 }

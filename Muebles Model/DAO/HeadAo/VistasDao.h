@@ -35,7 +35,6 @@ namespace MueblesModel
 		List<VistaDto^>^ vistaMovimientosFinancieros();
 		List<VistaDto^>^ vistaRegistroMuebles();
 		List<ComprasRealizadas^>^ vistaCompraRealizada();
-		
 	
 	};
 }

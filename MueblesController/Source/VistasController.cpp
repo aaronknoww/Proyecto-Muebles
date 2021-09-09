@@ -9,6 +9,7 @@ MueblesController::VistasController::VistasController()
 
 List<MueblesController::Fila^>^ MueblesController::VistasController::comprasRealizadasCtr()
 {
+	listaG->Clear();
     List<ComprasRealizadas^>^ compras= gcnew List<ComprasRealizadas^>;
 	int i=0;
 
@@ -35,4 +36,26 @@ List<MueblesController::Fila^>^ MueblesController::VistasController::comprasReal
 	}
 
 	return listaG;
+}
+
+List<MueblesController::Fila^>^ MueblesController::VistasController::vistaInventarioCtr()
+{
+	listaG->Clear();
+	int i=0;
+	
+
+	for each (VistaDto^ renglon in vista->vistaInventario())
+	{
+		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		listaG[i]->setId(renglon->getId().ToString());//-----------------> id.
+		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Nombre Mueble.
+		listaG[i]->setDesMue(renglon->getCadena2());//-------------------> Descripcion Mueble.
+		listaG[i]->setCosto(renglon->getDinero1().ToString("N2"));//-----> Costo Final.
+		listaG[i]->setFecha(renglon->getFecha()->ToShortDateString());//-> Fecha de Compra.
+		
+		i++;
+	}
+	return listaG;
+	// TODO: Insertar una instrucción "return" aquí
 }

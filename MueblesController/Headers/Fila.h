@@ -20,7 +20,8 @@ namespace MueblesController
 		property String^ _desCompra;
 
 	public:
-
+		
+	    bool buscarCadena(String^ cadena);
 
 		//***** SETTERS *****//
 

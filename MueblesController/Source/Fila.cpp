@@ -2,9 +2,26 @@
 #include "..\Headers\Fila.h"
 
 
+
+
+
+bool MueblesController::Fila::buscarCadena(String^ cadena)
+{
+	String^ aux = _nombreMue->ToLower();// Convierte todo a minusculas para realizar la busqueda.
+	if (String::IsNullOrEmpty(cadena) || String::IsNullOrWhiteSpace(cadena))
+		return false;
+	else if (aux->StartsWith(cadena))
+		return true;
+	else
+		return false;
+}
+
+
 //*************************************************************************************\\
 //---------------------------------- SETTERS -------------------------------------------\\
 //***************************************************************************************\\
+
+
 
 
 void MueblesController::Fila::setId(String^ id)

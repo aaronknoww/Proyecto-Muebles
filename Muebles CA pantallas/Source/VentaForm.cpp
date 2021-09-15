@@ -1,16 +1,17 @@
 #include "../Headers/VentaForm.h"
 
-System::Void MueblesCApantallas::VentaForm::cargarDgv()
+
+System::Void MueblesCApantallas::VentaForm::cargarDgv(List<Fila^>^ tabla)
 {
 	
-	//this->dgvVistaAlm->Rows->RemoveAt(0);
-	//this->dgvVistaAlm->Rows->Count;
+	
 
 	this->dgvVistaAlm->ColumnCount = 5; //Se indica el numero de columnas de que se van a utlizar.
 	this->dgvVistaAlm->Columns[4]->Visible = false;// Oculta la columna indicada.
 	int a = 0;
-
-	for each (Fila ^ renglon in vistas->vistaInventarioCtr())// El metodo comprasRealizadas regresa una lista de objetos fila.
+	
+	
+	for each (Fila ^ renglon in tabla)// El metodo comprasRealizadas regresa una lista de objetos fila.
 	{
 
 
@@ -24,5 +25,45 @@ System::Void MueblesCApantallas::VentaForm::cargarDgv()
 
 
 	}
+	
     return System::Void();
 }
+
+System::Void MueblesCApantallas::VentaForm::filtrarDgv(List<Fila^>^ tabla)
+{
+	// Funcion que se encarga de copiar en una lista, las filas que cumplan con los criterios de busqueda recibidos.
+	
+	resultado->Clear();// Se inicializa la lista.
+	limpiarDgv();
+
+	if (String::IsNullOrEmpty(txbFiltrar->Text) || String::IsNullOrWhiteSpace(txbFiltrar->Text))
+	{
+		limpiarDgv();
+		cargarDgv(consulta);
+	}
+	else
+	{
+		for each (Fila^ renglon in tabla)
+		{
+			txbFiltrar->Text = txbFiltrar->Text->ToLower();
+			if (renglon->buscarCadena(txbFiltrar->Text))
+				resultado->Add(renglon);//---> inserta los objetos filas que cumplan con la condicion.
+		}
+		cargarDgv(resultado);// Se muestra en el dgv el resultado obtenido.
+
+	}
+
+	return System::Void();
+}
+
+System::Void MueblesCApantallas::VentaForm::limpiarDgv()
+{
+	// Elimina todas la filas del dgv
+
+	int total = this->dgvVistaAlm->Rows->Count;
+	for (int i = total - 1; i >= 0; i--)
+		this->dgvVistaAlm->Rows->RemoveAt(i);
+		
+	return System::Void();
+}
+

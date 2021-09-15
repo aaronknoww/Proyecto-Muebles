@@ -23,9 +23,12 @@ namespace MueblesCApantallas {
 			controlador = gcnew ControladorGeneral();
 			vistas = gcnew VistasController();
 			datos = gcnew List<String^>;
+			consulta = gcnew List<Fila^>;
+			consulta = vistas->vistaInventarioCtr();//---> Carga la consulta al inicio del programa.
+			resultado = gcnew List<Fila^>;
 
 			InitializeComponent();
-			cargarDgv();
+			cargarDgv(consulta);
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -62,10 +65,16 @@ namespace MueblesCApantallas {
 		DateTime fechaActual;
 		Int16 contador;
 		List<String^>^ datos;
+		List<Fila^>^ consulta;//------------>Guarda toda la consulta que viene de la base de datos.
+		List<Fila^>^ resultado;//----------->Guarda las filas que cumplan con cierto criterio.
+		
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nombreMue;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ desMueble;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ costoCompra;
+	private: System::Windows::Forms::Label^ lblFiltrar;
+	private: System::Windows::Forms::TextBox^ txbFiltrar;
 		   System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -84,6 +93,8 @@ namespace MueblesCApantallas {
 			this->desMueble = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->lblFiltrar = (gcnew System::Windows::Forms::Label());
+			this->txbFiltrar = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -92,7 +103,8 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->AllowUserToAddRows = false;
 			this->dgvVistaAlm->AllowUserToDeleteRows = false;
 			this->dgvVistaAlm->AllowUserToResizeRows = false;
-			this->dgvVistaAlm->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCellsExceptHeader;
+			this->dgvVistaAlm->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dgvVistaAlm->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::DisplayedCells;
 			this->dgvVistaAlm->BackgroundColor = System::Drawing::SystemColors::WindowFrame;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
 			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::ControlText;
@@ -145,7 +157,6 @@ namespace MueblesCApantallas {
 			this->nombreMue->MaxInputLength = 30;
 			this->nombreMue->MinimumWidth = 6;
 			this->nombreMue->Name = L"nombreMue";
-			this->nombreMue->Width = 6;
 			// 
 			// desMueble
 			// 
@@ -153,7 +164,6 @@ namespace MueblesCApantallas {
 			this->desMueble->MaxInputLength = 60;
 			this->desMueble->MinimumWidth = 6;
 			this->desMueble->Name = L"desMueble";
-			this->desMueble->Width = 6;
 			// 
 			// fecha
 			// 
@@ -161,7 +171,6 @@ namespace MueblesCApantallas {
 			this->fecha->MaxInputLength = 10;
 			this->fecha->MinimumWidth = 6;
 			this->fecha->Name = L"fecha";
-			this->fecha->Width = 6;
 			// 
 			// costoCompra
 			// 
@@ -169,7 +178,32 @@ namespace MueblesCApantallas {
 			this->costoCompra->MaxInputLength = 60;
 			this->costoCompra->MinimumWidth = 6;
 			this->costoCompra->Name = L"costoCompra";
-			this->costoCompra->Width = 6;
+			// 
+			// lblFiltrar
+			// 
+			this->lblFiltrar->AutoSize = true;
+			this->lblFiltrar->BackColor = System::Drawing::Color::Transparent;
+			this->lblFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblFiltrar->ForeColor = System::Drawing::Color::Peru;
+			this->lblFiltrar->Location = System::Drawing::Point(481, 168);
+			this->lblFiltrar->Name = L"lblFiltrar";
+			this->lblFiltrar->Size = System::Drawing::Size(82, 29);
+			this->lblFiltrar->TabIndex = 37;
+			this->lblFiltrar->Text = L"Filtrar";
+			// 
+			// txbFiltrar
+			// 
+			this->txbFiltrar->BackColor = System::Drawing::SystemColors::InactiveCaption;
+			this->txbFiltrar->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->txbFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->txbFiltrar->Location = System::Drawing::Point(569, 168);
+			this->txbFiltrar->MaxLength = 30;
+			this->txbFiltrar->Name = L"txbFiltrar";
+			this->txbFiltrar->Size = System::Drawing::Size(521, 23);
+			this->txbFiltrar->TabIndex = 38;
+			this->txbFiltrar->TextChanged += gcnew System::EventHandler(this, &VentaForm::txbFiltrar_TextChanged);
 			// 
 			// VentaForm
 			// 
@@ -177,15 +211,27 @@ namespace MueblesCApantallas {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->ClientSize = System::Drawing::Size(1159, 685);
+			this->Controls->Add(this->txbFiltrar);
+			this->Controls->Add(this->lblFiltrar);
 			this->Controls->Add(this->dgvVistaAlm);
 			this->Name = L"VentaForm";
 			this->Text = L"Venta";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
 
-		private: System::Void cargarDgv();
-	};
+	private: System::Void cargarDgv(List<Fila^>^);
+	private: System::Void filtrarDgv(List<Fila^>^); // Filtra datos de una lista y el resultado se carga en data dgv.
+	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
+	
+	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		
+		filtrarDgv(consulta);// Recibe la consulta que se recibió de la base de datos.
+		
+	}
+};
 }

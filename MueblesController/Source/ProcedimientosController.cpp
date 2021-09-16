@@ -119,3 +119,27 @@ Boolean MueblesController::ProcedimentosController::updateCompra(String^ id, Str
 
 	return true;
 }
+
+Boolean MueblesController::ProcedimentosController::venta(String^ idMueble, String^ precio, DateTime^ fecha, String^ desVenta)
+{
+	ProcedimientosDao proVenta;
+
+	
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		proVenta.procedimientoVenta(Int32::Parse(idMueble), Double::Parse(precio),
+			f.cadenaSql(fech), f.cadenaSql(desVenta));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+	
+}

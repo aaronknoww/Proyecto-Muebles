@@ -27,6 +27,7 @@ namespace MueblesController
 		Boolean retiro(String^, DateTime^);//------> Manda llamar al stored procedure retirar. Utilizando Model DAO
 		Boolean comprar(String^, String^, DateTime^, String^, String^); //--> manda llamar al stored procedure compra.
 		Boolean updateCompra(String^, String^, String^, String^, String^, String^);
+		Boolean venta(String^, String^, DateTime^, String^);
 	};
 
 }

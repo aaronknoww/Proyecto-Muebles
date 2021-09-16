@@ -32,10 +32,10 @@ void MueblesModel::ProcedimientosDao::procedimientoCompra(String^ nombre, String
 	cerrarConexion();
 }
 
-void MueblesModel::ProcedimientosDao::procedimientoVenta(String^ nombreMueble, Double precio, String^ fecha, String^ ventades)
+void MueblesModel::ProcedimientosDao::procedimientoVenta(int idMueble, Double precio, String^ fecha, String^ ventades)
 {
 	comandoSql->Connection = abrirConexion();
-	comandoSql->CommandText = "CALL venta(" + nombreMueble + "," + precio + "," + fecha + "," + ventades + "); ";
+	comandoSql->CommandText = "CALL venta(" + idMueble + "," + precio + "," + fecha + "," + ventades + "); ";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
 }

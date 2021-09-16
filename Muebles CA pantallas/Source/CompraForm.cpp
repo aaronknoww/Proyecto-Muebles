@@ -40,9 +40,7 @@ System::Boolean MueblesCApantallas::CompraForm::ejecutarEditar()
 	}
 	else
 	{
-		// Ejecuta procedimiento
-		
-		
+						
 		procedimiento->updateCompra(datos[5], txbSetNomMue->Text, txbSetDescMue->Text,
 			dtpSetfecha->Value.ToShortDateString(), txbSetCosto->Text, txbSetDescCompra->Text);
 		return true;
@@ -51,6 +49,15 @@ System::Boolean MueblesCApantallas::CompraForm::ejecutarEditar()
 	 
 
 	return Boolean();
+}
+
+System::Void MueblesCApantallas::CompraForm::limpiarDgv(DataGridView^ dgv)
+{
+	int total = dgv->Rows->Count;
+	for (int i = total - 1; i >= 0; i--)
+		dgv->Rows->RemoveAt(i);
+
+	return System::Void();
 }
 
 System::Void MueblesCApantallas::CompraForm::limpiar()

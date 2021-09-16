@@ -67,3 +67,21 @@ System::Void MueblesCApantallas::VentaForm::limpiarDgv()
 	return System::Void();
 }
 
+System::Void MueblesCApantallas::VentaForm::limpiar()
+{
+	this->txbSetNomMue->Clear();
+	this->txbSetDescMue->Clear();
+	this->txbSetPrecio->Clear();
+	this->dtpSetfecha->Text = fechaActual.ToShortTimeString();
+	this->txbSetDescVenta->Clear();
+	this->txbFiltrar->Clear();
+	this->txbSetPrecio->Enabled = false;
+	this->txbSetDescVenta->Enabled = false;
+	this->dtpSetfecha->Enabled = false;
+	datos->Clear();
+	contador = 0;
+	punto = false;
+	
+	return System::Void();
+}
+

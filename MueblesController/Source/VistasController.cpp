@@ -57,5 +57,45 @@ List<MueblesController::Fila^>^ MueblesController::VistasController::vistaInvent
 		i++;
 	}
 	return listaG;
-	// TODO: Insertar una instrucción "return" aquí
+}
+
+List<MueblesController::Fila^>^ MueblesController::VistasController::vistaDepositosCtr()
+{
+	listaG->Clear();
+	int i = 0;
+
+
+	for each (VistaDto ^ renglon in vista->vistaDepositos())
+	{
+		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		listaG[i]->setId(renglon->getId().ToString());//-----------------> id movimiento financiero.
+		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Tipo de movimiento.
+		listaG[i]->setFecha(renglon->getFecha()->ToShortDateString());//-> Fecha de Compra.
+		listaG[i]->setCosto(renglon->getDinero1().ToString("N2"));//-----> Costo Final.
+		
+
+		i++;
+	}
+	return listaG;
+}
+
+List<MueblesController::Fila^>^ MueblesController::VistasController::vistaRetirosCtr()
+{
+	listaG->Clear();
+	int i = 0;
+
+
+	for each (VistaDto ^ renglon in vista->vistaRetiros())
+	{
+		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		listaG[i]->setId(renglon->getId().ToString());//-----------------> id movimiento financiero.
+		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Tipo de movimiento.
+		listaG[i]->setFecha(renglon->getFecha()->ToShortDateString());//-> Fecha de Compra.
+		listaG[i]->setCosto(renglon->getDinero1().ToString("N2"));//-----> Costo Final.
+
+		i++;
+	}
+	return listaG;
 }

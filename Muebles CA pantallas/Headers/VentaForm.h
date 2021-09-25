@@ -36,9 +36,7 @@ namespace MueblesCApantallas {
 			fechaActual = fechaActual.Now;
 			this->lblGetDinero->Text = procedimiento->getCapitalActual();
 			this->lblGetFecha->Text = fechaActual.ToShortDateString();// Para mostrar la fehca actual al usuario
-
-			//this->lblGetRestante->Text = this->lblGetDinero->Text;
-			
+								
 			cargarDgv(consulta);
 			//
 			//TODO: agregar código de constructor aquí

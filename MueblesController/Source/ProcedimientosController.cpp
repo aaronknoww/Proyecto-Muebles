@@ -107,7 +107,7 @@ Boolean MueblesController::ProcedimentosController::updateCompra(String^ id, Str
 
 	try
 	{
-		proUpdate.procedimietnoUpdateCompra(Int32::Parse(id), f.cadenaSql(nombreMue), f.cadenaSql(DesMue),
+		proUpdate.procedimientoUpdateCompra(Int32::Parse(id), f.cadenaSql(nombreMue), f.cadenaSql(DesMue),
 			f.cadenaSql(fecha), Double::Parse(costo), f.cadenaSql(desCompra));
 
 	}
@@ -142,4 +142,45 @@ Boolean MueblesController::ProcedimentosController::venta(String^ idMueble, Stri
 
 	return true;
 	
+}
+
+Boolean MueblesController::ProcedimentosController::updateDeposito(String^ id, DateTime^ fecha, String^ cantidad )
+{
+	ProcedimientosDao procedimiento;
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		procedimiento.procedimientoUpdateDeposito(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+
+}
+
+Boolean MueblesController::ProcedimentosController::updateRetiro(String^ id, DateTime^ fecha, String^cantidad)
+{
+	ProcedimientosDao procedimiento;
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		procedimiento.procedimientoUpdateRetiro(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
 }

@@ -20,7 +20,9 @@ namespace MueblesModel
 		void   procedimientoCompra(String^ nombre, String^ descripcion, String^ fecha,Double costo, String^ descompra);
 		void   procedimientoVenta(int idMueble, Double precio, String^ fecha, String^ ventades);
 		void   procedimientoOtroGasto(String^ nombreMue, Double cantGasto, String^ fechaOtro, String^ descOtro);
-		void   procedimietnoUpdateCompra(int id, String^ nombre, String^ descripcion, String^ fecha, Double costo, String^ descompra);
+		void   procedimientoUpdateCompra(int id, String^ nombre, String^ descripcion, String^ fecha, Double costo, String^ descompra);
+		void   procedimientoUpdateDeposito(int id, String^ fecha, Double cantidad);
+		void   procedimientoUpdateRetiro(int id, String^ fecha, Double cantidad);
 		Double procedimientoCapitalActual();
 		
 	};

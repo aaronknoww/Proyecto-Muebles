@@ -46,3 +46,21 @@ System::Void MueblesCApantallas::RetiroForm::limpiar()
 
 	return System::Void();
 }
+
+System::Boolean MueblesCApantallas::RetiroForm::ejecutarEditar()
+{
+
+	if (datos[2] == this->textBoxRetiro->Text)
+	{
+		// No ejecuta consulta porque los datos son iguales a los que ya existian.
+		return false;
+	}
+	else
+	{
+
+		procedimiento->updateRetiro(datos[3], dtpSetfecha->Value, textBoxRetiro->Text);
+		
+		return true;
+	}
+	
+}

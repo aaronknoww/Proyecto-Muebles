@@ -39,8 +39,30 @@ System::Void MueblesCApantallas::DepositoForm::limpiar()
 	this->textBoxDeposito->Clear();
 	this->textBoxDeposito->Text = "0";
 	this->textBoxDeposito->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+	this->btnDepositar->Enabled = true;
+	this->gbDeposito->ForeColor = System::Drawing::Color::Peru;
 	this->dtpSetfecha->Text = fechaActual.ToShortTimeString();
+	this->gbDeposito->Text = "Datos del Deposito";
 	contador = 0;
 	punto = false;
+
 	return System::Void();
+}
+
+System::Boolean MueblesCApantallas::DepositoForm::ejecutarEditar()
+{
+	
+
+	if (datos[2] == this->textBoxDeposito->Text)
+	{
+		// No ejecuta consulta porque los datos son iguales a los que ya existian.
+		return false;
+	}
+	else
+	{
+		
+		procedimiento->updateDeposito(datos[3], dtpSetfecha->Value, textBoxDeposito->Text);
+		return true;
+	}
+			
 }

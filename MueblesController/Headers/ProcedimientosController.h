@@ -28,6 +28,8 @@ namespace MueblesController
 		Boolean comprar(String^, String^, DateTime^, String^, String^); //--> manda llamar al stored procedure compra.
 		Boolean updateCompra(String^, String^, String^, String^, String^, String^);
 		Boolean venta(String^, String^, DateTime^, String^);
+		Boolean updateDeposito(String^, DateTime^, String^ );
+		Boolean updateRetiro(String^, DateTime^, String^ );
 	};
 
 }

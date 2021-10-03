@@ -23,6 +23,8 @@ namespace MueblesCApantallas {
 			controlador = gcnew ControladorGeneral();
 			vistas = gcnew VistasController();
 			consulta = gcnew List<Fila^>;
+			consulta = gcnew List<Fila^>;
+			datos = gcnew List<String^>;
 			consulta = vistas->vistaRetirosCtr();//---> Carga la consulta al inicio del programa.
 
 			InitializeComponent();
@@ -61,6 +63,7 @@ namespace MueblesCApantallas {
 		DateTime fechaActual;
 		Int16 contador;
 		List<Fila^>^ consulta;
+		List<String^>^ datos;
 
 	//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\
 		
@@ -79,11 +82,11 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::Button^ btnRetiro;
 	private: System::Windows::Forms::DateTimePicker^ dtpSetfecha;
 	private: System::Windows::Forms::TextBox^ textBoxRetiro;
-	
 	private: System::Windows::Forms::DataGridView^ dgvVistaRet;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ tipo;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cantidad;
+	private: System::Windows::Forms::Button^ btnEditar;
 
      System::ComponentModel::Container^ components;
 
@@ -94,11 +97,11 @@ namespace MueblesCApantallas {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle31 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle33 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle34 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle35 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle32 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle9 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle10 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lblGetActual = (gcnew System::Windows::Forms::Label());
 			this->lblCapActual = (gcnew System::Windows::Forms::Label());
 			this->btnBorrar = (gcnew System::Windows::Forms::Button());
@@ -115,8 +118,9 @@ namespace MueblesCApantallas {
 			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->cantidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->gbRetiros = (gcnew System::Windows::Forms::GroupBox());
-			this->lblFechaRet = (gcnew System::Windows::Forms::Label());
 			this->dtpSetfecha = (gcnew System::Windows::Forms::DateTimePicker());
+			this->lblFechaRet = (gcnew System::Windows::Forms::Label());
+			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaRet))->BeginInit();
 			this->gbRetiros->SuspendLayout();
 			this->SuspendLayout();
@@ -158,9 +162,9 @@ namespace MueblesCApantallas {
 			this->btnBorrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBorrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBorrar->Location = System::Drawing::Point(249, 495);
+			this->btnBorrar->Location = System::Drawing::Point(172, 490);
 			this->btnBorrar->Name = L"btnBorrar";
-			this->btnBorrar->Size = System::Drawing::Size(205, 50);
+			this->btnBorrar->Size = System::Drawing::Size(150, 50);
 			this->btnBorrar->TabIndex = 18;
 			this->btnBorrar->Text = L"Borrar";
 			this->btnBorrar->UseVisualStyleBackColor = false;
@@ -175,9 +179,9 @@ namespace MueblesCApantallas {
 			this->btnRetiro->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRetiro->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRetiro->Location = System::Drawing::Point(27, 495);
+			this->btnRetiro->Location = System::Drawing::Point(18, 490);
 			this->btnRetiro->Name = L"btnRetiro";
-			this->btnRetiro->Size = System::Drawing::Size(205, 50);
+			this->btnRetiro->Size = System::Drawing::Size(150, 50);
 			this->btnRetiro->TabIndex = 17;
 			this->btnRetiro->Text = L"Retirar";
 			this->btnRetiro->UseVisualStyleBackColor = false;
@@ -207,11 +211,12 @@ namespace MueblesCApantallas {
 			this->textBoxRetiro->Location = System::Drawing::Point(193, 60);
 			this->textBoxRetiro->MaxLength = 10;
 			this->textBoxRetiro->Name = L"textBoxRetiro";
-			this->textBoxRetiro->Size = System::Drawing::Size(225, 32);
+			this->textBoxRetiro->Size = System::Drawing::Size(243, 32);
 			this->textBoxRetiro->TabIndex = 15;
 			this->textBoxRetiro->Text = L"0 ";
 			this->textBoxRetiro->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->textBoxRetiro->TextChanged += gcnew System::EventHandler(this, &RetiroForm::textBoxRetiro_TextChanged);
+			this->textBoxRetiro->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &RetiroForm::textBoxRetiro_KeyPress);
 			// 
 			// lblGetFecha
 			// 
@@ -221,7 +226,7 @@ namespace MueblesCApantallas {
 			this->lblGetFecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblGetFecha->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblGetFecha->Location = System::Drawing::Point(779, 86);
+			this->lblGetFecha->Location = System::Drawing::Point(772, 53);
 			this->lblGetFecha->Name = L"lblGetFecha";
 			this->lblGetFecha->Size = System::Drawing::Size(0, 33);
 			this->lblGetFecha->TabIndex = 14;
@@ -291,62 +296,63 @@ namespace MueblesCApantallas {
 			this->dgvVistaRet->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::DisplayedCells;
 			this->dgvVistaRet->BackgroundColor = System::Drawing::SystemColors::Desktop;
 			this->dgvVistaRet->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle31->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle31->BackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle31->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle6->BackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle31->ForeColor = System::Drawing::Color::DarkGoldenrod;
-			dataGridViewCellStyle31->SelectionBackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle31->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			dataGridViewCellStyle31->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaRet->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+			dataGridViewCellStyle6->ForeColor = System::Drawing::Color::DarkGoldenrod;
+			dataGridViewCellStyle6->SelectionBackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle6->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			dataGridViewCellStyle6->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaRet->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
 			this->dgvVistaRet->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvVistaRet->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
 				this->tipo, this->fecha,
 					this->cantidad
 			});
-			dataGridViewCellStyle33->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle33->BackColor = System::Drawing::SystemColors::Window;
-			dataGridViewCellStyle33->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
+			dataGridViewCellStyle8->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle8->BackColor = System::Drawing::SystemColors::Window;
+			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			dataGridViewCellStyle33->ForeColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle33->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle33->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle33->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->dgvVistaRet->DefaultCellStyle = dataGridViewCellStyle33;
+			dataGridViewCellStyle8->ForeColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle8->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle8->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle8->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->dgvVistaRet->DefaultCellStyle = dataGridViewCellStyle8;
 			this->dgvVistaRet->EnableHeadersVisualStyles = false;
 			this->dgvVistaRet->GridColor = System::Drawing::Color::DarkGoldenrod;
 			this->dgvVistaRet->Location = System::Drawing::Point(484, 244);
 			this->dgvVistaRet->Name = L"dgvVistaRet";
-			dataGridViewCellStyle34->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle34->BackColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle34->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
+			dataGridViewCellStyle9->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle9->BackColor = System::Drawing::SystemColors::WindowFrame;
+			dataGridViewCellStyle9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			dataGridViewCellStyle34->ForeColor = System::Drawing::SystemColors::InactiveCaption;
-			dataGridViewCellStyle34->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle34->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle34->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaRet->RowHeadersDefaultCellStyle = dataGridViewCellStyle34;
+			dataGridViewCellStyle9->ForeColor = System::Drawing::SystemColors::InactiveCaption;
+			dataGridViewCellStyle9->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle9->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle9->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaRet->RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
 			this->dgvVistaRet->RowHeadersVisible = false;
 			this->dgvVistaRet->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
-			dataGridViewCellStyle35->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			dataGridViewCellStyle10->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			dataGridViewCellStyle35->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
+			dataGridViewCellStyle10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			dataGridViewCellStyle35->ForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle35->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
+			dataGridViewCellStyle10->ForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle10->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
 				static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(137)));
-			dataGridViewCellStyle35->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->dgvVistaRet->RowsDefaultCellStyle = dataGridViewCellStyle35;
+			dataGridViewCellStyle10->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->dgvVistaRet->RowsDefaultCellStyle = dataGridViewCellStyle10;
 			this->dgvVistaRet->RowTemplate->Height = 24;
 			this->dgvVistaRet->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaRet->Size = System::Drawing::Size(648, 387);
 			this->dgvVistaRet->TabIndex = 46;
+			this->dgvVistaRet->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &RetiroForm::dgvVistaRet_CellClick);
 			// 
 			// tipo
 			// 
-			dataGridViewCellStyle32->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->tipo->DefaultCellStyle = dataGridViewCellStyle32;
+			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->tipo->DefaultCellStyle = dataGridViewCellStyle7;
 			this->tipo->HeaderText = L"Tipo";
 			this->tipo->MaxInputLength = 10;
 			this->tipo->MinimumWidth = 6;
@@ -377,15 +383,30 @@ namespace MueblesCApantallas {
 			this->gbRetiros->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gbRetiros->ForeColor = System::Drawing::Color::Peru;
-			this->gbRetiros->Location = System::Drawing::Point(27, 260);
+			this->gbRetiros->Location = System::Drawing::Point(18, 260);
 			this->gbRetiros->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbRetiros->Name = L"gbRetiros";
 			this->gbRetiros->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbRetiros->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->gbRetiros->Size = System::Drawing::Size(427, 199);
+			this->gbRetiros->Size = System::Drawing::Size(460, 199);
 			this->gbRetiros->TabIndex = 48;
 			this->gbRetiros->TabStop = false;
 			this->gbRetiros->Text = L"Datos del Retiros";
+			// 
+			// dtpSetfecha
+			// 
+			this->dtpSetfecha->CalendarFont = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dtpSetfecha->CalendarMonthBackground = System::Drawing::SystemColors::MenuHighlight;
+			this->dtpSetfecha->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->dtpSetfecha->DropDownAlign = System::Windows::Forms::LeftRightAlignment::Right;
+			this->dtpSetfecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F));
+			this->dtpSetfecha->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->dtpSetfecha->Location = System::Drawing::Point(199, 109);
+			this->dtpSetfecha->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->dtpSetfecha->Name = L"dtpSetfecha";
+			this->dtpSetfecha->Size = System::Drawing::Size(237, 39);
+			this->dtpSetfecha->TabIndex = 24;
 			// 
 			// lblFechaRet
 			// 
@@ -402,20 +423,23 @@ namespace MueblesCApantallas {
 			this->lblFechaRet->Text = L"*Fecha ";
 			this->lblFechaRet->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
 			// 
-			// dtpSetfecha
+			// btnEditar
 			// 
-			this->dtpSetfecha->CalendarFont = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnEditar->BackColor = System::Drawing::Color::Transparent;
+			this->btnEditar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnEditar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::SteelBlue;
+			this->btnEditar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEditar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->dtpSetfecha->CalendarMonthBackground = System::Drawing::SystemColors::MenuHighlight;
-			this->dtpSetfecha->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->dtpSetfecha->DropDownAlign = System::Windows::Forms::LeftRightAlignment::Right;
-			this->dtpSetfecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F));
-			this->dtpSetfecha->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dtpSetfecha->Location = System::Drawing::Point(199, 109);
-			this->dtpSetfecha->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->dtpSetfecha->Name = L"dtpSetfecha";
-			this->dtpSetfecha->Size = System::Drawing::Size(219, 39);
-			this->dtpSetfecha->TabIndex = 24;
+			this->btnEditar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEditar->Location = System::Drawing::Point(328, 490);
+			this->btnEditar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnEditar->Name = L"btnEditar";
+			this->btnEditar->Size = System::Drawing::Size(150, 50);
+			this->btnEditar->TabIndex = 49;
+			this->btnEditar->Text = L"Editar";
+			this->btnEditar->UseVisualStyleBackColor = false;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &RetiroForm::btnEditar_Click);
 			// 
 			// RetiroForm
 			// 
@@ -423,6 +447,7 @@ namespace MueblesCApantallas {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1144, 656);
+			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->gbRetiros);
 			this->Controls->Add(this->lblTituloRet);
 			this->Controls->Add(this->dgvVistaRet);
@@ -444,10 +469,12 @@ namespace MueblesCApantallas {
 			this->PerformLayout();
 
 		}
+
 #pragma endregion
 	private: System::Void cargarDgv(List<Fila^>^);
 	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
 	private: System::Void limpiar();// Elimina todos las filas del dgv.
+	private: System::Boolean ejecutarEditar();
 
 	private: System::Void btnRetiro_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -527,5 +554,126 @@ namespace MueblesCApantallas {
 		this->lblGetActual->Text = this->lblGetDinero->Text; //--> Entra cuando uno de los numeros a sumar ingresa vacio.
 
 }
+	private: System::Void textBoxRetiro_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+	{
+		//1.- Validar mediante un procedimiento que es un numero lo que ingreso
+		//2.- Validar cuando entre un punto y solo puede ingresar uno
+		//3.- Despues de ingresar el punto solo pueden ingresar 2 numeros mas.
+
+
+		for each (wchar_t caracter in this->textBoxRetiro->Text)// Recorre toda al cadena en busca de un punto.
+		{
+			if (Char::IsPunctuation(caracter))
+			{
+				// Si encuentra un punto en la cadana de texto entra y ejecuta las instrucciones.
+				punto = true;
+				break;
+			}
+			else
+				punto = false;
+		}
+
+
+		if (punto == true)
+		{
+
+			if (controlador->esNumero(e->KeyChar) || Char::IsControl(e->KeyChar))
+			{
+				e->Handled = false;// Perminte ingresar el caracter.
+				return;
+			}
+			else
+			{
+				e->Handled = true; // no permite ingresar el caracter
+				return;
+			}
+		}
+		else
+		{
+			if (controlador->esNumero(e->KeyChar) || Char::IsControl(e->KeyChar) || Char::IsPunctuation(e->KeyChar))
+			{	// numero								Back Space						Punto .
+				e->Handled = false;// Perminte ingresar el caracter.
+				return;
+			}
+			else
+			{
+				e->Handled = true; // no permite ingresar el caracter
+				return;
+			}
+
+		}
+		return;
+
+
+	}
+	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (datos->Count > 1)
+		{// Entra porque ya se eligio alguna fila del data grid view.
+
+			if (controlador->vacio(textBoxRetiro->Text))
+				textBoxRetiro->Text = "0";// Si el texto box esta vacio se le asigna 0.
+
+			if (Double::Parse(textBoxRetiro->Text) > 0)
+			{
+				//Ejecuta porque la cantidad que se quiere cambiar es mayor que 0
+
+				System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+					"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+				if (respuesta == System::Windows::Forms::DialogResult::Yes)
+				{
+
+
+					ejecutarEditar();
+					MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+					limpiar();
+					limpiarDgv();
+					consulta->Clear();
+					consulta = vistas->vistaRetirosCtr();
+					cargarDgv(consulta);
+					this->lblGetDinero->Text = procedimiento->getCapitalActual();
+					this->btnRetiro->Enabled = true;
+				}
+				else
+				{
+					MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+				}
+			}
+			else
+				MessageBox::Show("La cantidad debe de ser mayor que 0", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+		}
+		else
+		{
+			// El usuario no ha elegido ninguna fila del dgv.
+
+			MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+		}
+	}
+	private: System::Void dgvVistaRet_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+	{
+		datos->Clear();// Elimina todo lo que haya en la lista de datos.
+		this->btnRetiro->Enabled = false;// No permite registrar depositos mientras se esta editando. 
+		this->gbRetiros->Text = "Datos a Modificar";
+		this->gbRetiros->ForeColor = System::Drawing::Color::SteelBlue;
+
+
+
+		// Se copian los datos de la fila seleccionada a los textboxs de la pantalla.
+
+		this->dtpSetfecha->Text = this->dgvVistaRet->CurrentRow->Cells[1]->Value->ToString();
+		this->textBoxRetiro->Text = this->dgvVistaRet->CurrentRow->Cells[2]->Value->ToString();
+
+
+		// Se guardan los datos en un contenedor.
+
+		datos->Add(this->dgvVistaRet->CurrentRow->Cells[0]->Value->ToString());// tipo
+		datos->Add(this->dgvVistaRet->CurrentRow->Cells[1]->Value->ToString());// Fecha
+		datos->Add(this->dgvVistaRet->CurrentRow->Cells[2]->Value->ToString());// Cantidad
+		datos->Add(this->dgvVistaRet->CurrentRow->Cells[3]->Value->ToString());// Se copia el id
+
+	}
 };
 }

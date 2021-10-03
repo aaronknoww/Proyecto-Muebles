@@ -48,10 +48,26 @@ void MueblesModel::ProcedimientosDao::procedimientoOtroGasto(String^ nombreMue, 
 	cerrarConexion();
 }
 
-void MueblesModel::ProcedimientosDao::procedimietnoUpdateCompra(int id, String^ nombre, String^ descripcion, String^ fecha, Double costo, String^ descompra)
+void MueblesModel::ProcedimientosDao::procedimientoUpdateCompra(int id, String^ nombre, String^ descripcion, String^ fecha, Double costo, String^ descompra)
 {
 	comandoSql->Connection = abrirConexion();
 	comandoSql->CommandText = "CALL updateCompra("+ id +"," + nombre + "," + descripcion + "," + fecha + "," + costo + "," + descompra + ");";
+	comandoSql->ExecuteNonQuery();
+	cerrarConexion();
+}
+
+void MueblesModel::ProcedimientosDao::procedimientoUpdateDeposito(int id, String^ fecha, Double cantidad)
+{
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL updateDeposito(" + id + "," + fecha + "," + cantidad + ");";
+	comandoSql->ExecuteNonQuery();
+	cerrarConexion();
+}
+
+void MueblesModel::ProcedimientosDao::procedimientoUpdateRetiro(int id, String^ fecha, Double cantidad)
+{
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL updateRetiro(" + id + "," + fecha + "," + cantidad + ");";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
 }

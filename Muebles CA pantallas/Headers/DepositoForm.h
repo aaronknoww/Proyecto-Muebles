@@ -23,6 +23,7 @@ namespace MueblesCApantallas {
 			controlador = gcnew ControladorGeneral();
 			vistas = gcnew VistasController();
 			consulta = gcnew List<Fila^>;
+			datos = gcnew List<String^>;
 			consulta = vistas->vistaDepositosCtr();//---> Carga la consulta al inicio del programa.
 			
 			InitializeComponent();
@@ -59,6 +60,7 @@ namespace MueblesCApantallas {
 		DateTime fechaActual;
 		Int16 contador;
 		List<Fila^>^ consulta;
+		List<String^>^ datos;
 
 		//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\
 	
@@ -80,6 +82,7 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::DateTimePicker^ dtpSetfecha;
 	private: System::Windows::Forms::GroupBox^ gbDeposito;
 	private: System::Windows::Forms::Label^ lblTitulDep;
+	private: System::Windows::Forms::Button^ btnEditar;
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -114,6 +117,7 @@ namespace MueblesCApantallas {
 			this->dtpSetfecha = (gcnew System::Windows::Forms::DateTimePicker());
 			this->gbDeposito = (gcnew System::Windows::Forms::GroupBox());
 			this->lblTitulDep = (gcnew System::Windows::Forms::Label());
+			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaDepo))->BeginInit();
 			this->gbDeposito->SuspendLayout();
 			this->SuspendLayout();
@@ -184,7 +188,7 @@ namespace MueblesCApantallas {
 			this->btnDepositar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->btnDepositar->Location = System::Drawing::Point(18, 490);
 			this->btnDepositar->Name = L"btnDepositar";
-			this->btnDepositar->Size = System::Drawing::Size(205, 50);
+			this->btnDepositar->Size = System::Drawing::Size(150, 50);
 			this->btnDepositar->TabIndex = 6;
 			this->btnDepositar->Text = L"Depositar";
 			this->btnDepositar->UseVisualStyleBackColor = false;
@@ -199,9 +203,9 @@ namespace MueblesCApantallas {
 			this->btnBorrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBorrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBorrar->Location = System::Drawing::Point(240, 490);
+			this->btnBorrar->Location = System::Drawing::Point(174, 490);
 			this->btnBorrar->Name = L"btnBorrar";
-			this->btnBorrar->Size = System::Drawing::Size(205, 50);
+			this->btnBorrar->Size = System::Drawing::Size(150, 50);
 			this->btnBorrar->TabIndex = 7;
 			this->btnBorrar->Text = L"Limpiar";
 			this->btnBorrar->UseVisualStyleBackColor = false;
@@ -295,6 +299,7 @@ namespace MueblesCApantallas {
 			this->dgvVistaDepo->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaDepo->Size = System::Drawing::Size(648, 387);
 			this->dgvVistaDepo->TabIndex = 37;
+			this->dgvVistaDepo->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &DepositoForm::dgvVistaDepo_CellClick);
 			// 
 			// tipo
 			// 
@@ -329,7 +334,7 @@ namespace MueblesCApantallas {
 			this->textBoxDeposito->Location = System::Drawing::Point(199, 56);
 			this->textBoxDeposito->MaxLength = 10;
 			this->textBoxDeposito->Name = L"textBoxDeposito";
-			this->textBoxDeposito->Size = System::Drawing::Size(219, 32);
+			this->textBoxDeposito->Size = System::Drawing::Size(243, 32);
 			this->textBoxDeposito->TabIndex = 4;
 			this->textBoxDeposito->Text = L"0 ";
 			this->textBoxDeposito->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
@@ -377,7 +382,7 @@ namespace MueblesCApantallas {
 			this->dtpSetfecha->Location = System::Drawing::Point(199, 109);
 			this->dtpSetfecha->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dtpSetfecha->Name = L"dtpSetfecha";
-			this->dtpSetfecha->Size = System::Drawing::Size(219, 39);
+			this->dtpSetfecha->Size = System::Drawing::Size(243, 39);
 			this->dtpSetfecha->TabIndex = 24;
 			// 
 			// gbDeposito
@@ -396,7 +401,7 @@ namespace MueblesCApantallas {
 			this->gbDeposito->Name = L"gbDeposito";
 			this->gbDeposito->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->gbDeposito->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->gbDeposito->Size = System::Drawing::Size(427, 199);
+			this->gbDeposito->Size = System::Drawing::Size(460, 199);
 			this->gbDeposito->TabIndex = 44;
 			this->gbDeposito->TabStop = false;
 			this->gbDeposito->Text = L"Datos del Deposito";
@@ -415,12 +420,31 @@ namespace MueblesCApantallas {
 			this->lblTitulDep->TabIndex = 45;
 			this->lblTitulDep->Text = L"Depositos Realizados";
 			// 
+			// btnEditar
+			// 
+			this->btnEditar->BackColor = System::Drawing::Color::Transparent;
+			this->btnEditar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnEditar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::SteelBlue;
+			this->btnEditar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEditar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnEditar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEditar->Location = System::Drawing::Point(328, 490);
+			this->btnEditar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnEditar->Name = L"btnEditar";
+			this->btnEditar->Size = System::Drawing::Size(150, 50);
+			this->btnEditar->TabIndex = 46;
+			this->btnEditar->Text = L"Editar";
+			this->btnEditar->UseVisualStyleBackColor = false;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &DepositoForm::btnEditar_Click);
+			// 
 			// DepositoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1144, 656);
+			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->lblTitulDep);
 			this->Controls->Add(this->gbDeposito);
 			this->Controls->Add(this->dgvVistaDepo);
@@ -447,6 +471,8 @@ namespace MueblesCApantallas {
 	private: System::Void cargarDgv(List<Fila^>^);
 	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
 	private: System::Void limpiar();// Elimina todos las filas del dgv.
+	private: System::Boolean ejecutarEditar();//--> Devuelve true si ejecuta el procedimiento almacenado o false si no se ejecuto.
+
 
 private: System::Void textBoxDeposito_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
 {
@@ -554,6 +580,79 @@ private: System::Void btnDepositar_Click(System::Object^ sender, System::EventAr
 	}
 	else
 		MessageBox::Show("La cantidad debe ser mayor a 1", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	
+}
+private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	
+	if (datos->Count > 1)
+	{// Entra porque ya se eligio alguna fila del data grid view.
+
+		if (controlador->vacio(textBoxDeposito->Text))
+			textBoxDeposito->Text = "0";// Si el texto box esta vacio se le asigna 0.
+
+		if (Double::Parse(textBoxDeposito->Text)>0)
+		{
+			//Ejecuta porque la cantidad que se quiere cambiar es mayor que 0
+
+			System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+				"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			if (respuesta == System::Windows::Forms::DialogResult::Yes)
+			{
+
+
+				ejecutarEditar();
+				MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+				limpiar();
+				limpiarDgv();
+				consulta->Clear();
+				consulta = vistas->vistaDepositosCtr();
+				cargarDgv(consulta);
+				this->lblGetDinero->Text = procedimiento->getCapitalActual();
+				this->btnDepositar->Enabled = true;
+			}
+			else
+			{
+				MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			}
+		}
+		else
+			MessageBox::Show("La cantidad debe de ser mayor que 0", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	}
+	else
+	{
+		// El usuario no ha elegido ninguna fila del dgv.
+
+		MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	}
+}
+private: System::Void dgvVistaDepo_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+{
+	//Copia lo que está en el dgv y los inserta en los text box
+	//Copia los datos del dgv a una lista.
+
+	datos->Clear();// Elimina todo lo que haya en la lista de datos.
+	this->btnDepositar->Enabled = false;// No permite registrar depositos mientras se esta editando. 
+	this->gbDeposito->Text = "Datos a Modificar";
+	this->gbDeposito->ForeColor = System::Drawing::Color::SteelBlue;
+	
+
+
+	// Se copian los datos de la fila seleccionada a los textboxs de la pantalla.
+
+	this->dtpSetfecha->Text = this->dgvVistaDepo->CurrentRow->Cells[1]->Value->ToString();
+	this->textBoxDeposito->Text = this->dgvVistaDepo->CurrentRow->Cells[2]->Value->ToString();
+	
+	
+	// Se guardan los datos en un contenedor.
+
+	datos->Add(this->dgvVistaDepo->CurrentRow->Cells[0]->Value->ToString());
+	datos->Add(this->dgvVistaDepo->CurrentRow->Cells[1]->Value->ToString());
+	datos->Add(this->dgvVistaDepo->CurrentRow->Cells[2]->Value->ToString());
+	datos->Add(this->dgvVistaDepo->CurrentRow->Cells[3]->Value->ToString());// Se copia el id
 	
 }
 };

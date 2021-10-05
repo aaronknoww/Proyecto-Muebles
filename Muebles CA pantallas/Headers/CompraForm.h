@@ -94,7 +94,9 @@ namespace MueblesCApantallas {
 		Boolean punto;
 		DateTime fechaActual;
 		Int16 contador;
-		List<String^>^ datos;
+	private: System::Windows::Forms::Label^ lblComprasReg;
+
+		   List<String^>^ datos;
 
 		/// </summary>
 		System::ComponentModel::Container ^components;
@@ -137,6 +139,7 @@ namespace MueblesCApantallas {
 			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->desCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
+			this->lblComprasReg = (gcnew System::Windows::Forms::Label());
 			this->gbMueble->SuspendLayout();
 			this->gbCompra->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaCom))->BeginInit();
@@ -563,12 +566,27 @@ namespace MueblesCApantallas {
 			this->btnEditar->UseVisualStyleBackColor = false;
 			this->btnEditar->Click += gcnew System::EventHandler(this, &CompraForm::btnEditar_Click);
 			// 
+			// lblComprasReg
+			// 
+			this->lblComprasReg->AutoSize = true;
+			this->lblComprasReg->BackColor = System::Drawing::Color::Transparent;
+			this->lblComprasReg->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->lblComprasReg->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblComprasReg->ForeColor = System::Drawing::Color::Peru;
+			this->lblComprasReg->Location = System::Drawing::Point(682, 259);
+			this->lblComprasReg->Name = L"lblComprasReg";
+			this->lblComprasReg->Size = System::Drawing::Size(314, 33);
+			this->lblComprasReg->TabIndex = 46;
+			this->lblComprasReg->Text = L"Compras Registradas";
+			// 
 			// CompraForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1159, 685);
+			this->Controls->Add(this->lblComprasReg);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->dgvVistaCom);
 			this->Controls->Add(this->btnLimpiar);

@@ -99,3 +99,24 @@ List<MueblesController::Fila^>^ MueblesController::VistasController::vistaRetiro
 	}
 	return listaG;
 }
+
+List<MueblesController::Fila^>^ MueblesController::VistasController::vistaVentasCtr()
+{
+
+	listaG->Clear();
+	int i = 0;
+
+
+	for each (VistaDto ^ renglon in vista->vistaInventario())
+	{
+		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		listaG[i]->setId(renglon->getId().ToString());//-----------------> id.
+		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Nombre Mueble.
+		listaG[i]->setFecha(renglon->getFecha()->ToShortDateString());//-> Fecha de Venta.
+		listaG[i]->setCosto(renglon->getDinero1().ToString("N2"));//-----> Precio de Venta.
+		listaG[i]->setDesMue(renglon->getCadena2());//-------------------> Descripcion Venta.
+		i++;
+	}
+	return listaG;
+}

@@ -37,6 +37,7 @@ namespace MueblesModel
 		List<ComprasRealizadas^>^ vistaCompraRealizada();
 		List<VistaDto^>^ vistaDepositos();
 		List<VistaDto^>^ vistaRetiros();
+		List<VistaDto^>^ vistaVentas();
 	
 	};
 }

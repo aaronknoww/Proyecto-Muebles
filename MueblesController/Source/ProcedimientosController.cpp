@@ -184,3 +184,23 @@ Boolean MueblesController::ProcedimentosController::updateRetiro(String^ id, Dat
 
 	return true;
 }
+
+Boolean MueblesController::ProcedimentosController::updateVenta(String^ id, DateTime^ fecha, String^ cantidad, String^ descripcion)
+{
+	ProcedimientosDao procedimiento;
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		procedimiento.procedimientoUpdateVenta(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad), f.cadenaSql(descripcion));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+}

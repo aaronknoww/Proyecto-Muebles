@@ -105,6 +105,10 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::TextBox^ txbSetPrecio;
 	private: System::Windows::Forms::Button^ btnLimpiar;
 	private: System::Windows::Forms::Button^ btnVender;
+	private: System::Windows::Forms::Label^ lblTituloDgv;
+	private: System::Windows::Forms::Button^ btnMostrar;
+	private: System::Windows::Forms::Button^ btnEditar;
+
 		   System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -143,6 +147,9 @@ namespace MueblesCApantallas {
 			this->txbSetPrecio = (gcnew System::Windows::Forms::TextBox());
 			this->btnLimpiar = (gcnew System::Windows::Forms::Button());
 			this->btnVender = (gcnew System::Windows::Forms::Button());
+			this->lblTituloDgv = (gcnew System::Windows::Forms::Label());
+			this->btnMostrar = (gcnew System::Windows::Forms::Button());
+			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbMueble->SuspendLayout();
 			this->gbVenta->SuspendLayout();
@@ -173,7 +180,7 @@ namespace MueblesCApantallas {
 			});
 			this->dgvVistaAlm->EnableHeadersVisualStyles = false;
 			this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
-			this->dgvVistaAlm->Location = System::Drawing::Point(498, 151);
+			this->dgvVistaAlm->Location = System::Drawing::Point(493, 149);
 			this->dgvVistaAlm->Name = L"dgvVistaAlm";
 			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
@@ -197,7 +204,7 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this->dgvVistaAlm->RowTemplate->Height = 24;
 			this->dgvVistaAlm->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dgvVistaAlm->Size = System::Drawing::Size(648, 413);
+			this->dgvVistaAlm->Size = System::Drawing::Size(657, 367);
 			this->dgvVistaAlm->TabIndex = 36;
 			this->dgvVistaAlm->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &VentaForm::dgvVistaAlm_CellClick);
 			// 
@@ -238,7 +245,7 @@ namespace MueblesCApantallas {
 			this->lblFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblFiltrar->ForeColor = System::Drawing::Color::Peru;
-			this->lblFiltrar->Location = System::Drawing::Point(493, 106);
+			this->lblFiltrar->Location = System::Drawing::Point(498, 532);
 			this->lblFiltrar->Name = L"lblFiltrar";
 			this->lblFiltrar->Size = System::Drawing::Size(95, 32);
 			this->lblFiltrar->TabIndex = 37;
@@ -250,7 +257,7 @@ namespace MueblesCApantallas {
 			this->txbFiltrar->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->txbFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->txbFiltrar->Location = System::Drawing::Point(597, 111);
+			this->txbFiltrar->Location = System::Drawing::Point(601, 537);
 			this->txbFiltrar->MaxLength = 30;
 			this->txbFiltrar->Name = L"txbFiltrar";
 			this->txbFiltrar->Size = System::Drawing::Size(549, 27);
@@ -518,10 +525,10 @@ namespace MueblesCApantallas {
 			this->btnLimpiar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnLimpiar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnLimpiar->Location = System::Drawing::Point(258, 591);
+			this->btnLimpiar->Location = System::Drawing::Point(253, 591);
 			this->btnLimpiar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnLimpiar->Name = L"btnLimpiar";
-			this->btnLimpiar->Size = System::Drawing::Size(225, 50);
+			this->btnLimpiar->Size = System::Drawing::Size(230, 50);
 			this->btnLimpiar->TabIndex = 46;
 			this->btnLimpiar->Text = L"Limpiar";
 			this->btnLimpiar->UseVisualStyleBackColor = false;
@@ -539,11 +546,60 @@ namespace MueblesCApantallas {
 			this->btnVender->Location = System::Drawing::Point(9, 591);
 			this->btnVender->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnVender->Name = L"btnVender";
-			this->btnVender->Size = System::Drawing::Size(225, 50);
+			this->btnVender->Size = System::Drawing::Size(230, 50);
 			this->btnVender->TabIndex = 45;
 			this->btnVender->Text = L"Vender";
 			this->btnVender->UseVisualStyleBackColor = false;
 			this->btnVender->Click += gcnew System::EventHandler(this, &VentaForm::btnVender_Click);
+			// 
+			// lblTituloDgv
+			// 
+			this->lblTituloDgv->AutoSize = true;
+			this->lblTituloDgv->BackColor = System::Drawing::Color::Transparent;
+			this->lblTituloDgv->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->lblTituloDgv->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblTituloDgv->ForeColor = System::Drawing::Color::Peru;
+			this->lblTituloDgv->Location = System::Drawing::Point(664, 106);
+			this->lblTituloDgv->Name = L"lblTituloDgv";
+			this->lblTituloDgv->Size = System::Drawing::Size(279, 33);
+			this->lblTituloDgv->TabIndex = 47;
+			this->lblTituloDgv->Text = L"Muebles a la Venta";
+			// 
+			// btnMostrar
+			// 
+			this->btnMostrar->BackColor = System::Drawing::Color::Transparent;
+			this->btnMostrar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnMostrar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Teal;
+			this->btnMostrar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnMostrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnMostrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnMostrar->Location = System::Drawing::Point(514, 591);
+			this->btnMostrar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnMostrar->Name = L"btnMostrar";
+			this->btnMostrar->Size = System::Drawing::Size(230, 50);
+			this->btnMostrar->TabIndex = 48;
+			this->btnMostrar->Text = L"Mostrar Ventas";
+			this->btnMostrar->UseVisualStyleBackColor = false;
+			// 
+			// btnEditar
+			// 
+			this->btnEditar->BackColor = System::Drawing::Color::Transparent;
+			this->btnEditar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnEditar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::SteelBlue;
+			this->btnEditar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEditar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnEditar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEditar->Location = System::Drawing::Point(771, 591);
+			this->btnEditar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnEditar->Name = L"btnEditar";
+			this->btnEditar->Size = System::Drawing::Size(230, 50);
+			this->btnEditar->TabIndex = 49;
+			this->btnEditar->Text = L"Editar";
+			this->btnEditar->UseVisualStyleBackColor = false;
+			this->btnEditar->Visible = false;
 			// 
 			// VentaForm
 			// 
@@ -551,6 +607,9 @@ namespace MueblesCApantallas {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1159, 685);
+			this->Controls->Add(this->btnEditar);
+			this->Controls->Add(this->btnMostrar);
+			this->Controls->Add(this->lblTituloDgv);
 			this->Controls->Add(this->btnLimpiar);
 			this->Controls->Add(this->btnVender);
 			this->Controls->Add(this->gbVenta);

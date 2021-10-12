@@ -107,9 +107,11 @@ List<MueblesController::Fila^>^ MueblesController::VistasController::vistaVentas
 	int i = 0;
 
 
-	for each (VistaDto ^ renglon in vista->vistaInventario())
+	for each (VistaDto ^ renglon in vista->vistaVentas())
 	{
 		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		//Como es una fila generica se usan metodos con diferentes nombres pero se especifica lo que se guarda en cada uno.
 
 		listaG[i]->setId(renglon->getId().ToString());//-----------------> id.
 		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Nombre Mueble.

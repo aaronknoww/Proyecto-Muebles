@@ -23,10 +23,14 @@ namespace MueblesCApantallas {
 			controlador = gcnew ControladorGeneral();
 			vistas = gcnew VistasController();
 			datos = gcnew List<String^>;
-			consulta = gcnew List<Fila^>;
-			consulta = vistas->vistaInventarioCtr();//---> Carga la consulta al inicio del programa.
+			inventario = gcnew List<Fila^>;
 			resultado = gcnew List<Fila^>;
-
+			ventasReg = gcnew List<Fila^>;
+			actualizar = false;
+			inventario = vistas->vistaInventarioCtr();//---> Carga la consulta inventario.
+			vistas = nullptr;
+			vistas = gcnew VistasController(); //---> Con el mismo puntero se crea espacio en memoria para ejcutar otra consulta.
+			ventasReg = vistas->vistaVentasCtr();
 
 			InitializeComponent();
 			
@@ -37,7 +41,7 @@ namespace MueblesCApantallas {
 			this->lblGetDinero->Text = procedimiento->getCapitalActual();
 			this->lblGetFecha->Text = fechaActual.ToShortDateString();// Para mostrar la fehca actual al usuario
 								
-			cargarDgv(consulta);
+			cargarDgv(inventario);
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -71,11 +75,13 @@ namespace MueblesCApantallas {
 		ControladorGeneral^ controlador;
 		VistasController^ vistas;
 		Boolean punto;
+		Boolean actualizar; //---------> Se pone en verdadero cuando se muestran las ventas registradas.
 		DateTime fechaActual;
 		Int16 contador;
 		List<String^>^ datos;
-		List<Fila^>^ consulta;//------------>Guarda toda la consulta que viene de la base de datos.
-		List<Fila^>^ resultado;//----------->Guarda las filas que cumplan con cierto criterio.
+		List<Fila^>^ inventario;//----->Guarda lo que arroja la vista almacenada inventarioView.
+		List<Fila^>^ ventasReg;//------>Guarda lo que arroja la vista ventas.
+		List<Fila^>^ resultado;//------>Guarda las filas que cumplan con cierto criterio.
 		
 
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nombreMue;
@@ -108,6 +114,7 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::Label^ lblTituloDgv;
 	private: System::Windows::Forms::Button^ btnMostrar;
 	private: System::Windows::Forms::Button^ btnEditar;
+	private: System::Windows::Forms::Button^ btnCancelar;
 
 		   System::ComponentModel::Container^ components;
 
@@ -150,6 +157,7 @@ namespace MueblesCApantallas {
 			this->lblTituloDgv = (gcnew System::Windows::Forms::Label());
 			this->btnMostrar = (gcnew System::Windows::Forms::Button());
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
+			this->btnCancelar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbMueble->SuspendLayout();
 			this->gbVenta->SuspendLayout();
@@ -525,10 +533,10 @@ namespace MueblesCApantallas {
 			this->btnLimpiar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnLimpiar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnLimpiar->Location = System::Drawing::Point(253, 591);
+			this->btnLimpiar->Location = System::Drawing::Point(268, 591);
 			this->btnLimpiar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnLimpiar->Name = L"btnLimpiar";
-			this->btnLimpiar->Size = System::Drawing::Size(230, 50);
+			this->btnLimpiar->Size = System::Drawing::Size(215, 50);
 			this->btnLimpiar->TabIndex = 46;
 			this->btnLimpiar->Text = L"Limpiar";
 			this->btnLimpiar->UseVisualStyleBackColor = false;
@@ -546,7 +554,7 @@ namespace MueblesCApantallas {
 			this->btnVender->Location = System::Drawing::Point(9, 591);
 			this->btnVender->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnVender->Name = L"btnVender";
-			this->btnVender->Size = System::Drawing::Size(230, 50);
+			this->btnVender->Size = System::Drawing::Size(215, 50);
 			this->btnVender->TabIndex = 45;
 			this->btnVender->Text = L"Vender";
 			this->btnVender->UseVisualStyleBackColor = false;
@@ -575,13 +583,14 @@ namespace MueblesCApantallas {
 			this->btnMostrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnMostrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnMostrar->Location = System::Drawing::Point(514, 591);
+			this->btnMostrar->Location = System::Drawing::Point(489, 591);
 			this->btnMostrar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnMostrar->Name = L"btnMostrar";
-			this->btnMostrar->Size = System::Drawing::Size(230, 50);
+			this->btnMostrar->Size = System::Drawing::Size(215, 50);
 			this->btnMostrar->TabIndex = 48;
 			this->btnMostrar->Text = L"Mostrar Ventas";
 			this->btnMostrar->UseVisualStyleBackColor = false;
+			this->btnMostrar->Click += gcnew System::EventHandler(this, &VentaForm::btnMostrar_Click);
 			// 
 			// btnEditar
 			// 
@@ -592,14 +601,33 @@ namespace MueblesCApantallas {
 			this->btnEditar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnEditar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnEditar->Location = System::Drawing::Point(771, 591);
+			this->btnEditar->Location = System::Drawing::Point(714, 591);
 			this->btnEditar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnEditar->Name = L"btnEditar";
-			this->btnEditar->Size = System::Drawing::Size(230, 50);
+			this->btnEditar->Size = System::Drawing::Size(215, 50);
 			this->btnEditar->TabIndex = 49;
 			this->btnEditar->Text = L"Editar";
 			this->btnEditar->UseVisualStyleBackColor = false;
 			this->btnEditar->Visible = false;
+			// 
+			// btnCancelar
+			// 
+			this->btnCancelar->BackColor = System::Drawing::Color::Transparent;
+			this->btnCancelar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnCancelar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Crimson;
+			this->btnCancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnCancelar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnCancelar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnCancelar->Location = System::Drawing::Point(935, 591);
+			this->btnCancelar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnCancelar->Name = L"btnCancelar";
+			this->btnCancelar->Size = System::Drawing::Size(215, 50);
+			this->btnCancelar->TabIndex = 50;
+			this->btnCancelar->Text = L"Cancelar";
+			this->btnCancelar->UseVisualStyleBackColor = false;
+			this->btnCancelar->Visible = false;
+			this->btnCancelar->Click += gcnew System::EventHandler(this, &VentaForm::btnCancelar_Click);
 			// 
 			// VentaForm
 			// 
@@ -607,6 +635,7 @@ namespace MueblesCApantallas {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(1159, 685);
+			this->Controls->Add(this->btnCancelar);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->btnMostrar);
 			this->Controls->Add(this->lblTituloDgv);
@@ -643,20 +672,40 @@ namespace MueblesCApantallas {
 	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		
-		filtrarDgv(consulta);// Recibe la consulta que se recibió de la base de datos.
+		filtrarDgv(inventario);// Recibe la consulta que se recibió de la base de datos.
 		
 	}
 	private: System::Void dgvVistaAlm_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) 
 	{
-		datos->Clear();
-		datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
 		
-		this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
-		this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
-		this->txbSetPrecio->Enabled = true;
-		this->txbSetDescVenta->Enabled = true;
-		this->dtpSetfecha->Enabled = true;
 
+		datos->Clear();
+		if (actualizar==false)
+		{
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+
+			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
+			this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
+			this->txbSetPrecio->Enabled = true;
+			this->txbSetDescVenta->Enabled = true;
+			this->dtpSetfecha->Enabled = true;
+
+		}
+		else
+		{
+			// Se cargan datos de las VENTAS registradas a los textbox para poder modificarlos.
+
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+
+			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
+			this->txbSetDescVenta->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
+			this->txbSetPrecio->Text = this->dgvVistaAlm->CurrentRow->Cells[2]->Value->ToString();
+			this->dtpSetfecha->Text = this->dgvVistaAlm->CurrentRow->Cells[3]->Value->ToString();
+			
+			this->txbSetPrecio->Enabled = true;
+			this->txbSetDescVenta->Enabled = true;
+			this->dtpSetfecha->Enabled = true;
+		}
 	}
 	private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -733,10 +782,10 @@ namespace MueblesCApantallas {
 				MessageBox::Show("Se registro tu compra correctamente", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 
 				limpiarDgv();// Borra todas las filas del dgv
-				consulta->Clear();
-				consulta=vistas->vistaInventarioCtr();// Se ejecuta nuevamente la consulta para actulizar la tabla despues de realizar la venta.
+				inventario->Clear();
+				inventario=vistas->vistaInventarioCtr();// Se ejecuta nuevamente la consulta para actulizar la tabla despues de realizar la venta.
 				this->lblGetDinero->Text = procedimiento->getCapitalActual();
-				cargarDgv(consulta);
+				cargarDgv(inventario);
 				limpiar();
 				return;
 			}
@@ -751,6 +800,53 @@ namespace MueblesCApantallas {
 			return;
 
 	}
+}
+private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	actualizar = true;
+	limpiarDgv(); //------------------------> Se inicializa el data Grid View
+	this->lblTituloDgv->Text = "Ventas Registradas";
+	this->lblTituloDgv->ForeColor = System::Drawing::Color::SeaGreen;
+	this->lblFiltrar->Visible = false;
+	this->txbFiltrar->Visible = false;
+	this->txbSetDescMue->Visible = false;
+	this->lblDescMue->Visible = false;
+	this->btnVender->Enabled = false;
+	this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::SeaGreen;
+	this->dgvVistaAlm->GridColor = System::Drawing::Color::SeaGreen;
+	this->gbVenta->Text = "Datos de la Venta a Modificar ";
+	this->gbVenta->ForeColor = System::Drawing::Color::SeaGreen;
+	this->gbMueble->Text = "Datos de Mueble Vendido ";
+	this->gbMueble->ForeColor = System::Drawing::Color::SeaGreen;
+	this->btnCancelar->Visible = true;
+	this->btnEditar->Visible = true;
+	limpiar();//----> Ver en caso de error.
+	cargarDgv(ventasReg);
+	
+
+}
+private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	// Mandar llamar una funcion para restablecer la pantalla a el estado inicial.
+	
+	this->lblTituloDgv->Text = L"Muebles a la Venta";
+	this->lblTituloDgv->ForeColor = System::Drawing::Color::Peru;
+	this->lblFiltrar->Visible = true;
+	this->txbFiltrar->Visible = true;
+	this->txbSetDescMue->Visible = true;
+	this->lblDescMue->Visible = true;
+	this->btnVender->Enabled = true;
+	this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::DarkGoldenrod;
+	this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
+	this->gbVenta->Text = "Datos de la Venta ";
+	this->gbVenta->ForeColor = System::Drawing::Color::Peru;
+	this->gbMueble->Text = "Datos del mueble seleccionado ";
+	this->gbMueble->ForeColor = System::Drawing::Color::Peru;
+	this->btnCancelar->Visible = false;
+	this->btnEditar->Visible = false;
+	limpiarDgv();
+	cargarDgv(inventario);
+	actualizar = false; // Para saber cual consulta se va a cargar al dgv.
 }
 };
 }

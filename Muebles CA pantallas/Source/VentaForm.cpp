@@ -29,6 +29,7 @@ System::Void MueblesCApantallas::VentaForm::cargarDgv(List<Fila^>^ tabla)
     return System::Void();
 }
 
+
 System::Void MueblesCApantallas::VentaForm::filtrarDgv(List<Fila^>^ tabla)
 {
 	// Funcion que se encarga de copiar en una lista, las filas que cumplan con los criterios de busqueda recibidos.
@@ -39,7 +40,7 @@ System::Void MueblesCApantallas::VentaForm::filtrarDgv(List<Fila^>^ tabla)
 	if (String::IsNullOrEmpty(txbFiltrar->Text) || String::IsNullOrWhiteSpace(txbFiltrar->Text))
 	{
 		limpiarDgv();
-		cargarDgv(consulta);
+		cargarDgv(inventario);
 	}
 	else
 	{

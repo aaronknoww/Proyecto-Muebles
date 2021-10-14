@@ -86,3 +86,24 @@ System::Void MueblesCApantallas::VentaForm::limpiar()
 	return System::Void();
 }
 
+System::Boolean MueblesCApantallas::VentaForm::ejecutarEditar()
+{
+
+	if ((datos[1] == this->txbSetPrecio->Text) && (datos[3] == this->txbSetDescVenta->Text)
+		&& (datos[2] == this->dtpSetfecha->Text))
+	{
+		// No ejecuta consulta porque los datos son iguales a los que ya existian.
+		return false;
+	}
+	else
+	{
+		
+		procedimiento->updateVenta(datos[0], dtpSetfecha->Value, txbSetPrecio->Text, txbSetDescVenta->Text);
+		return true;
+	}
+
+
+
+	return Boolean();
+}
+

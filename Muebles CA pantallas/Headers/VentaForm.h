@@ -21,16 +21,16 @@ namespace MueblesCApantallas {
 		{
 			procedimiento = gcnew ProcedimentosController();
 			controlador = gcnew ControladorGeneral();
-			vistas = gcnew VistasController();
+			vistaInventario = gcnew VistasController();
+			vistaVentas = gcnew VistasController();
 			datos = gcnew List<String^>;
 			inventario = gcnew List<Fila^>;
 			resultado = gcnew List<Fila^>;
 			ventasReg = gcnew List<Fila^>;
+			
 			actualizar = false;
-			inventario = vistas->vistaInventarioCtr();//---> Carga la consulta inventario.
-			vistas = nullptr;
-			vistas = gcnew VistasController(); //---> Con el mismo puntero se crea espacio en memoria para ejcutar otra consulta.
-			ventasReg = vistas->vistaVentasCtr();
+			inventario = vistaInventario->vistaInventarioCtr();//---> Carga la consulta inventario.
+			ventasReg = vistaVentas->vistaVentasCtr(); //--> Se carga la consulta ventasView
 
 			InitializeComponent();
 			
@@ -58,22 +58,16 @@ namespace MueblesCApantallas {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::DataGridView^ dgvVistaAlm;
-	protected:
-
-
-
-
-
+	
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
 		
-		
 		ProcedimentosController^ procedimiento;
 		ControladorGeneral^ controlador;
-		VistasController^ vistas;
+		VistasController^ vistaInventario; // Punetero para llamar la consulta invetarioView 
+		VistasController^ vistaVentas; // Punetero para poder llamar a la vista ventasView.
 		Boolean punto;
 		Boolean actualizar; //---------> Se pone en verdadero cuando se muestran las ventas registradas.
 		DateTime fechaActual;
@@ -84,6 +78,8 @@ namespace MueblesCApantallas {
 		List<Fila^>^ resultado;//------>Guarda las filas que cumplan con cierto criterio.
 		
 
+
+	private: System::Windows::Forms::DataGridView^ dgvVistaAlm;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nombreMue;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ desMueble;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
@@ -250,25 +246,25 @@ namespace MueblesCApantallas {
 			// 
 			this->lblFiltrar->AutoSize = true;
 			this->lblFiltrar->BackColor = System::Drawing::Color::Transparent;
-			this->lblFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->lblFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblFiltrar->ForeColor = System::Drawing::Color::Peru;
 			this->lblFiltrar->Location = System::Drawing::Point(498, 532);
 			this->lblFiltrar->Name = L"lblFiltrar";
-			this->lblFiltrar->Size = System::Drawing::Size(95, 32);
+			this->lblFiltrar->Size = System::Drawing::Size(203, 29);
 			this->lblFiltrar->TabIndex = 37;
-			this->lblFiltrar->Text = L"Filtrar";
+			this->lblFiltrar->Text = L"Filtrar Inventario";
 			// 
 			// txbFiltrar
 			// 
 			this->txbFiltrar->BackColor = System::Drawing::Color::Tan;
 			this->txbFiltrar->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->txbFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->txbFiltrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->txbFiltrar->Location = System::Drawing::Point(601, 537);
+			this->txbFiltrar->Location = System::Drawing::Point(707, 537);
 			this->txbFiltrar->MaxLength = 30;
 			this->txbFiltrar->Name = L"txbFiltrar";
-			this->txbFiltrar->Size = System::Drawing::Size(549, 27);
+			this->txbFiltrar->Size = System::Drawing::Size(443, 29);
 			this->txbFiltrar->TabIndex = 38;
 			this->txbFiltrar->TextChanged += gcnew System::EventHandler(this, &VentaForm::txbFiltrar_TextChanged);
 			// 
@@ -609,6 +605,7 @@ namespace MueblesCApantallas {
 			this->btnEditar->Text = L"Editar";
 			this->btnEditar->UseVisualStyleBackColor = false;
 			this->btnEditar->Visible = false;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &VentaForm::btnEditar_Click);
 			// 
 			// btnCancelar
 			// 
@@ -667,6 +664,7 @@ namespace MueblesCApantallas {
 	private: System::Void filtrarDgv(List<Fila^>^); // Filtra datos de una lista y el resultado se carga en data dgv.
 	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
 	private: System::Void limpiar();// Elimina todos las filas del dgv.
+	private: System::Boolean ejecutarEditar();
 
 	
 	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e)
@@ -682,6 +680,8 @@ namespace MueblesCApantallas {
 		datos->Clear();
 		if (actualizar==false)
 		{
+			// Se cargan los datos del INVENTARIO o ALMACEN a los text box.
+
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
 
 			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
@@ -696,6 +696,9 @@ namespace MueblesCApantallas {
 			// Se cargan datos de las VENTAS registradas a los textbox para poder modificarlos.
 
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[2]->Value->ToString());// Precio.
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[3]->Value->ToString());// Fecha.
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString());// Descripcion Venta.
 
 			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
 			this->txbSetDescVenta->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
@@ -783,7 +786,7 @@ namespace MueblesCApantallas {
 
 				limpiarDgv();// Borra todas las filas del dgv
 				inventario->Clear();
-				inventario=vistas->vistaInventarioCtr();// Se ejecuta nuevamente la consulta para actulizar la tabla despues de realizar la venta.
+				inventario=vistaInventario->vistaInventarioCtr();// Se ejecuta nuevamente la consulta para actulizar la tabla despues de realizar la venta.
 				this->lblGetDinero->Text = procedimiento->getCapitalActual();
 				cargarDgv(inventario);
 				limpiar();
@@ -805,19 +808,20 @@ private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs
 {
 	actualizar = true;
 	limpiarDgv(); //------------------------> Se inicializa el data Grid View
+	Color pigmento = System::Drawing::Color::MediumSeaGreen;
 	this->lblTituloDgv->Text = "Ventas Registradas";
-	this->lblTituloDgv->ForeColor = System::Drawing::Color::SeaGreen;
+	this->lblTituloDgv->ForeColor = pigmento;
 	this->lblFiltrar->Visible = false;
 	this->txbFiltrar->Visible = false;
 	this->txbSetDescMue->Visible = false;
 	this->lblDescMue->Visible = false;
 	this->btnVender->Enabled = false;
-	this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::SeaGreen;
-	this->dgvVistaAlm->GridColor = System::Drawing::Color::SeaGreen;
+	this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = pigmento;
+	this->dgvVistaAlm->GridColor = pigmento;
 	this->gbVenta->Text = "Datos de la Venta a Modificar ";
-	this->gbVenta->ForeColor = System::Drawing::Color::SeaGreen;
+	this->gbVenta->ForeColor = pigmento;
 	this->gbMueble->Text = "Datos de Mueble Vendido ";
-	this->gbMueble->ForeColor = System::Drawing::Color::SeaGreen;
+	this->gbMueble->ForeColor = pigmento;
 	this->btnCancelar->Visible = true;
 	this->btnEditar->Visible = true;
 	limpiar();//----> Ver en caso de error.
@@ -847,6 +851,42 @@ private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArg
 	limpiarDgv();
 	cargarDgv(inventario);
 	actualizar = false; // Para saber cual consulta se va a cargar al dgv.
+}
+private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	
+	if (datos->Count >= 1)
+	{// Entra porque ya se eligio alguna fila del data grid view.
+
+		System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+			"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+		if (respuesta == System::Windows::Forms::DialogResult::Yes)
+		{
+					
+			ejecutarEditar();
+			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+			limpiar();
+			ventasReg->Clear();
+			ventasReg = vistaVentas->vistaVentasCtr();
+			limpiarDgv();
+			cargarDgv(ventasReg);
+			this->lblGetDinero->Text = procedimiento->getCapitalActual();
+						
+		}
+		else
+		{
+			MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		}
+	}
+	else
+	{
+		// El usuario no ha elegido ninguna fila del dgv.
+
+		MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	}
+
 }
 };
 }

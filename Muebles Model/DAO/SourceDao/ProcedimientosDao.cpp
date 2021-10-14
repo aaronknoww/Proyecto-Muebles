@@ -72,10 +72,10 @@ void MueblesModel::ProcedimientosDao::procedimientoUpdateRetiro(int id, String^ 
 	cerrarConexion();
 }
 
-void MueblesModel::ProcedimientosDao::procedimientoUpdateVenta(int id, String^ fecha, Double cantidad, String^ decripcion)
+void MueblesModel::ProcedimientosDao::procedimientoUpdateVenta(int id, String^ fecha, Double cantidad, String^ descripcion)
 {
 	comandoSql->Connection = abrirConexion();
-	comandoSql->CommandText = "CALL updateVenta(" + id + "," + fecha + "," + cantidad + "," + cantidad + ");";
+	comandoSql->CommandText = "CALL updateVenta(" + id + "," + fecha + "," + cantidad + "," + descripcion + ");";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
 }

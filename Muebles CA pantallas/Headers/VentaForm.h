@@ -804,7 +804,7 @@ namespace MueblesCApantallas {
 
 	}
 }
-private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs^ e) 
+	private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	actualizar = true;
 	limpiarDgv(); //------------------------> Se inicializa el data Grid View
@@ -829,7 +829,7 @@ private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs
 	
 
 }
-private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e)
+	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	// Mandar llamar una funcion para restablecer la pantalla a el estado inicial.
 	
@@ -852,7 +852,7 @@ private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArg
 	cargarDgv(inventario);
 	actualizar = false; // Para saber cual consulta se va a cargar al dgv.
 }
-private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	
 	if (datos->Count >= 1)

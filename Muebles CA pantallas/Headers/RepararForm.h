@@ -1,14 +1,17 @@
 #pragma once
 
-namespace MueblesCApantallas {
+namespace MueblesCApantallas
+{
 
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace MueblesController;
+	
 	/// <summary>
 	/// Resumen de RepararForm
 	/// </summary>
@@ -17,7 +20,31 @@ namespace MueblesCApantallas {
 	public:
 		RepararForm(void)
 		{
+
+			procedimiento = gcnew ProcedimentosController();
+			controlador = gcnew ControladorGeneral();
+			vistaInventario = gcnew VistasController();
+			vistaReparar = gcnew VistasController();
+			datos = gcnew List<String^>;
+			inventario = gcnew List<Fila^>;
+			resultado = gcnew List<Fila^>;
+			ventasReg = gcnew List<Fila^>;
+
+			actualizar = false;
+			inventario = vistaInventario->vistaInventarioCtr();//---> Carga la consulta inventario.
+			//ventasReg = vistaVentas->vistaVentasCtr(); //--> Se carga la consulta ventasView
+
 			InitializeComponent();
+
+			this->txbSetPrecio->Enabled = false;
+			this->txbSetDescRepara->Enabled = false;
+			this->dtpSetfecha->Enabled = false;
+			fechaActual = fechaActual.Now;
+			this->lblGetDinero->Text = procedimiento->getCapitalActual();
+			this->lblGetFecha->Text = fechaActual.ToShortDateString();// Para mostrar la fehca actual al usuario
+
+			cargarDgv(inventario);
+
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -39,6 +66,22 @@ namespace MueblesCApantallas {
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
+		
+
+		ProcedimentosController^ procedimiento;
+		ControladorGeneral^ controlador;
+		VistasController^ vistaInventario; // Punetero para llamar la consulta invetarioView 
+		VistasController^ vistaReparar; // Punetero para poder llamar a la vista ventasView.
+		Boolean punto;
+		Boolean actualizar; //---------> Se pone en verdadero cuando se muestran las ventas registradas.
+		DateTime fechaActual;
+		Int16 contador;
+		List<String^>^ datos;
+		List<Fila^>^ inventario;//----->Guarda lo que arroja la vista almacenada inventarioView.
+		List<Fila^>^ ventasReg;//------>Guarda lo que arroja la vista ventas.
+		List<Fila^>^ resultado;//------>Guarda las filas que cumplan con cierto criterio.
+
+
 	
 	
 
@@ -81,10 +124,10 @@ namespace MueblesCApantallas {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->btnCancelar = (gcnew System::Windows::Forms::Button());
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->btnMostrar = (gcnew System::Windows::Forms::Button());
@@ -202,6 +245,7 @@ namespace MueblesCApantallas {
 			this->btnLimpiar->TabIndex = 61;
 			this->btnLimpiar->Text = L"Limpiar";
 			this->btnLimpiar->UseVisualStyleBackColor = false;
+			this->btnLimpiar->Click += gcnew System::EventHandler(this, &RepararForm::btnLimpiar_Click);
 			// 
 			// btnReparar
 			// 
@@ -331,6 +375,7 @@ namespace MueblesCApantallas {
 			this->txbSetPrecio->Size = System::Drawing::Size(267, 32);
 			this->txbSetPrecio->TabIndex = 3;
 			this->txbSetPrecio->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->txbSetPrecio->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &RepararForm::txbSetPrecio_KeyPress);
 			// 
 			// gbMueble
 			// 
@@ -482,6 +527,7 @@ namespace MueblesCApantallas {
 			this->txbFiltrar->Name = L"txbFiltrar";
 			this->txbFiltrar->Size = System::Drawing::Size(443, 29);
 			this->txbFiltrar->TabIndex = 53;
+			this->txbFiltrar->TextChanged += gcnew System::EventHandler(this, &RepararForm::txbFiltrar_TextChanged);
 			// 
 			// lblFiltrar
 			// 
@@ -505,15 +551,15 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::DisplayedCells;
 			this->dgvVistaAlm->BackgroundColor = System::Drawing::SystemColors::Desktop;
 			this->dgvVistaAlm->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle5->BackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::DarkGoldenrod;
-			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaAlm->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::DarkGoldenrod;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaAlm->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dgvVistaAlm->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvVistaAlm->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->nombreMue,
@@ -523,35 +569,36 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
 			this->dgvVistaAlm->Location = System::Drawing::Point(493, 157);
 			this->dgvVistaAlm->Name = L"dgvVistaAlm";
-			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle7->BackColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle7->ForeColor = System::Drawing::SystemColors::InactiveCaption;
-			dataGridViewCellStyle7->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle7->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle7->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::InactiveCaption;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this->dgvVistaAlm->RowHeadersVisible = false;
 			this->dgvVistaAlm->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
-			dataGridViewCellStyle8->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle8->ForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle8->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
+			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
 				static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(137)));
-			dataGridViewCellStyle8->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this->dgvVistaAlm->RowTemplate->Height = 24;
 			this->dgvVistaAlm->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaAlm->Size = System::Drawing::Size(657, 367);
 			this->dgvVistaAlm->TabIndex = 51;
+			this->dgvVistaAlm->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &RepararForm::dgvVistaAlm_CellClick);
 			// 
 			// nombreMue
 			// 
-			dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle2;
 			this->nombreMue->HeaderText = L"Nombre";
 			this->nombreMue->MaxInputLength = 30;
 			this->nombreMue->MinimumWidth = 6;
@@ -611,5 +658,104 @@ namespace MueblesCApantallas {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void cargarDgv(List<Fila^>^);
+	private: System::Void filtrarDgv(List<Fila^>^); // Filtra datos de una lista y el resultado se carga en data dgv.
+	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
+	private: System::Void limpiar();// Elimina todos las filas del dgv.
+	private: System::Boolean ejecutarEditar();
+
+
+
+	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		filtrarDgv(inventario);// Recibe la consulta que se recibió de la base de datos.
+
+	}
+	private: System::Void txbSetPrecio_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) 
+	{
+		for each (wchar_t caracter in this->txbSetPrecio->Text)// Recorre toda al cadena en busca de un punto.
+	{
+		if (Char::IsPunctuation(caracter))
+		{
+			// Si encuentra un punto en la cadana de texto entra y ejecuta las instrucciones.
+			punto = true;
+			break;
+		}
+		else
+			punto = false;
+	}
+	
+	
+		if (punto == true)
+	{
+
+		if (controlador->esNumero(e->KeyChar) || Char::IsControl(e->KeyChar))
+		{
+			e->Handled = false;// Perminte ingresar el caracter.
+			return;
+		}
+		else
+		{
+			e->Handled = true; // no permite ingresar el caracter
+			return;
+		}
+	}
+		else
+	{
+		if (controlador->esNumero(e->KeyChar) || Char::IsControl(e->KeyChar) || Char::IsPunctuation(e->KeyChar))
+		{	// numero								Back Space						Punto .
+			e->Handled = false;// Perminte ingresar el caracter.
+			return;
+		}
+		else
+		{
+			e->Handled = true; // no permite ingresar el caracter
+			return;
+		}
+
+	}
+		return;
+	}
+	private: System::Void dgvVistaAlm_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+	{
+
+		datos->Clear();
+		if (actualizar == false)
+		{
+			// Se cargan los datos del INVENTARIO o ALMACEN a los text box.
+
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+
+			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
+			this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
+			this->txbSetPrecio->Enabled = true;
+			this->txbSetDescRepara->Enabled = true;
+			this->dtpSetfecha->Enabled = true;
+
+		}
+		else
+		{
+			// Se cargan datos de las VENTAS registradas a los textbox para poder modificarlos.
+
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[2]->Value->ToString());// Precio.
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[3]->Value->ToString());// Fecha.
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString());// Descripcion Venta.
+
+			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
+			this->txbSetDescRepara->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
+			this->txbSetPrecio->Text = this->dgvVistaAlm->CurrentRow->Cells[2]->Value->ToString();
+			this->dtpSetfecha->Text = this->dgvVistaAlm->CurrentRow->Cells[3]->Value->ToString();
+
+			this->txbSetPrecio->Enabled = true;
+			this->txbSetDescRepara->Enabled = true;
+			this->dtpSetfecha->Enabled = true;
+		}
+	}
+	private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		limpiar();
+	}
+};
 }

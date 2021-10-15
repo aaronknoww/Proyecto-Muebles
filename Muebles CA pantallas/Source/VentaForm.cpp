@@ -28,8 +28,6 @@ System::Void MueblesCApantallas::VentaForm::cargarDgv(List<Fila^>^ tabla)
 	
     return System::Void();
 }
-
-
 System::Void MueblesCApantallas::VentaForm::filtrarDgv(List<Fila^>^ tabla)
 {
 	// Funcion que se encarga de copiar en una lista, las filas que cumplan con los criterios de busqueda recibidos.
@@ -56,7 +54,6 @@ System::Void MueblesCApantallas::VentaForm::filtrarDgv(List<Fila^>^ tabla)
 
 	return System::Void();
 }
-
 System::Void MueblesCApantallas::VentaForm::limpiarDgv()
 {
 	// Elimina todas la filas del dgv
@@ -67,7 +64,6 @@ System::Void MueblesCApantallas::VentaForm::limpiarDgv()
 		
 	return System::Void();
 }
-
 System::Void MueblesCApantallas::VentaForm::limpiar()
 {
 	this->txbSetNomMue->Clear();
@@ -85,7 +81,6 @@ System::Void MueblesCApantallas::VentaForm::limpiar()
 	
 	return System::Void();
 }
-
 System::Boolean MueblesCApantallas::VentaForm::ejecutarEditar()
 {
 

@@ -3,6 +3,7 @@
 #include "RetiroForm.h"
 #include "CompraForm.h"
 #include "VentaForm.h"
+#include "RepararForm.h"
 #pragma once
 
 namespace MueblesCApantallas {
@@ -49,13 +50,25 @@ namespace MueblesCApantallas {
 				delete components;
 			}
 		}
-	public: System::Windows::Forms::Panel^ panelIzquierdo;
-	protected:
+	
 
+		/// </summary>
+		/// <summary>
+		/// Variable del diseñador necesaria.
+	
+	private:
+	private: Form^ formaActiva; //------> Creada para saber cual es la forma hija que se encuentra activa.
+		System::ComponentModel::Container ^components;
+	
+	
+
+
+
+	public: System::Windows::Forms::Panel^ panelIzquierdo;
 	public: System::Windows::Forms::Panel^ panelCentral;
 	public: System::Windows::Forms::Button^ botonDeposito;
 	public: System::Windows::Forms::PictureBox^ pBLogo;
-	public: System::Windows::Forms::Button^ botonInventario;
+	public: System::Windows::Forms::Button^ botonReparar;
 	public: System::Windows::Forms::Button^ botonVenta;
 	public: System::Windows::Forms::Button^ botonCompra;
 	public: System::Windows::Forms::Button^ botonRetiro;
@@ -65,13 +78,6 @@ namespace MueblesCApantallas {
 	public: System::Windows::Forms::Label^ labelMenu;
 
 
-	private: Form^ formaActiva; //------> Creada para saber cual es la forma hija que se encuentra activa.
-
-	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
-		System::ComponentModel::Container ^components;
 		
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -83,7 +89,7 @@ namespace MueblesCApantallas {
 			this->panelIzquierdo = (gcnew System::Windows::Forms::Panel());
 			this->botonReportes = (gcnew System::Windows::Forms::Button());
 			this->botonModificar = (gcnew System::Windows::Forms::Button());
-			this->botonInventario = (gcnew System::Windows::Forms::Button());
+			this->botonReparar = (gcnew System::Windows::Forms::Button());
 			this->botonVenta = (gcnew System::Windows::Forms::Button());
 			this->botonCompra = (gcnew System::Windows::Forms::Button());
 			this->botonRetiro = (gcnew System::Windows::Forms::Button());
@@ -104,7 +110,7 @@ namespace MueblesCApantallas {
 			this->panelIzquierdo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->panelIzquierdo->Controls->Add(this->botonReportes);
 			this->panelIzquierdo->Controls->Add(this->botonModificar);
-			this->panelIzquierdo->Controls->Add(this->botonInventario);
+			this->panelIzquierdo->Controls->Add(this->botonReparar);
 			this->panelIzquierdo->Controls->Add(this->botonVenta);
 			this->panelIzquierdo->Controls->Add(this->botonCompra);
 			this->panelIzquierdo->Controls->Add(this->botonRetiro);
@@ -150,22 +156,23 @@ namespace MueblesCApantallas {
 			this->botonModificar->Text = L"Modificar";
 			this->botonModificar->UseVisualStyleBackColor = false;
 			// 
-			// botonInventario
+			// botonReparar
 			// 
-			this->botonInventario->BackColor = System::Drawing::Color::Transparent;
-			this->botonInventario->Dock = System::Windows::Forms::DockStyle::Top;
-			this->botonInventario->FlatAppearance->BorderSize = 0;
-			this->botonInventario->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Teal;
-			this->botonInventario->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->botonInventario->Font = (gcnew System::Drawing::Font(L"Elephant", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->botonReparar->BackColor = System::Drawing::Color::Transparent;
+			this->botonReparar->Dock = System::Windows::Forms::DockStyle::Top;
+			this->botonReparar->FlatAppearance->BorderSize = 0;
+			this->botonReparar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Teal;
+			this->botonReparar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->botonReparar->Font = (gcnew System::Drawing::Font(L"Elephant", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->botonInventario->ForeColor = System::Drawing::Color::Transparent;
-			this->botonInventario->Location = System::Drawing::Point(0, 389);
-			this->botonInventario->Name = L"botonInventario";
-			this->botonInventario->Size = System::Drawing::Size(250, 60);
-			this->botonInventario->TabIndex = 5;
-			this->botonInventario->Text = L"Inventario";
-			this->botonInventario->UseVisualStyleBackColor = false;
+			this->botonReparar->ForeColor = System::Drawing::Color::Transparent;
+			this->botonReparar->Location = System::Drawing::Point(0, 389);
+			this->botonReparar->Name = L"botonReparar";
+			this->botonReparar->Size = System::Drawing::Size(250, 60);
+			this->botonReparar->TabIndex = 5;
+			this->botonReparar->Text = L"Reparar Mueble";
+			this->botonReparar->UseVisualStyleBackColor = false;
+			this->botonReparar->Click += gcnew System::EventHandler(this, &MenuPrincipal::botonReparar_Click);
 			// 
 			// botonVenta
 			// 
@@ -353,6 +360,10 @@ private: System::Void botonVenta_Click(System::Object^ sender, System::EventArgs
 {
 	
 	abrirFormaHija(gcnew VentaForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
+}
+private: System::Void botonReparar_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	abrirFormaHija(gcnew RepararForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
 }
 };
 }

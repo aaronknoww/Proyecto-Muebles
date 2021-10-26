@@ -29,6 +29,11 @@ void MueblesController::Fila::setId(String^ id)
 	this->_id = id;
 }
 
+void MueblesController::Fila::setId2(String^ id)
+{
+	this->_id2 = id;
+}
+
 void MueblesController::Fila::setNombreMue(String^ nombreMue)
 {
 	this->_nombreMue = nombreMue;
@@ -66,6 +71,11 @@ void MueblesController::Fila::setDesCompra(String^ desCompra)
 String^ MueblesController::Fila::getId()
 {
 	return _id;
+}
+
+String^ MueblesController::Fila::getId2()
+{
+	return _id2;
 }
 
 String^ MueblesController::Fila::getNombreMue()

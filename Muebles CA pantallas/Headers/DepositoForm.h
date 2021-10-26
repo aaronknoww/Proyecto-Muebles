@@ -550,7 +550,8 @@ private: System::Void btnDepositar_Click(System::Object^ sender, System::EventAr
 {
 
 	
-	Double r=r.Parse(this->textBoxDeposito->Text);
+	Double r = 0;
+	r=r.Parse(this->textBoxDeposito->Text);
 	
 	if (r>1)
 	{

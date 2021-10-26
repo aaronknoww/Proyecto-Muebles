@@ -2,8 +2,10 @@
 
 System::Void MueblesCApantallas::RepararForm::cargarDgv(List<Fila^>^ tabla)
 {
-	this->dgvVistaAlm->ColumnCount = 5; //Se indica el numero de columnas de que se van a utlizar.
+	this->dgvVistaAlm->ColumnCount = 6; //Se indica el numero de columnas de que se van a utlizar.
 	this->dgvVistaAlm->Columns[4]->Visible = false;// Oculta la columna indicada.
+	this->dgvVistaAlm->Columns[5]->Visible = false;// Oculta la columna indicada.
+	
 	int a = 0;
 
 
@@ -13,6 +15,7 @@ System::Void MueblesCApantallas::RepararForm::cargarDgv(List<Fila^>^ tabla)
 
 		this->dgvVistaAlm->Rows->Add();
 		this->dgvVistaAlm->Rows[a]->Cells[4]->Value = renglon->getId();// Se guarada en el grid view pero no se debe de mostrar.
+		this->dgvVistaAlm->Rows[a]->Cells[5]->Value = renglon->getId2();// Se guarada en el grid view pero no se debe de mostrar.
 		this->dgvVistaAlm->Rows[a]->Cells[0]->Value = renglon->getNombreMue();
 		this->dgvVistaAlm->Rows[a]->Cells[1]->Value = renglon->getDesMue();
 		this->dgvVistaAlm->Rows[a]->Cells[2]->Value = renglon->getCosto();
@@ -80,16 +83,16 @@ System::Void MueblesCApantallas::RepararForm::limpiar()
 
 System::Boolean MueblesCApantallas::RepararForm::ejecutarEditar()
 {
-	if ((datos[1] == this->txbSetPrecio->Text) && (datos[3] == this->txbSetDescRepara->Text)
-		&& (datos[2] == this->dtpSetfecha->Text))
+	if ((datos[2] == this->txbSetPrecio->Text) && (datos[4] == this->txbSetDescRepara->Text)
+		&& (datos[3] == this->dtpSetfecha->Text))
 	{
 		// No ejecuta consulta porque los datos son iguales a los que ya existian.
 		return false;
 	}
 	else
 	{
-
-		//procedimiento->updateVenta(datos[0], dtpSetfecha->Value, txbSetPrecio->Text, txbSetDescVenta->Text);
+		procedimiento->updateGasto(datos[0], txbSetPrecio->Text, dtpSetfecha->Value, txbSetDescRepara->Text);
+		// se debe mandar el id movimiento.
 		return true;
 	}
 

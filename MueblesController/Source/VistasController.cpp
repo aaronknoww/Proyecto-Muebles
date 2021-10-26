@@ -122,3 +122,26 @@ List<MueblesController::Fila^>^ MueblesController::VistasController::vistaVentas
 	}
 	return listaG;
 }
+
+List<MueblesController::Fila^>^ MueblesController::VistasController::vistaOtrosGastosCtr()
+{
+	listaG->Clear();
+	int i = 0;
+
+
+	for each (VistaDto ^ renglon in vista->vistaOtrosGastos())
+	{
+		listaG->Add(gcnew Fila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+		//Como es una fila generica se usan metodos con diferentes nombres pero se especifica lo que se guarda en cada uno.
+
+		listaG[i]->setId(renglon->getId().ToString());//-----------------> id Movimiento financiero.
+		listaG[i]->setId2(renglon->getId2().ToString());//---------------> id Mueble.
+		listaG[i]->setNombreMue(renglon->getCadena1());//----------------> Nombre Mueble.
+		listaG[i]->setFecha(renglon->getFecha()->ToShortDateString());//-> Fecha del Gasto.
+		listaG[i]->setCosto(renglon->getDinero1().ToString("N2"));//-----> Costo de gasto.
+		listaG[i]->setDesMue(renglon->getCadena2());//-------------------> Descripcion Gasto.
+		i++;
+	}
+	return listaG;
+}

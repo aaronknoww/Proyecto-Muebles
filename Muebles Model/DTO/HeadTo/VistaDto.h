@@ -10,6 +10,7 @@ namespace MueblesModel
 	{
 	public:
 		property Int32	 _id;
+		property Int32	 _id2;
 		property String^ _cadena1;
 		property String^ _cadena2;
 		property Double  _dinero1;
@@ -21,6 +22,7 @@ namespace MueblesModel
 		//***** SETTERS *****//
 
 		void setId(Int32 id);
+		void setId2(Int32 id);
 		void setCadena1(String^ cadena1);
 		void setCadena2(String^ cadena2);
 		void setDinero1(Double dinero1);
@@ -30,6 +32,7 @@ namespace MueblesModel
 		// ***** GETTERS ****//
 
 		Int32   getId();
+		Int32   getId2();
 		String^ getCadena1();
 		String^ getCadena2();
 		Double  getDinero1();

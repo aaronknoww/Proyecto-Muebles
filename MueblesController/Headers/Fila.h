@@ -13,6 +13,7 @@ namespace MueblesController
 	{
 	private:
 		property String^ _id;
+		property String^ _id2;
 		property String^ _nombreMue;
 		property String^ _desMue;
 		property String^ _fecha;
@@ -26,6 +27,7 @@ namespace MueblesController
 		//***** SETTERS *****//
 
 		void setId(String^ id);
+		void setId2(String^ id);
 		void setNombreMue(String^ nombreMue);
 		void setDesMue(String^ desMue);
 		void setFecha(String^ fecha);
@@ -35,6 +37,7 @@ namespace MueblesController
 		// ***** GETTERS ****//
 
 		String^ getId();
+		String^ getId2();
 		String^ getNombreMue();
 		String^ getDesMue();
 		String^ getFecha();

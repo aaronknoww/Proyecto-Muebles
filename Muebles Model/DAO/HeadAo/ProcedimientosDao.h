@@ -24,6 +24,8 @@ namespace MueblesModel
 		void   procedimientoUpdateDeposito(int id, String^ fecha, Double cantidad);
 		void   procedimientoUpdateRetiro(int id, String^ fecha, Double cantidad);
 		void   procedimientoUpdateVenta(int id, String^ fecha, Double cantidad, String^ descripcion);
+		void   procedimientoOtroGasto(int idmue, Double cantidad, String^ fecha, String^ descripcion);
+		void   procedimientoUpdateGasto(int idmov, Double cantidad, String^ fecha, String^ descripcion);
 		Double procedimientoCapitalActual();
 		
 	};

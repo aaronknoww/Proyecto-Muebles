@@ -80,6 +80,22 @@ void MueblesModel::ProcedimientosDao::procedimientoUpdateVenta(int id, String^ f
 	cerrarConexion();
 }
 
+void MueblesModel::ProcedimientosDao::procedimientoOtroGasto(int idmue, Double cantidad, String^ fecha, String^ descripcion)
+{
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL otroGasto(" + idmue + "," + cantidad + "," + fecha + "," + descripcion + ");";
+	comandoSql->ExecuteNonQuery();
+	cerrarConexion();
+}
+
+void MueblesModel::ProcedimientosDao::procedimientoUpdateGasto(int idmov, Double cantidad, String^ fecha, String^ descripcion)
+{
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL updateGasto(" + idmov + "," + cantidad + "," + fecha + "," + descripcion + ");";
+	comandoSql->ExecuteNonQuery();
+	cerrarConexion();
+}
+
 Double MueblesModel::ProcedimientosDao::procedimientoCapitalActual()
 {	
 

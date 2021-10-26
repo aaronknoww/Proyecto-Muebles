@@ -38,7 +38,8 @@ namespace MueblesController
 		List<Fila^>^ vistaInventarioCtr(); //---> Ejecuta vista comprasRealizadas y los datos los convierte a texto.
 		List<Fila^>^ vistaDepositosCtr();
 		List<Fila^>^ vistaRetirosCtr(); 
-		List<Fila^>^ vistaVentasCtr(); 
+		List<Fila^>^ vistaVentasCtr();
+		List<Fila^>^ vistaOtrosGastosCtr();
 	};
 
 }

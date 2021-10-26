@@ -228,3 +228,31 @@ List<MueblesModel::VistaDto^>^ MueblesModel::VistasDao::vistaVentas()
 
 	return _listaGenerica;
 }
+
+List<MueblesModel::VistaDto^>^ MueblesModel::VistasDao::vistaOtrosGastos()
+{
+	_listaGenerica->Clear();
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "SELECT * FROM bdnegociomuebles.otrosGastosView;";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+		_listaGenerica->Add(gcnew VistaDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+		_listaGenerica[i]->setId(lectorSql->GetInt32(0));//---------------------------> Se guarda el id del movimiento financiero.
+		_listaGenerica[i]->setId2(lectorSql->GetInt32(1));//--------------------------> Se guarda el id del Mueble.
+		_listaGenerica[i]->setCadena1(lectorSql->GetString(2));//---------------------> Se guarda el nombre del mueble.
+		_listaGenerica[i]->setFecha(Convert::ToDateTime(lectorSql->GetString(3)));//--> Se guarda la fecha de venta.
+		_listaGenerica[i]->setDinero1(lectorSql->GetDouble(4));//---------------------> Se guarda el precio.
+		_listaGenerica[i]->setCadena2(lectorSql->GetString(5));//---------------------> Guarda la descripcion del gasto.
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+	return _listaGenerica;
+}

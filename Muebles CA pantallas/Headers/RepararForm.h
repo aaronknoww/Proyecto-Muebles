@@ -28,11 +28,11 @@ namespace MueblesCApantallas
 			datos = gcnew List<String^>;
 			inventario = gcnew List<Fila^>;
 			resultado = gcnew List<Fila^>;
-			ventasReg = gcnew List<Fila^>;
+			gastosReg = gcnew List<Fila^>;
 
 			actualizar = false;
 			inventario = vistaInventario->vistaInventarioCtr();//---> Carga la consulta inventario.
-			//ventasReg = vistaVentas->vistaVentasCtr(); //--> Se carga la consulta ventasView
+			gastosReg = vistaReparar->vistaOtrosGastosCtr(); //-----> Se carga la consulta otros gastos.
 
 			InitializeComponent();
 
@@ -78,7 +78,7 @@ namespace MueblesCApantallas
 		Int16 contador;
 		List<String^>^ datos;
 		List<Fila^>^ inventario;//----->Guarda lo que arroja la vista almacenada inventarioView.
-		List<Fila^>^ ventasReg;//------>Guarda lo que arroja la vista ventas.
+		List<Fila^>^ gastosReg;//------>Guarda lo que arroja la vista gastosRegistrados.
 		List<Fila^>^ resultado;//------>Guarda las filas que cumplan con cierto criterio.
 
 
@@ -179,6 +179,7 @@ namespace MueblesCApantallas
 			this->btnCancelar->Text = L"Cancelar";
 			this->btnCancelar->UseVisualStyleBackColor = false;
 			this->btnCancelar->Visible = false;
+			this->btnCancelar->Click += gcnew System::EventHandler(this, &RepararForm::btnCancelar_Click);
 			// 
 			// btnEditar
 			// 
@@ -197,6 +198,7 @@ namespace MueblesCApantallas
 			this->btnEditar->Text = L"Editar";
 			this->btnEditar->UseVisualStyleBackColor = false;
 			this->btnEditar->Visible = false;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &RepararForm::btnEditar_Click);
 			// 
 			// btnMostrar
 			// 
@@ -214,6 +216,7 @@ namespace MueblesCApantallas
 			this->btnMostrar->TabIndex = 63;
 			this->btnMostrar->Text = L"Reparaciones";
 			this->btnMostrar->UseVisualStyleBackColor = false;
+			this->btnMostrar->Click += gcnew System::EventHandler(this, &RepararForm::btnMostrar_Click);
 			// 
 			// lblTituloDgv
 			// 
@@ -263,6 +266,7 @@ namespace MueblesCApantallas
 			this->btnReparar->TabIndex = 60;
 			this->btnReparar->Text = L"Reparar";
 			this->btnReparar->UseVisualStyleBackColor = false;
+			this->btnReparar->Click += gcnew System::EventHandler(this, &RepararForm::btnReparar_Click);
 			// 
 			// gbRepara
 			// 
@@ -283,7 +287,7 @@ namespace MueblesCApantallas
 			this->gbRepara->Size = System::Drawing::Size(474, 246);
 			this->gbRepara->TabIndex = 59;
 			this->gbRepara->TabStop = false;
-			this->gbRepara->Text = L"Datos de la Venta";
+			this->gbRepara->Text = L"Datos del Gasto";
 			// 
 			// dtpSetfecha
 			// 
@@ -725,7 +729,7 @@ namespace MueblesCApantallas
 		{
 			// Se cargan los datos del INVENTARIO o ALMACEN a los text box.
 
-			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id mueble
 
 			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
 			this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();
@@ -736,9 +740,10 @@ namespace MueblesCApantallas
 		}
 		else
 		{
-			// Se cargan datos de las VENTAS registradas a los textbox para poder modificarlos.
+			// Se cargan datos de los GASTOS registrados a los textbox para poder modificarlos.
 
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[5]->Value->ToString());// Se obtiene el id del mueble
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[2]->Value->ToString());// Precio.
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[3]->Value->ToString());// Fecha.
 			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString());// Descripcion Venta.
@@ -756,6 +761,143 @@ namespace MueblesCApantallas
 	private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
 		limpiar();
+	}
+	private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		actualizar = true;
+		limpiarDgv();
+		Color pigmento = System::Drawing::Color::MediumSeaGreen;
+		this->lblTituloDgv->Text = "Gastos Registrados";
+		this->lblTituloDgv->ForeColor = pigmento;
+		this->lblFiltrar->Visible = false;
+		this->txbFiltrar->Visible = false;
+		this->txbSetDescMue->Visible = false;
+		this->lblDescMue->Visible = false;
+		this->btnReparar->Enabled = false;
+		this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = pigmento;
+		this->dgvVistaAlm->GridColor = pigmento;
+		this->gbRepara->Text = "Datos del Gasto a Modificar ";
+		this->gbRepara->ForeColor = pigmento;
+		this->gbMueble->Text = "Datos del Mueble Reparado ";
+		this->gbMueble->ForeColor = pigmento;
+		this->btnCancelar->Visible = true;
+		this->btnEditar->Visible = true;
+		limpiar();//----> Ver en caso de error.
+		cargarDgv(gastosReg);
+	}
+	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		// Mandar llamar una funcion para restablecer la pantalla a el estado inicial.
+
+		this->lblTituloDgv->Text = L"Muebles en el Almacen";
+		this->lblTituloDgv->ForeColor = System::Drawing::Color::Peru;
+		this->lblFiltrar->Visible = true;
+		this->txbFiltrar->Visible = true;
+		this->txbSetDescMue->Visible = true;
+		this->lblDescMue->Visible = true;
+		this->btnReparar->Enabled = true;
+		this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::DarkGoldenrod;
+		this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
+		this->gbRepara->Text = "Datos del Gasto";
+		this->gbRepara->ForeColor = System::Drawing::Color::Peru;
+		this->gbMueble->Text = "Datos del mueble seleccionado ";
+		this->gbMueble->ForeColor = System::Drawing::Color::Peru;
+		this->btnCancelar->Visible = false;
+		this->btnEditar->Visible = false;
+		limpiarDgv();
+		limpiar();
+		cargarDgv(inventario);
+		actualizar = false; // Para saber cual consulta se va a cargar al dgv.
+	}
+	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+
+
+		if (datos->Count >= 1)
+		{// Entra porque ya se eligio alguna fila del data grid view.
+
+			System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+				"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			if (respuesta == System::Windows::Forms::DialogResult::Yes)
+			{
+
+				ejecutarEditar();
+				MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+				limpiar();
+				gastosReg->Clear();
+				gastosReg = vistaReparar->vistaOtrosGastosCtr();
+				limpiarDgv();
+				cargarDgv(gastosReg);
+				this->lblGetDinero->Text = procedimiento->getCapitalActual();
+
+			}
+			else
+			{
+				MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			}
+		}
+		else
+		{
+			// El usuario no ha elegido ninguna fila del dgv.
+
+			MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+		}
+
+	}
+	private: System::Void btnReparar_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+
+	
+
+
+		if (controlador->vacio(this->txbSetPrecio->Text))
+		{
+			// Entra porque falta el precio de venta.
+
+			MessageBox::Show("Es necesario asignar costo del gasto", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+		}
+		else if (controlador->vacio(this->txbSetDescRepara->Text))
+		{
+			MessageBox::Show("Es necesario describir el gasto", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		else
+		{
+			System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos", "Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			if (respuesta == System::Windows::Forms::DialogResult::Yes)
+			{
+				// Entra porque el usuario confirma que los datos son correctos.
+			
+				if (procedimiento->otrosGastos(datos[0], this->txbSetPrecio->Text,
+					this->dtpSetfecha->Value, this->txbSetDescRepara->Text))
+				{
+					// Entra aqui porque no ocurrio ningun error.
+					MessageBox::Show("Se registro tu compra correctamente", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+
+					limpiarDgv();// Borra todas las filas del dgv
+					inventario->Clear();
+					inventario = vistaInventario->vistaInventarioCtr();// Se ejecuta nuevamente la consulta para actulizar la tabla despues de realizar la venta.
+					this->lblGetDinero->Text = procedimiento->getCapitalActual();
+					cargarDgv(inventario);
+					gastosReg->Clear();
+					gastosReg = vistaReparar->vistaOtrosGastosCtr(); //--> Se vuelve a cargar la consulta con la infomacion que se acaba de registrar.
+					limpiar();
+					return;
+				}
+				else
+				{
+					// ############## Se necesita un metodo para obtener el error y mostrarlo
+					MessageBox::Show("Ocurrio un error al insertar en la base de datos", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				}
+
+			}
+			else
+				return;
+
+		}
 	}
 };
 }

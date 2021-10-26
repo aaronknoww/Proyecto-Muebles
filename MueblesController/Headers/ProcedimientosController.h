@@ -31,6 +31,8 @@ namespace MueblesController
 		Boolean updateDeposito(String^, DateTime^, String^ );
 		Boolean updateRetiro(String^, DateTime^, String^ );
 		Boolean updateVenta(String^ id, DateTime^ fecha, String^ cantidad, String^ descripcion);
+		Boolean otrosGastos(String^ idmue, String^ cantidad, DateTime^ fecha, String^ descripcion);
+		Boolean updateGasto(String^ id, String^ cantidad, DateTime^ fecha, String^ descripcion);
 	};
 
 }

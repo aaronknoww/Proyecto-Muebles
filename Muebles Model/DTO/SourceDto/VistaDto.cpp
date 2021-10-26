@@ -7,6 +7,11 @@ void MueblesModel::VistaDto::setId(Int32 id)
     _id = id;
 }
 
+void MueblesModel::VistaDto::setId2(Int32 id)
+{
+    _id2 = id;
+}
+
 void MueblesModel::VistaDto::setCadena1(String^ nombre)
 {
     this->_cadena1 = nombre;
@@ -35,6 +40,11 @@ void MueblesModel::VistaDto::setFecha(DateTime^ fecha)
 Int32 MueblesModel::VistaDto::getId()
 {
     return _id;
+}
+
+Int32 MueblesModel::VistaDto::getId2()
+{
+    return _id2;
 }
 
 String^ MueblesModel::VistaDto::getCadena1()

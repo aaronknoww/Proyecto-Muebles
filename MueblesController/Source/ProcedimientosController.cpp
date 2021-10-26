@@ -204,3 +204,44 @@ Boolean MueblesController::ProcedimentosController::updateVenta(String^ id, Date
 
 	return true;
 }
+
+Boolean MueblesController::ProcedimentosController::otrosGastos(String^ idmue, String^ cantidad, DateTime^ fecha, String^ descripcion)
+{
+	ProcedimientosDao procedimiento;
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		procedimiento.procedimientoOtroGasto(Int32::Parse(idmue), Double::Parse(cantidad), f.cadenaSql(fech), f.cadenaSql(descripcion));
+
+	}
+	catch (Exception^)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+}
+
+Boolean MueblesController::ProcedimentosController::updateGasto(String^ id, String^ cantidad, DateTime^ fecha, String^ descripcion)
+{
+	ProcedimientosDao procedimiento;
+	auto tipo = fecha->GetDateTimeFormats();
+	String^ fech = tipo[80];
+
+	try
+	{
+		procedimiento.procedimientoUpdateGasto(Int32::Parse(id), Double::Parse(cantidad), f.cadenaSql(fech), f.cadenaSql(descripcion));
+
+	}
+	catch (Exception^ exp)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
+	
+}

@@ -807,7 +807,7 @@ namespace MueblesCApantallas {
 	private: System::Void btnMostrar_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	actualizar = true;
-	limpiarDgv(); //------------------------> Se inicializa el data Grid View
+	limpiarDgv(); 
 	Color pigmento = System::Drawing::Color::MediumSeaGreen;
 	this->lblTituloDgv->Text = "Ventas Registradas";
 	this->lblTituloDgv->ForeColor = pigmento;
@@ -849,6 +849,7 @@ namespace MueblesCApantallas {
 	this->btnCancelar->Visible = false;
 	this->btnEditar->Visible = false;
 	limpiarDgv();
+	limpiar();
 	cargarDgv(inventario);
 	actualizar = false; // Para saber cual consulta se va a cargar al dgv.
 }

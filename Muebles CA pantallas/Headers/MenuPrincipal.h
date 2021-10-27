@@ -4,6 +4,8 @@
 #include "CompraForm.h"
 #include "VentaForm.h"
 #include "RepararForm.h"
+#include "InventarioForm.h"
+
 #pragma once
 
 namespace MueblesCApantallas {
@@ -153,8 +155,9 @@ namespace MueblesCApantallas {
 			this->botonModificar->Name = L"botonModificar";
 			this->botonModificar->Size = System::Drawing::Size(250, 60);
 			this->botonModificar->TabIndex = 6;
-			this->botonModificar->Text = L"Modificar";
+			this->botonModificar->Text = L"Inventario";
 			this->botonModificar->UseVisualStyleBackColor = false;
+			this->botonModificar->Click += gcnew System::EventHandler(this, &MenuPrincipal::botonModificar_Click);
 			// 
 			// botonReparar
 			// 
@@ -325,14 +328,6 @@ namespace MueblesCApantallas {
 	private: Void abrirFormaHija(Form^ hija, Object^ botonSender);
 	private: System::Void MenuPrincipal_Load(System::Object^ sender, System::EventArgs^ e)
 	{
-		try
-		{
-
-		}
-		catch (Exception^ exp)
-		{
-			MessageBox::Show(exp->Message);
-		}
 		
 	}
 
@@ -364,6 +359,10 @@ private: System::Void botonVenta_Click(System::Object^ sender, System::EventArgs
 private: System::Void botonReparar_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	abrirFormaHija(gcnew RepararForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
+}
+private: System::Void botonModificar_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	abrirFormaHija(gcnew InventarioForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
 }
 };
 }

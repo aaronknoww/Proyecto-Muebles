@@ -2,12 +2,15 @@
 
 namespace MueblesCApantallas {
 
+
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MueblesController;
 
 	/// <summary>
 	/// Resumen de InventarioForm
@@ -17,10 +20,22 @@ namespace MueblesCApantallas {
 	public:
 		InventarioForm(void)
 		{
+			procedimiento = gcnew ProcedimentosController();
+			controlador = gcnew ControladorGeneral();
+			vistaInventario = gcnew VistasController();
+			datos = gcnew List<String^>;
+			inventario = gcnew List<Fila^>;
+			resultado = gcnew List<Fila^>;
+			inventario = vistaInventario->vistaInventarioCtr();//---> Carga la consulta inventario.
+
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			
+			
+			fechaActual = fechaActual.Now;
+			this->lblGetDinero->Text = procedimiento->getCapitalActual();
+			this->lblGetFecha->Text = fechaActual.ToShortDateString();// Para mostrar la fecha actual al usuario
+			cargarDgv(inventario);
+
 		}
 
 	protected:
@@ -35,29 +50,39 @@ namespace MueblesCApantallas {
 			}
 		}
 
-	protected:
+	
+	private:
+		/// <summary>
+		/// Variable del diseñador necesaria.
+		/// </summary>
+		
+		ProcedimentosController^ procedimiento;
+		ControladorGeneral^ controlador;
+		VistasController^ vistaInventario; // Punetero para llamar la consulta invetarioView 
+		DateTime fechaActual;
+		List<String^>^ datos;
+		List<Fila^>^ inventario;//----->Guarda lo que arroja la vista almacenada inventarioView.
+		List<Fila^>^ resultado;//------>Guarda las filas que cumplan con cierto criterio.
 
+		
+		//Boolean actualizar; //---------> Se pone en verdadero cuando se muestran las ventas registradas.
+		//Int16 contador;
+		//VistasController^ vistaReparar; // Punetero para poder llamar a la vista ventasView.
+		//List<Fila^>^ gastosReg;//------>Guarda lo que arroja la vista gastosRegistrados.
+
+		
+		System::ComponentModel::Container ^components;
+	
 
 	private: System::Windows::Forms::Label^ lblTituloDgv;
 	private: System::Windows::Forms::Button^ btnLimpiar;
-	private: System::Windows::Forms::Button^ btnModificar;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ gbMueble;
 	private: System::Windows::Forms::Label^ lblDescMue;
 	private: System::Windows::Forms::TextBox^ txbSetDescMue;
 	private: System::Windows::Forms::Label^ lblNomMueble;
 	private: System::Windows::Forms::TextBox^ txbSetNomMue;
 	public: System::Windows::Forms::Label^ lblGetFecha;
-	private:
 	private: System::Windows::Forms::Label^ labelFecha;
-	public:
 	private: System::Windows::Forms::Label^ lblGetDinero;
 	private: System::Windows::Forms::Label^ labelCapital;
 	private: System::Windows::Forms::TextBox^ txbFiltrar;
@@ -66,13 +91,9 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nombreMue;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ desMueble;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
+	private: System::Windows::Forms::Button^ btnEditar;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ costoCompra;
 
-	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
-		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -87,7 +108,6 @@ namespace MueblesCApantallas {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lblTituloDgv = (gcnew System::Windows::Forms::Label());
 			this->btnLimpiar = (gcnew System::Windows::Forms::Button());
-			this->btnModificar = (gcnew System::Windows::Forms::Button());
 			this->gbMueble = (gcnew System::Windows::Forms::GroupBox());
 			this->lblDescMue = (gcnew System::Windows::Forms::Label());
 			this->txbSetDescMue = (gcnew System::Windows::Forms::TextBox());
@@ -104,6 +124,7 @@ namespace MueblesCApantallas {
 			this->desMueble = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->gbMueble->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->SuspendLayout();
@@ -138,23 +159,7 @@ namespace MueblesCApantallas {
 			this->btnLimpiar->TabIndex = 76;
 			this->btnLimpiar->Text = L"Limpiar";
 			this->btnLimpiar->UseVisualStyleBackColor = false;
-			// 
-			// btnModificar
-			// 
-			this->btnModificar->BackColor = System::Drawing::Color::Transparent;
-			this->btnModificar->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btnModificar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::MediumSeaGreen;
-			this->btnModificar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnModificar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnModificar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnModificar->Location = System::Drawing::Point(10, 436);
-			this->btnModificar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->btnModificar->Name = L"btnModificar";
-			this->btnModificar->Size = System::Drawing::Size(225, 50);
-			this->btnModificar->TabIndex = 75;
-			this->btnModificar->Text = L"Modificar";
-			this->btnModificar->UseVisualStyleBackColor = false;
+			this->btnLimpiar->Click += gcnew System::EventHandler(this, &InventarioForm::btnLimpiar_Click);
 			// 
 			// gbMueble
 			// 
@@ -204,7 +209,6 @@ namespace MueblesCApantallas {
 			this->txbSetDescMue->MaxLength = 60;
 			this->txbSetDescMue->Multiline = true;
 			this->txbSetDescMue->Name = L"txbSetDescMue";
-			this->txbSetDescMue->ReadOnly = true;
 			this->txbSetDescMue->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->txbSetDescMue->Size = System::Drawing::Size(271, 76);
 			this->txbSetDescMue->TabIndex = 2;
@@ -235,7 +239,6 @@ namespace MueblesCApantallas {
 			this->txbSetNomMue->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txbSetNomMue->MaxLength = 30;
 			this->txbSetNomMue->Name = L"txbSetNomMue";
-			this->txbSetNomMue->ReadOnly = true;
 			this->txbSetNomMue->Size = System::Drawing::Size(271, 32);
 			this->txbSetNomMue->TabIndex = 1;
 			// 
@@ -306,6 +309,7 @@ namespace MueblesCApantallas {
 			this->txbFiltrar->Name = L"txbFiltrar";
 			this->txbFiltrar->Size = System::Drawing::Size(443, 29);
 			this->txbFiltrar->TabIndex = 68;
+			this->txbFiltrar->TextChanged += gcnew System::EventHandler(this, &InventarioForm::txbFiltrar_TextChanged);
 			// 
 			// lblFiltrar
 			// 
@@ -371,6 +375,7 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaAlm->Size = System::Drawing::Size(657, 395);
 			this->dgvVistaAlm->TabIndex = 66;
+			this->dgvVistaAlm->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &InventarioForm::dgvVistaAlm_CellClick);
 			// 
 			// nombreMue
 			// 
@@ -402,15 +407,33 @@ namespace MueblesCApantallas {
 			this->costoCompra->MinimumWidth = 6;
 			this->costoCompra->Name = L"costoCompra";
 			// 
+			// btnEditar
+			// 
+			this->btnEditar->BackColor = System::Drawing::Color::Transparent;
+			this->btnEditar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnEditar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::SteelBlue;
+			this->btnEditar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEditar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnEditar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEditar->Location = System::Drawing::Point(12, 436);
+			this->btnEditar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnEditar->Name = L"btnEditar";
+			this->btnEditar->Size = System::Drawing::Size(225, 50);
+			this->btnEditar->TabIndex = 78;
+			this->btnEditar->Text = L"Editar";
+			this->btnEditar->UseVisualStyleBackColor = false;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &InventarioForm::btnEditar_Click);
+			// 
 			// InventarioForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Desktop;
 			this->ClientSize = System::Drawing::Size(1157, 688);
+			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->lblTituloDgv);
 			this->Controls->Add(this->btnLimpiar);
-			this->Controls->Add(this->btnModificar);
 			this->Controls->Add(this->gbMueble);
 			this->Controls->Add(this->lblGetFecha);
 			this->Controls->Add(this->labelFecha);
@@ -430,5 +453,67 @@ namespace MueblesCApantallas {
 		}
 #pragma endregion
 
+	private: System::Void cargarDgv(List<Fila^>^);
+	private: System::Void filtrarDgv(List<Fila^>^); // Filtra datos de una lista y el resultado se carga en data dgv.
+	private: System::Void limpiarDgv();// Elimina todos las filas del dgv.
+	private: System::Void limpiar();// Elimina todos las filas del dgv.
+	private: System::Boolean ejecutarEditar();
+
+	private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		limpiar();
+		return;
+	}
+private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+
+	if (datos->Count >= 1)
+	{// Entra porque ya se eligio alguna fila del data grid view.
+
+		System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+			"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+		if (respuesta == System::Windows::Forms::DialogResult::Yes)
+		{
+
+			ejecutarEditar();
+			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+			limpiar();
+			limpiarDgv();
+			inventario=vistaInventario->vistaInventarioCtr();
+			cargarDgv(inventario);
+			
+
+		}
+		else
+		{
+			MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		}
+	}
+	else
+	{
+		// El usuario no ha elegido ninguna fila del dgv.
+
+		MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	}
+
+}
+	private: System::Void dgvVistaAlm_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+	{
+		datos->Clear();
+	
+			// Se cargan los datos del INVENTARIO o ALMACEN a los text box.
+
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id mueble
+
+			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
+			this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();	
+	
+	}
+	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		filtrarDgv(inventario);// Recibe la consulta que se recibió de la base de datos.
+	}
 };
 }

@@ -96,6 +96,14 @@ void MueblesModel::ProcedimientosDao::procedimientoUpdateGasto(int idmov, Double
 	cerrarConexion();
 }
 
+void MueblesModel::ProcedimientosDao::procedimientoUpdateMueble(int idmue, String^ nombre, String^ descripcion)
+{
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL updateMueble(" + idmue + "," + nombre + "," + descripcion + ");";
+	comandoSql->ExecuteNonQuery();
+	cerrarConexion();
+}
+
 Double MueblesModel::ProcedimientosDao::procedimientoCapitalActual()
 {	
 

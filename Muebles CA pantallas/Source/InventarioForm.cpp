@@ -73,18 +73,18 @@ System::Void MueblesCApantallas::InventarioForm::limpiar()
 
 System::Boolean MueblesCApantallas::InventarioForm::ejecutarEditar()
 {
-	//if ((datos[1] == this->txbSetPrecio->Text) && (datos[4] == this->txbSetDescRepara->Text)
-	//	&& (datos[3] == this->dtpSetfecha->Text))
-	//{
-	//	// No ejecuta consulta porque los datos son iguales a los que ya existian.
-	//	return false;
-	//}
-	//else
-	//{
-	//	//procedimiento->updateGasto(datos[0], txbSetPrecio->Text, dtpSetfecha->Value, txbSetDescRepara->Text);
-	//	// se debe mandar el id movimiento.
-	//	return true;
-	//}
+	
+	if ((datos[1] == this->txbSetNomMue->Text) && (datos[2] == this->txbSetDescMue->Text))
+	{
+		// No ejecuta consulta porque los datos son iguales a los que ya existian.
+		return false;
+	}
+	else
+	{
+		procedimiento->updateMueble(datos[0], this->txbSetNomMue->Text, this->txbSetDescMue->Text);
+		// se debe mandar el id movimiento.
+		return true;
+	}
 
 
 

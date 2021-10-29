@@ -27,7 +27,7 @@ Boolean MueblesController::ProcedimentosController::depositar(String^ deposito, 
 	{
 		procDeposito.procedimientoDeposito(res, formato);
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -51,7 +51,7 @@ Boolean MueblesController::ProcedimentosController::retiro(String^ retiro, DateT
 	{
 		procedimientoDao.procedimientoRetiro(res, formato);
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -83,7 +83,7 @@ Boolean MueblesController::ProcedimentosController::comprar(String^ nombre, Stri
 		proCompra.procedimientoCompra(f.cadenaSql(nombre), f.cadenaSql(desMue), f.cadenaSql(formato), resultado, f.cadenaSql(desCom));
 		
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -111,7 +111,7 @@ Boolean MueblesController::ProcedimentosController::updateCompra(String^ id, Str
 			f.cadenaSql(fecha), Double::Parse(costo), f.cadenaSql(desCompra));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -134,7 +134,7 @@ Boolean MueblesController::ProcedimentosController::venta(String^ idMueble, Stri
 			f.cadenaSql(fech), f.cadenaSql(desVenta));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -155,7 +155,7 @@ Boolean MueblesController::ProcedimentosController::updateDeposito(String^ id, D
 		procedimiento.procedimientoUpdateDeposito(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -176,7 +176,7 @@ Boolean MueblesController::ProcedimentosController::updateRetiro(String^ id, Dat
 		procedimiento.procedimientoUpdateRetiro(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -196,7 +196,7 @@ Boolean MueblesController::ProcedimentosController::updateVenta(String^ id, Date
 		procedimiento.procedimientoUpdateVenta(Int32::Parse(id), f.cadenaSql(fech), Double::Parse(cantidad), f.cadenaSql(descripcion));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -236,7 +236,7 @@ Boolean MueblesController::ProcedimentosController::updateGasto(String^ id, Stri
 		procedimiento.procedimientoUpdateGasto(Int32::Parse(id), Double::Parse(cantidad), f.cadenaSql(fech), f.cadenaSql(descripcion));
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^)
 	{
 		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
 		return false;
@@ -244,4 +244,22 @@ Boolean MueblesController::ProcedimentosController::updateGasto(String^ id, Stri
 
 	return true;
 	
+}
+
+Boolean MueblesController::ProcedimentosController::updateMueble(String^ idmue, String^ nombre, String^ descripcion)
+{
+	ProcedimientosDao procedimiento;
+	
+	try
+	{
+		procedimiento.procedimientoUpdateMueble(Int32::Parse(idmue), f.cadenaSql(nombre), f.cadenaSql(descripcion));
+
+	}
+	catch (Exception^)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		return false;
+	}
+
+	return true;
 }

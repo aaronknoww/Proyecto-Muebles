@@ -464,48 +464,50 @@ namespace MueblesCApantallas {
 		limpiar();
 		return;
 	}
-private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
-{
+	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e)
+	{
 
-	if (datos->Count >= 1)
-	{// Entra porque ya se eligio alguna fila del data grid view.
+		if (datos->Count >= 1)
+		{// Entra porque ya se eligio alguna fila del data grid view.
 
-		System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
-			"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+			System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+				"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
-		if (respuesta == System::Windows::Forms::DialogResult::Yes)
-		{
+			if (respuesta == System::Windows::Forms::DialogResult::Yes)
+			{
 
-			ejecutarEditar();
-			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
-			limpiar();
-			limpiarDgv();
-			inventario=vistaInventario->vistaInventarioCtr();
-			cargarDgv(inventario);
+				ejecutarEditar();
+				MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+				limpiar();
+				limpiarDgv();
+				inventario=vistaInventario->vistaInventarioCtr();
+				cargarDgv(inventario);
 			
 
+			}
+			else
+			{
+				MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			}
 		}
 		else
 		{
-			MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			// El usuario no ha elegido ninguna fila del dgv.
+
+			MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
 		}
-	}
-	else
-	{
-		// El usuario no ha elegido ninguna fila del dgv.
-
-		MessageBox::Show("No has eligido ninguna fila", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Error);
 
 	}
-
-}
 	private: System::Void dgvVistaAlm_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 	{
 		datos->Clear();
 	
-			// Se cargan los datos del INVENTARIO o ALMACEN a los text box.
+			// Se cargan los datos del INVENTARIO o ALMACEN a los text box y a una lista de datos.
 
-			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// Se obtiene el id mueble
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[4]->Value->ToString());// [0] Se obtiene el id mueble
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString());// [1] Se obtiene el nombre
+			datos->Add(this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString());// [2] Se obtiene el descripcion
 
 			this->txbSetNomMue->Text = this->dgvVistaAlm->CurrentRow->Cells[0]->Value->ToString();
 			this->txbSetDescMue->Text = this->dgvVistaAlm->CurrentRow->Cells[1]->Value->ToString();	

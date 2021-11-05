@@ -47,18 +47,26 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ desMueble;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ costoCompra;
-	private: System::Windows::Forms::CheckBox^ chbInvercion;
-	private: System::Windows::Forms::CheckBox^ chbGanancia;
-	private: System::Windows::Forms::CheckBox^ chbCompras;
-	private: System::Windows::Forms::CheckBox^ chbVentas;
-	private: System::Windows::Forms::CheckBox^ chbRetiros;
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ gbOpciones;
-	private: System::Windows::Forms::CheckBox^ chbMensual;
-	private: System::Windows::Forms::CheckBox^ chbAnual;
-	private: System::Windows::Forms::CheckBox^ chbManual;
+
+
+
 	private: System::Windows::Forms::GroupBox^ gbPeriodo;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker2;
+	private: System::Windows::Forms::RadioButton^ rbRetiros;
+	private: System::Windows::Forms::RadioButton^ rbVentas;
+	private: System::Windows::Forms::RadioButton^ rbCompras;
+	private: System::Windows::Forms::RadioButton^ rbGanancia;
+	private: System::Windows::Forms::RadioButton^ rbInversion;
+	private: System::Windows::Forms::RadioButton^ radioButton1;
+	private: System::Windows::Forms::RadioButton^ rbMensual;
+	private: System::Windows::Forms::RadioButton^ tbSemanal;
 
 	private:
 		/// <summary>
@@ -87,18 +95,18 @@ namespace MueblesCApantallas {
 			this->desMueble = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->chbInvercion = (gcnew System::Windows::Forms::CheckBox());
-			this->chbGanancia = (gcnew System::Windows::Forms::CheckBox());
-			this->chbCompras = (gcnew System::Windows::Forms::CheckBox());
-			this->chbVentas = (gcnew System::Windows::Forms::CheckBox());
-			this->chbRetiros = (gcnew System::Windows::Forms::CheckBox());
 			this->gbOpciones = (gcnew System::Windows::Forms::GroupBox());
-			this->chbMensual = (gcnew System::Windows::Forms::CheckBox());
-			this->chbAnual = (gcnew System::Windows::Forms::CheckBox());
-			this->chbManual = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPeriodo = (gcnew System::Windows::Forms::GroupBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->rbInversion = (gcnew System::Windows::Forms::RadioButton());
+			this->rbGanancia = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCompras = (gcnew System::Windows::Forms::RadioButton());
+			this->rbVentas = (gcnew System::Windows::Forms::RadioButton());
+			this->rbRetiros = (gcnew System::Windows::Forms::RadioButton());
+			this->rbMensual = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->tbSemanal = (gcnew System::Windows::Forms::RadioButton());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbOpciones->SuspendLayout();
 			this->gbPeriodo->SuspendLayout();
@@ -256,146 +264,36 @@ namespace MueblesCApantallas {
 			this->costoCompra->MinimumWidth = 6;
 			this->costoCompra->Name = L"costoCompra";
 			// 
-			// chbInvercion
-			// 
-			this->chbInvercion->AutoSize = true;
-			this->chbInvercion->BackColor = System::Drawing::Color::Transparent;
-			this->chbInvercion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbInvercion->ForeColor = System::Drawing::Color::Peru;
-			this->chbInvercion->Location = System::Drawing::Point(14, 40);
-			this->chbInvercion->Name = L"chbInvercion";
-			this->chbInvercion->Size = System::Drawing::Size(132, 33);
-			this->chbInvercion->TabIndex = 84;
-			this->chbInvercion->Text = L"Inversion";
-			this->chbInvercion->UseVisualStyleBackColor = false;
-			// 
-			// chbGanancia
-			// 
-			this->chbGanancia->AutoSize = true;
-			this->chbGanancia->BackColor = System::Drawing::Color::Transparent;
-			this->chbGanancia->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbGanancia->ForeColor = System::Drawing::Color::Peru;
-			this->chbGanancia->Location = System::Drawing::Point(14, 67);
-			this->chbGanancia->Name = L"chbGanancia";
-			this->chbGanancia->Size = System::Drawing::Size(136, 33);
-			this->chbGanancia->TabIndex = 85;
-			this->chbGanancia->Text = L"Ganancia";
-			this->chbGanancia->UseVisualStyleBackColor = false;
-			// 
-			// chbCompras
-			// 
-			this->chbCompras->AutoSize = true;
-			this->chbCompras->BackColor = System::Drawing::Color::Transparent;
-			this->chbCompras->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbCompras->ForeColor = System::Drawing::Color::Peru;
-			this->chbCompras->Location = System::Drawing::Point(14, 94);
-			this->chbCompras->Name = L"chbCompras";
-			this->chbCompras->Size = System::Drawing::Size(133, 33);
-			this->chbCompras->TabIndex = 86;
-			this->chbCompras->Text = L"Compras";
-			this->chbCompras->UseVisualStyleBackColor = false;
-			// 
-			// chbVentas
-			// 
-			this->chbVentas->AutoSize = true;
-			this->chbVentas->BackColor = System::Drawing::Color::Transparent;
-			this->chbVentas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbVentas->ForeColor = System::Drawing::Color::Peru;
-			this->chbVentas->Location = System::Drawing::Point(14, 121);
-			this->chbVentas->Name = L"chbVentas";
-			this->chbVentas->Size = System::Drawing::Size(108, 33);
-			this->chbVentas->TabIndex = 87;
-			this->chbVentas->Text = L"Ventas";
-			this->chbVentas->UseVisualStyleBackColor = false;
-			// 
-			// chbRetiros
-			// 
-			this->chbRetiros->AutoSize = true;
-			this->chbRetiros->BackColor = System::Drawing::Color::Transparent;
-			this->chbRetiros->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbRetiros->ForeColor = System::Drawing::Color::Peru;
-			this->chbRetiros->Location = System::Drawing::Point(14, 149);
-			this->chbRetiros->Name = L"chbRetiros";
-			this->chbRetiros->Size = System::Drawing::Size(112, 33);
-			this->chbRetiros->TabIndex = 88;
-			this->chbRetiros->Text = L"Retiros";
-			this->chbRetiros->UseVisualStyleBackColor = false;
-			// 
 			// gbOpciones
 			// 
-			this->gbOpciones->Controls->Add(this->chbRetiros);
-			this->gbOpciones->Controls->Add(this->chbVentas);
-			this->gbOpciones->Controls->Add(this->chbCompras);
-			this->gbOpciones->Controls->Add(this->chbGanancia);
-			this->gbOpciones->Controls->Add(this->chbInvercion);
-			this->gbOpciones->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->gbOpciones->BackColor = System::Drawing::Color::Transparent;
+			this->gbOpciones->Controls->Add(this->rbRetiros);
+			this->gbOpciones->Controls->Add(this->rbVentas);
+			this->gbOpciones->Controls->Add(this->rbCompras);
+			this->gbOpciones->Controls->Add(this->rbGanancia);
+			this->gbOpciones->Controls->Add(this->rbInversion);
+			this->gbOpciones->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gbOpciones->ForeColor = System::Drawing::Color::CornflowerBlue;
 			this->gbOpciones->Location = System::Drawing::Point(23, 210);
 			this->gbOpciones->Name = L"gbOpciones";
-			this->gbOpciones->Size = System::Drawing::Size(215, 203);
+			this->gbOpciones->Size = System::Drawing::Size(260, 203);
 			this->gbOpciones->TabIndex = 89;
 			this->gbOpciones->TabStop = false;
 			this->gbOpciones->Text = L"Opciones de Reporte";
 			// 
-			// chbMensual
-			// 
-			this->chbMensual->AutoSize = true;
-			this->chbMensual->BackColor = System::Drawing::Color::Transparent;
-			this->chbMensual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbMensual->ForeColor = System::Drawing::Color::Peru;
-			this->chbMensual->Location = System::Drawing::Point(17, 29);
-			this->chbMensual->Name = L"chbMensual";
-			this->chbMensual->Size = System::Drawing::Size(126, 33);
-			this->chbMensual->TabIndex = 89;
-			this->chbMensual->Text = L"Mensual";
-			this->chbMensual->UseVisualStyleBackColor = false;
-			// 
-			// chbAnual
-			// 
-			this->chbAnual->AutoSize = true;
-			this->chbAnual->BackColor = System::Drawing::Color::Transparent;
-			this->chbAnual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbAnual->ForeColor = System::Drawing::Color::Peru;
-			this->chbAnual->Location = System::Drawing::Point(17, 57);
-			this->chbAnual->Name = L"chbAnual";
-			this->chbAnual->Size = System::Drawing::Size(95, 33);
-			this->chbAnual->TabIndex = 90;
-			this->chbAnual->Text = L"Anual";
-			this->chbAnual->UseVisualStyleBackColor = false;
-			// 
-			// chbManual
-			// 
-			this->chbManual->AutoSize = true;
-			this->chbManual->BackColor = System::Drawing::Color::Transparent;
-			this->chbManual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->chbManual->ForeColor = System::Drawing::Color::Peru;
-			this->chbManual->Location = System::Drawing::Point(17, 85);
-			this->chbManual->Name = L"chbManual";
-			this->chbManual->Size = System::Drawing::Size(197, 33);
-			this->chbManual->TabIndex = 91;
-			this->chbManual->Text = L"Definir Periodo";
-			this->chbManual->UseVisualStyleBackColor = false;
-			// 
 			// gbPeriodo
 			// 
-			this->gbPeriodo->Controls->Add(this->chbManual);
-			this->gbPeriodo->Controls->Add(this->chbAnual);
-			this->gbPeriodo->Controls->Add(this->chbMensual);
-			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->gbPeriodo->BackColor = System::Drawing::Color::Transparent;
+			this->gbPeriodo->Controls->Add(this->tbSemanal);
+			this->gbPeriodo->Controls->Add(this->radioButton1);
+			this->gbPeriodo->Controls->Add(this->rbMensual);
+			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gbPeriodo->ForeColor = System::Drawing::Color::CornflowerBlue;
 			this->gbPeriodo->Location = System::Drawing::Point(23, 433);
 			this->gbPeriodo->Name = L"gbPeriodo";
-			this->gbPeriodo->Size = System::Drawing::Size(218, 130);
+			this->gbPeriodo->Size = System::Drawing::Size(260, 130);
 			this->gbPeriodo->TabIndex = 92;
 			this->gbPeriodo->TabStop = false;
 			this->gbPeriodo->Text = L"Elige un Periodo";
@@ -404,9 +302,10 @@ namespace MueblesCApantallas {
 			// 
 			this->dateTimePicker1->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->dateTimePicker1->CustomFormat = L"";
 			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
 			this->dateTimePicker1->Location = System::Drawing::Point(12, 593);
 			this->dateTimePicker1->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
 			this->dateTimePicker1->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
@@ -429,6 +328,110 @@ namespace MueblesCApantallas {
 			this->dateTimePicker2->Size = System::Drawing::Size(154, 30);
 			this->dateTimePicker2->TabIndex = 94;
 			this->dateTimePicker2->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
+			// 
+			// rbInversion
+			// 
+			this->rbInversion->AutoSize = true;
+			this->rbInversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbInversion->Location = System::Drawing::Point(12, 35);
+			this->rbInversion->Name = L"rbInversion";
+			this->rbInversion->Size = System::Drawing::Size(131, 33);
+			this->rbInversion->TabIndex = 95;
+			this->rbInversion->TabStop = true;
+			this->rbInversion->Text = L"Inversion";
+			this->rbInversion->UseVisualStyleBackColor = true;
+			// 
+			// rbGanancia
+			// 
+			this->rbGanancia->AutoSize = true;
+			this->rbGanancia->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbGanancia->Location = System::Drawing::Point(12, 66);
+			this->rbGanancia->Name = L"rbGanancia";
+			this->rbGanancia->Size = System::Drawing::Size(135, 33);
+			this->rbGanancia->TabIndex = 96;
+			this->rbGanancia->TabStop = true;
+			this->rbGanancia->Text = L"Ganancia";
+			this->rbGanancia->UseVisualStyleBackColor = true;
+			// 
+			// rbCompras
+			// 
+			this->rbCompras->AutoSize = true;
+			this->rbCompras->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbCompras->Location = System::Drawing::Point(12, 96);
+			this->rbCompras->Name = L"rbCompras";
+			this->rbCompras->Size = System::Drawing::Size(132, 33);
+			this->rbCompras->TabIndex = 97;
+			this->rbCompras->TabStop = true;
+			this->rbCompras->Text = L"Compras";
+			this->rbCompras->UseVisualStyleBackColor = true;
+			// 
+			// rbVentas
+			// 
+			this->rbVentas->AutoSize = true;
+			this->rbVentas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbVentas->Location = System::Drawing::Point(12, 125);
+			this->rbVentas->Name = L"rbVentas";
+			this->rbVentas->Size = System::Drawing::Size(107, 33);
+			this->rbVentas->TabIndex = 98;
+			this->rbVentas->TabStop = true;
+			this->rbVentas->Text = L"Ventas";
+			this->rbVentas->UseVisualStyleBackColor = true;
+			// 
+			// rbRetiros
+			// 
+			this->rbRetiros->AutoSize = true;
+			this->rbRetiros->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbRetiros->Location = System::Drawing::Point(12, 154);
+			this->rbRetiros->Name = L"rbRetiros";
+			this->rbRetiros->Size = System::Drawing::Size(111, 33);
+			this->rbRetiros->TabIndex = 99;
+			this->rbRetiros->TabStop = true;
+			this->rbRetiros->Text = L"Retiros";
+			this->rbRetiros->UseVisualStyleBackColor = true;
+			// 
+			// rbMensual
+			// 
+			this->rbMensual->AutoSize = true;
+			this->rbMensual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbMensual->Location = System::Drawing::Point(12, 57);
+			this->rbMensual->Name = L"rbMensual";
+			this->rbMensual->Size = System::Drawing::Size(125, 33);
+			this->rbMensual->TabIndex = 100;
+			this->rbMensual->TabStop = true;
+			this->rbMensual->Text = L"Mensual";
+			this->rbMensual->UseVisualStyleBackColor = true;
+			// 
+			// radioButton1
+			// 
+			this->radioButton1->AutoSize = true;
+			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->radioButton1->Location = System::Drawing::Point(12, 85);
+			this->radioButton1->Name = L"radioButton1";
+			this->radioButton1->Size = System::Drawing::Size(94, 33);
+			this->radioButton1->TabIndex = 101;
+			this->radioButton1->TabStop = true;
+			this->radioButton1->Text = L"Anual";
+			this->radioButton1->UseVisualStyleBackColor = true;
+			// 
+			// tbSemanal
+			// 
+			this->tbSemanal->AutoSize = true;
+			this->tbSemanal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->tbSemanal->Location = System::Drawing::Point(12, 30);
+			this->tbSemanal->Name = L"tbSemanal";
+			this->tbSemanal->Size = System::Drawing::Size(129, 33);
+			this->tbSemanal->TabIndex = 102;
+			this->tbSemanal->TabStop = true;
+			this->tbSemanal->Text = L"Semanal";
+			this->tbSemanal->UseVisualStyleBackColor = true;
 			// 
 			// ReportesForm
 			// 

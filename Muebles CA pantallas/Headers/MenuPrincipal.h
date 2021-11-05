@@ -5,6 +5,7 @@
 #include "VentaForm.h"
 #include "RepararForm.h"
 #include "InventarioForm.h"
+#include "ReportesForm.h"
 
 #pragma once
 
@@ -140,6 +141,7 @@ namespace MueblesCApantallas {
 			this->botonReportes->TabIndex = 7;
 			this->botonReportes->Text = L"Reportes";
 			this->botonReportes->UseVisualStyleBackColor = false;
+			this->botonReportes->Click += gcnew System::EventHandler(this, &MenuPrincipal::botonReportes_Click);
 			// 
 			// botonModificar
 			// 
@@ -363,6 +365,10 @@ private: System::Void botonReparar_Click(System::Object^ sender, System::EventAr
 private: System::Void botonModificar_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	abrirFormaHija(gcnew InventarioForm(), sender);//----> Se manda una nueva instancia de la forma que se manda llamar.
+}
+private: System::Void botonReportes_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	abrirFormaHija(gcnew ReportesForm(), sender);
 }
 };
 }

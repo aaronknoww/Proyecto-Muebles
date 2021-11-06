@@ -57,8 +57,8 @@ namespace MueblesCApantallas {
 
 
 	private: System::Windows::Forms::GroupBox^ gbPeriodo;
-	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
-	private: System::Windows::Forms::DateTimePicker^ dateTimePicker2;
+	private: System::Windows::Forms::DateTimePicker^ dtpInicial;
+	private: System::Windows::Forms::DateTimePicker^ dtpFinal;
 	private: System::Windows::Forms::RadioButton^ rbRetiros;
 	private: System::Windows::Forms::RadioButton^ rbVentas;
 	private: System::Windows::Forms::RadioButton^ rbCompras;
@@ -67,6 +67,8 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::RadioButton^ radioButton1;
 	private: System::Windows::Forms::RadioButton^ rbMensual;
 	private: System::Windows::Forms::RadioButton^ tbSemanal;
+	private: System::Windows::Forms::Label^ lblFechaIni;
+	private: System::Windows::Forms::Label^ lblFechaFinal;
 
 	private:
 		/// <summary>
@@ -81,10 +83,10 @@ namespace MueblesCApantallas {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle13 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle15 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle16 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle14 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lblTituloDgv = (gcnew System::Windows::Forms::Label());
 			this->lblGetFecha = (gcnew System::Windows::Forms::Label());
 			this->labelFecha = (gcnew System::Windows::Forms::Label());
@@ -96,17 +98,19 @@ namespace MueblesCApantallas {
 			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->gbOpciones = (gcnew System::Windows::Forms::GroupBox());
-			this->gbPeriodo = (gcnew System::Windows::Forms::GroupBox());
-			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
-			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
-			this->rbInversion = (gcnew System::Windows::Forms::RadioButton());
-			this->rbGanancia = (gcnew System::Windows::Forms::RadioButton());
-			this->rbCompras = (gcnew System::Windows::Forms::RadioButton());
-			this->rbVentas = (gcnew System::Windows::Forms::RadioButton());
 			this->rbRetiros = (gcnew System::Windows::Forms::RadioButton());
-			this->rbMensual = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbVentas = (gcnew System::Windows::Forms::RadioButton());
+			this->rbCompras = (gcnew System::Windows::Forms::RadioButton());
+			this->rbGanancia = (gcnew System::Windows::Forms::RadioButton());
+			this->rbInversion = (gcnew System::Windows::Forms::RadioButton());
+			this->gbPeriodo = (gcnew System::Windows::Forms::GroupBox());
 			this->tbSemanal = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbMensual = (gcnew System::Windows::Forms::RadioButton());
+			this->dtpInicial = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dtpFinal = (gcnew System::Windows::Forms::DateTimePicker());
+			this->lblFechaIni = (gcnew System::Windows::Forms::Label());
+			this->lblFechaFinal = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbOpciones->SuspendLayout();
 			this->gbPeriodo->SuspendLayout();
@@ -120,7 +124,7 @@ namespace MueblesCApantallas {
 			this->lblTituloDgv->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblTituloDgv->ForeColor = System::Drawing::Color::Peru;
-			this->lblTituloDgv->Location = System::Drawing::Point(639, 185);
+			this->lblTituloDgv->Location = System::Drawing::Point(609, 150);
 			this->lblTituloDgv->Name = L"lblTituloDgv";
 			this->lblTituloDgv->Size = System::Drawing::Size(341, 33);
 			this->lblTituloDgv->TabIndex = 83;
@@ -191,15 +195,15 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::DisplayedCells;
 			this->dgvVistaAlm->BackgroundColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->dgvVistaAlm->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle13->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle13->BackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle13->ForeColor = System::Drawing::Color::DarkGoldenrod;
-			dataGridViewCellStyle13->SelectionBackColor = System::Drawing::SystemColors::ControlText;
-			dataGridViewCellStyle13->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			dataGridViewCellStyle13->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaAlm->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::DarkGoldenrod;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::ControlText;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaAlm->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dgvVistaAlm->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvVistaAlm->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->nombreMue,
@@ -207,37 +211,37 @@ namespace MueblesCApantallas {
 			});
 			this->dgvVistaAlm->EnableHeadersVisualStyles = false;
 			this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
-			this->dgvVistaAlm->Location = System::Drawing::Point(468, 228);
+			this->dgvVistaAlm->Location = System::Drawing::Point(409, 186);
 			this->dgvVistaAlm->Name = L"dgvVistaAlm";
-			dataGridViewCellStyle15->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle15->BackColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle15->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			dataGridViewCellStyle15->ForeColor = System::Drawing::SystemColors::InactiveCaption;
-			dataGridViewCellStyle15->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle15->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle15->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::InactiveCaption;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this->dgvVistaAlm->RowHeadersVisible = false;
 			this->dgvVistaAlm->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
-			dataGridViewCellStyle16->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			dataGridViewCellStyle16->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle16->ForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle16->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
+			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
 				static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(137)));
-			dataGridViewCellStyle16->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle16;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this->dgvVistaAlm->RowTemplate->Height = 24;
 			this->dgvVistaAlm->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dgvVistaAlm->Size = System::Drawing::Size(657, 395);
+			this->dgvVistaAlm->Size = System::Drawing::Size(729, 424);
 			this->dgvVistaAlm->TabIndex = 78;
 			// 
 			// nombreMue
 			// 
-			dataGridViewCellStyle14->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle14;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle2;
 			this->nombreMue->HeaderText = L"Nombre";
 			this->nombreMue->MaxInputLength = 30;
 			this->nombreMue->MinimumWidth = 6;
@@ -275,111 +279,12 @@ namespace MueblesCApantallas {
 			this->gbOpciones->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->gbOpciones->ForeColor = System::Drawing::Color::CornflowerBlue;
-			this->gbOpciones->Location = System::Drawing::Point(23, 210);
+			this->gbOpciones->Location = System::Drawing::Point(23, 177);
 			this->gbOpciones->Name = L"gbOpciones";
-			this->gbOpciones->Size = System::Drawing::Size(260, 203);
+			this->gbOpciones->Size = System::Drawing::Size(369, 203);
 			this->gbOpciones->TabIndex = 89;
 			this->gbOpciones->TabStop = false;
 			this->gbOpciones->Text = L"Opciones de Reporte";
-			// 
-			// gbPeriodo
-			// 
-			this->gbPeriodo->BackColor = System::Drawing::Color::Transparent;
-			this->gbPeriodo->Controls->Add(this->tbSemanal);
-			this->gbPeriodo->Controls->Add(this->radioButton1);
-			this->gbPeriodo->Controls->Add(this->rbMensual);
-			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->gbPeriodo->ForeColor = System::Drawing::Color::CornflowerBlue;
-			this->gbPeriodo->Location = System::Drawing::Point(23, 433);
-			this->gbPeriodo->Name = L"gbPeriodo";
-			this->gbPeriodo->Size = System::Drawing::Size(260, 130);
-			this->gbPeriodo->TabIndex = 92;
-			this->gbPeriodo->TabStop = false;
-			this->gbPeriodo->Text = L"Elige un Periodo";
-			// 
-			// dateTimePicker1
-			// 
-			this->dateTimePicker1->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->dateTimePicker1->CustomFormat = L"";
-			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
-			this->dateTimePicker1->Location = System::Drawing::Point(12, 593);
-			this->dateTimePicker1->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
-			this->dateTimePicker1->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
-			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(154, 30);
-			this->dateTimePicker1->TabIndex = 93;
-			this->dateTimePicker1->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
-			// 
-			// dateTimePicker2
-			// 
-			this->dateTimePicker2->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->dateTimePicker2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->dateTimePicker2->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePicker2->Location = System::Drawing::Point(206, 593);
-			this->dateTimePicker2->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
-			this->dateTimePicker2->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
-			this->dateTimePicker2->Name = L"dateTimePicker2";
-			this->dateTimePicker2->Size = System::Drawing::Size(154, 30);
-			this->dateTimePicker2->TabIndex = 94;
-			this->dateTimePicker2->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
-			// 
-			// rbInversion
-			// 
-			this->rbInversion->AutoSize = true;
-			this->rbInversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->rbInversion->Location = System::Drawing::Point(12, 35);
-			this->rbInversion->Name = L"rbInversion";
-			this->rbInversion->Size = System::Drawing::Size(131, 33);
-			this->rbInversion->TabIndex = 95;
-			this->rbInversion->TabStop = true;
-			this->rbInversion->Text = L"Inversion";
-			this->rbInversion->UseVisualStyleBackColor = true;
-			// 
-			// rbGanancia
-			// 
-			this->rbGanancia->AutoSize = true;
-			this->rbGanancia->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->rbGanancia->Location = System::Drawing::Point(12, 66);
-			this->rbGanancia->Name = L"rbGanancia";
-			this->rbGanancia->Size = System::Drawing::Size(135, 33);
-			this->rbGanancia->TabIndex = 96;
-			this->rbGanancia->TabStop = true;
-			this->rbGanancia->Text = L"Ganancia";
-			this->rbGanancia->UseVisualStyleBackColor = true;
-			// 
-			// rbCompras
-			// 
-			this->rbCompras->AutoSize = true;
-			this->rbCompras->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->rbCompras->Location = System::Drawing::Point(12, 96);
-			this->rbCompras->Name = L"rbCompras";
-			this->rbCompras->Size = System::Drawing::Size(132, 33);
-			this->rbCompras->TabIndex = 97;
-			this->rbCompras->TabStop = true;
-			this->rbCompras->Text = L"Compras";
-			this->rbCompras->UseVisualStyleBackColor = true;
-			// 
-			// rbVentas
-			// 
-			this->rbVentas->AutoSize = true;
-			this->rbVentas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->rbVentas->Location = System::Drawing::Point(12, 125);
-			this->rbVentas->Name = L"rbVentas";
-			this->rbVentas->Size = System::Drawing::Size(107, 33);
-			this->rbVentas->TabIndex = 98;
-			this->rbVentas->TabStop = true;
-			this->rbVentas->Text = L"Ventas";
-			this->rbVentas->UseVisualStyleBackColor = true;
 			// 
 			// rbRetiros
 			// 
@@ -394,31 +299,73 @@ namespace MueblesCApantallas {
 			this->rbRetiros->Text = L"Retiros";
 			this->rbRetiros->UseVisualStyleBackColor = true;
 			// 
-			// rbMensual
+			// rbVentas
 			// 
-			this->rbMensual->AutoSize = true;
-			this->rbMensual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->rbVentas->AutoSize = true;
+			this->rbVentas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->rbMensual->Location = System::Drawing::Point(12, 57);
-			this->rbMensual->Name = L"rbMensual";
-			this->rbMensual->Size = System::Drawing::Size(125, 33);
-			this->rbMensual->TabIndex = 100;
-			this->rbMensual->TabStop = true;
-			this->rbMensual->Text = L"Mensual";
-			this->rbMensual->UseVisualStyleBackColor = true;
+			this->rbVentas->Location = System::Drawing::Point(12, 125);
+			this->rbVentas->Name = L"rbVentas";
+			this->rbVentas->Size = System::Drawing::Size(107, 33);
+			this->rbVentas->TabIndex = 98;
+			this->rbVentas->TabStop = true;
+			this->rbVentas->Text = L"Ventas";
+			this->rbVentas->UseVisualStyleBackColor = true;
 			// 
-			// radioButton1
+			// rbCompras
 			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->rbCompras->AutoSize = true;
+			this->rbCompras->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->radioButton1->Location = System::Drawing::Point(12, 85);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(94, 33);
-			this->radioButton1->TabIndex = 101;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"Anual";
-			this->radioButton1->UseVisualStyleBackColor = true;
+			this->rbCompras->Location = System::Drawing::Point(12, 96);
+			this->rbCompras->Name = L"rbCompras";
+			this->rbCompras->Size = System::Drawing::Size(132, 33);
+			this->rbCompras->TabIndex = 97;
+			this->rbCompras->TabStop = true;
+			this->rbCompras->Text = L"Compras";
+			this->rbCompras->UseVisualStyleBackColor = true;
+			// 
+			// rbGanancia
+			// 
+			this->rbGanancia->AutoSize = true;
+			this->rbGanancia->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbGanancia->Location = System::Drawing::Point(12, 66);
+			this->rbGanancia->Name = L"rbGanancia";
+			this->rbGanancia->Size = System::Drawing::Size(135, 33);
+			this->rbGanancia->TabIndex = 96;
+			this->rbGanancia->TabStop = true;
+			this->rbGanancia->Text = L"Ganancia";
+			this->rbGanancia->UseVisualStyleBackColor = true;
+			// 
+			// rbInversion
+			// 
+			this->rbInversion->AutoSize = true;
+			this->rbInversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbInversion->Location = System::Drawing::Point(12, 35);
+			this->rbInversion->Name = L"rbInversion";
+			this->rbInversion->Size = System::Drawing::Size(131, 33);
+			this->rbInversion->TabIndex = 95;
+			this->rbInversion->TabStop = true;
+			this->rbInversion->Text = L"Inversion";
+			this->rbInversion->UseVisualStyleBackColor = true;
+			// 
+			// gbPeriodo
+			// 
+			this->gbPeriodo->BackColor = System::Drawing::Color::Transparent;
+			this->gbPeriodo->Controls->Add(this->tbSemanal);
+			this->gbPeriodo->Controls->Add(this->radioButton1);
+			this->gbPeriodo->Controls->Add(this->rbMensual);
+			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->gbPeriodo->ForeColor = System::Drawing::Color::CornflowerBlue;
+			this->gbPeriodo->Location = System::Drawing::Point(23, 400);
+			this->gbPeriodo->Name = L"gbPeriodo";
+			this->gbPeriodo->Size = System::Drawing::Size(369, 130);
+			this->gbPeriodo->TabIndex = 92;
+			this->gbPeriodo->TabStop = false;
+			this->gbPeriodo->Text = L"Elige un Periodo";
 			// 
 			// tbSemanal
 			// 
@@ -433,14 +380,102 @@ namespace MueblesCApantallas {
 			this->tbSemanal->Text = L"Semanal";
 			this->tbSemanal->UseVisualStyleBackColor = true;
 			// 
+			// radioButton1
+			// 
+			this->radioButton1->AutoSize = true;
+			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->radioButton1->Location = System::Drawing::Point(12, 85);
+			this->radioButton1->Name = L"radioButton1";
+			this->radioButton1->Size = System::Drawing::Size(94, 33);
+			this->radioButton1->TabIndex = 101;
+			this->radioButton1->TabStop = true;
+			this->radioButton1->Text = L"Anual";
+			this->radioButton1->UseVisualStyleBackColor = true;
+			// 
+			// rbMensual
+			// 
+			this->rbMensual->AutoSize = true;
+			this->rbMensual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->rbMensual->Location = System::Drawing::Point(12, 57);
+			this->rbMensual->Name = L"rbMensual";
+			this->rbMensual->Size = System::Drawing::Size(125, 33);
+			this->rbMensual->TabIndex = 100;
+			this->rbMensual->TabStop = true;
+			this->rbMensual->Text = L"Mensual";
+			this->rbMensual->UseVisualStyleBackColor = true;
+			// 
+			// dtpInicial
+			// 
+			this->dtpInicial->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dtpInicial->CustomFormat = L"dd -MMM- yyyy";
+			this->dtpInicial->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dtpInicial->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
+			this->dtpInicial->Location = System::Drawing::Point(23, 580);
+			this->dtpInicial->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
+			this->dtpInicial->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
+			this->dtpInicial->Name = L"dtpInicial";
+			this->dtpInicial->Size = System::Drawing::Size(177, 30);
+			this->dtpInicial->TabIndex = 93;
+			this->dtpInicial->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
+			// 
+			// dtpFinal
+			// 
+			this->dtpFinal->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dtpFinal->CustomFormat = L"dd -MMM- yyyy";
+			this->dtpFinal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dtpFinal->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
+			this->dtpFinal->Location = System::Drawing::Point(208, 580);
+			this->dtpFinal->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
+			this->dtpFinal->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
+			this->dtpFinal->Name = L"dtpFinal";
+			this->dtpFinal->Size = System::Drawing::Size(184, 30);
+			this->dtpFinal->TabIndex = 94;
+			this->dtpFinal->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
+			// 
+			// lblFechaIni
+			// 
+			this->lblFechaIni->AutoSize = true;
+			this->lblFechaIni->BackColor = System::Drawing::Color::Transparent;
+			this->lblFechaIni->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->lblFechaIni->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblFechaIni->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->lblFechaIni->Location = System::Drawing::Point(24, 544);
+			this->lblFechaIni->Name = L"lblFechaIni";
+			this->lblFechaIni->Size = System::Drawing::Size(142, 23);
+			this->lblFechaIni->TabIndex = 95;
+			this->lblFechaIni->Text = L"Fecha Inicial";
+			// 
+			// lblFechaFinal
+			// 
+			this->lblFechaFinal->AutoSize = true;
+			this->lblFechaFinal->BackColor = System::Drawing::Color::Transparent;
+			this->lblFechaFinal->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->lblFechaFinal->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblFechaFinal->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->lblFechaFinal->Location = System::Drawing::Point(206, 544);
+			this->lblFechaFinal->Name = L"lblFechaFinal";
+			this->lblFechaFinal->Size = System::Drawing::Size(129, 23);
+			this->lblFechaFinal->TabIndex = 96;
+			this->lblFechaFinal->Text = L"Fecha Final";
+			// 
 			// ReportesForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->ClientSize = System::Drawing::Size(1157, 688);
-			this->Controls->Add(this->dateTimePicker2);
-			this->Controls->Add(this->dateTimePicker1);
+			this->Controls->Add(this->lblFechaFinal);
+			this->Controls->Add(this->lblFechaIni);
+			this->Controls->Add(this->dtpFinal);
+			this->Controls->Add(this->dtpInicial);
 			this->Controls->Add(this->gbPeriodo);
 			this->Controls->Add(this->gbOpciones);
 			this->Controls->Add(this->lblTituloDgv);
@@ -461,5 +496,20 @@ namespace MueblesCApantallas {
 
 		}
 #pragma endregion
-	};
+	private: System::Void tbSemanal_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		this->dtpInicial->CustomFormat = "dd -MMM- yyyy";
+		this->dtpFinal->CustomFormat = "dd -MMM- yyyy";
+	}
+private: System::Void rbMensual_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->dtpInicial->CustomFormat = "MMMM- yyyy";
+	this->dtpFinal->CustomFormat = "MMMM- yyyy";
+}
+private: System::Void radioButton1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->dtpInicial->CustomFormat = "yyyy";
+	this->dtpFinal->CustomFormat = "yyyy";
+}
+};
 }

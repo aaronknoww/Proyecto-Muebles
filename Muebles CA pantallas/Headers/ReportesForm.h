@@ -18,6 +18,9 @@ namespace MueblesCApantallas {
 		ReportesForm(void)
 		{
 			InitializeComponent();
+			
+			this->dtpFinal->MaxDate = DateTime::Now; //--> Para que la fecha maxima de una consulta sea la actual.
+			
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -66,9 +69,10 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::RadioButton^ rbInversion;
 	private: System::Windows::Forms::RadioButton^ radioButton1;
 	private: System::Windows::Forms::RadioButton^ rbMensual;
-	private: System::Windows::Forms::RadioButton^ tbSemanal;
+	private: System::Windows::Forms::RadioButton^ rbSemanal;
 	private: System::Windows::Forms::Label^ lblFechaIni;
 	private: System::Windows::Forms::Label^ lblFechaFinal;
+	private: System::Windows::Forms::Button^ btnEjecutar;
 
 	private:
 		/// <summary>
@@ -104,13 +108,14 @@ namespace MueblesCApantallas {
 			this->rbGanancia = (gcnew System::Windows::Forms::RadioButton());
 			this->rbInversion = (gcnew System::Windows::Forms::RadioButton());
 			this->gbPeriodo = (gcnew System::Windows::Forms::GroupBox());
-			this->tbSemanal = (gcnew System::Windows::Forms::RadioButton());
+			this->rbSemanal = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
 			this->rbMensual = (gcnew System::Windows::Forms::RadioButton());
 			this->dtpInicial = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dtpFinal = (gcnew System::Windows::Forms::DateTimePicker());
 			this->lblFechaIni = (gcnew System::Windows::Forms::Label());
 			this->lblFechaFinal = (gcnew System::Windows::Forms::Label());
+			this->btnEjecutar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbOpciones->SuspendLayout();
 			this->gbPeriodo->SuspendLayout();
@@ -124,11 +129,11 @@ namespace MueblesCApantallas {
 			this->lblTituloDgv->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblTituloDgv->ForeColor = System::Drawing::Color::Peru;
-			this->lblTituloDgv->Location = System::Drawing::Point(609, 150);
+			this->lblTituloDgv->Location = System::Drawing::Point(583, 150);
 			this->lblTituloDgv->Name = L"lblTituloDgv";
-			this->lblTituloDgv->Size = System::Drawing::Size(341, 33);
+			this->lblTituloDgv->Size = System::Drawing::Size(420, 33);
 			this->lblTituloDgv->TabIndex = 83;
-			this->lblTituloDgv->Text = L"Muebles en el Almacen";
+			this->lblTituloDgv->Text = L"Tabla para mostrar consultas";
 			// 
 			// lblGetFecha
 			// 
@@ -138,7 +143,7 @@ namespace MueblesCApantallas {
 			this->lblGetFecha->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblGetFecha->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblGetFecha->Location = System::Drawing::Point(913, 65);
+			this->lblGetFecha->Location = System::Drawing::Point(939, 65);
 			this->lblGetFecha->Name = L"lblGetFecha";
 			this->lblGetFecha->Size = System::Drawing::Size(199, 33);
 			this->lblGetFecha->TabIndex = 82;
@@ -152,7 +157,7 @@ namespace MueblesCApantallas {
 			this->labelFecha->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 16.2F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelFecha->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->labelFecha->Location = System::Drawing::Point(758, 65);
+			this->labelFecha->Location = System::Drawing::Point(784, 65);
 			this->labelFecha->Name = L"labelFecha";
 			this->labelFecha->Size = System::Drawing::Size(115, 32);
 			this->labelFecha->TabIndex = 81;
@@ -166,7 +171,7 @@ namespace MueblesCApantallas {
 			this->lblGetDinero->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblGetDinero->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblGetDinero->Location = System::Drawing::Point(557, 66);
+			this->lblGetDinero->Location = System::Drawing::Point(583, 66);
 			this->lblGetDinero->Name = L"lblGetDinero";
 			this->lblGetDinero->Size = System::Drawing::Size(155, 33);
 			this->lblGetDinero->TabIndex = 80;
@@ -180,7 +185,7 @@ namespace MueblesCApantallas {
 			this->labelCapital->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 16.2F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelCapital->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->labelCapital->Location = System::Drawing::Point(390, 66);
+			this->labelCapital->Location = System::Drawing::Point(416, 66);
 			this->labelCapital->Name = L"labelCapital";
 			this->labelCapital->Size = System::Drawing::Size(134, 32);
 			this->labelCapital->TabIndex = 79;
@@ -211,7 +216,7 @@ namespace MueblesCApantallas {
 			});
 			this->dgvVistaAlm->EnableHeadersVisualStyles = false;
 			this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
-			this->dgvVistaAlm->Location = System::Drawing::Point(409, 186);
+			this->dgvVistaAlm->Location = System::Drawing::Point(418, 186);
 			this->dgvVistaAlm->Name = L"dgvVistaAlm";
 			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
@@ -281,7 +286,7 @@ namespace MueblesCApantallas {
 			this->gbOpciones->ForeColor = System::Drawing::Color::CornflowerBlue;
 			this->gbOpciones->Location = System::Drawing::Point(23, 177);
 			this->gbOpciones->Name = L"gbOpciones";
-			this->gbOpciones->Size = System::Drawing::Size(369, 203);
+			this->gbOpciones->Size = System::Drawing::Size(382, 203);
 			this->gbOpciones->TabIndex = 89;
 			this->gbOpciones->TabStop = false;
 			this->gbOpciones->Text = L"Opciones de Reporte";
@@ -341,6 +346,7 @@ namespace MueblesCApantallas {
 			// rbInversion
 			// 
 			this->rbInversion->AutoSize = true;
+			this->rbInversion->Checked = true;
 			this->rbInversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->rbInversion->Location = System::Drawing::Point(12, 35);
@@ -354,7 +360,7 @@ namespace MueblesCApantallas {
 			// gbPeriodo
 			// 
 			this->gbPeriodo->BackColor = System::Drawing::Color::Transparent;
-			this->gbPeriodo->Controls->Add(this->tbSemanal);
+			this->gbPeriodo->Controls->Add(this->rbSemanal);
 			this->gbPeriodo->Controls->Add(this->radioButton1);
 			this->gbPeriodo->Controls->Add(this->rbMensual);
 			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -362,23 +368,24 @@ namespace MueblesCApantallas {
 			this->gbPeriodo->ForeColor = System::Drawing::Color::CornflowerBlue;
 			this->gbPeriodo->Location = System::Drawing::Point(23, 400);
 			this->gbPeriodo->Name = L"gbPeriodo";
-			this->gbPeriodo->Size = System::Drawing::Size(369, 130);
+			this->gbPeriodo->Size = System::Drawing::Size(382, 130);
 			this->gbPeriodo->TabIndex = 92;
 			this->gbPeriodo->TabStop = false;
-			this->gbPeriodo->Text = L"Elige un Periodo";
+			this->gbPeriodo->Text = L"Elige un Periodo de Muestreo";
 			// 
-			// tbSemanal
+			// rbSemanal
 			// 
-			this->tbSemanal->AutoSize = true;
-			this->tbSemanal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->rbSemanal->AutoSize = true;
+			this->rbSemanal->Checked = true;
+			this->rbSemanal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->tbSemanal->Location = System::Drawing::Point(12, 30);
-			this->tbSemanal->Name = L"tbSemanal";
-			this->tbSemanal->Size = System::Drawing::Size(129, 33);
-			this->tbSemanal->TabIndex = 102;
-			this->tbSemanal->TabStop = true;
-			this->tbSemanal->Text = L"Semanal";
-			this->tbSemanal->UseVisualStyleBackColor = true;
+			this->rbSemanal->Location = System::Drawing::Point(12, 30);
+			this->rbSemanal->Name = L"rbSemanal";
+			this->rbSemanal->Size = System::Drawing::Size(129, 33);
+			this->rbSemanal->TabIndex = 102;
+			this->rbSemanal->TabStop = true;
+			this->rbSemanal->Text = L"Semanal";
+			this->rbSemanal->UseVisualStyleBackColor = true;
 			// 
 			// radioButton1
 			// 
@@ -418,7 +425,7 @@ namespace MueblesCApantallas {
 			this->dtpInicial->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
 			this->dtpInicial->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
 			this->dtpInicial->Name = L"dtpInicial";
-			this->dtpInicial->Size = System::Drawing::Size(177, 30);
+			this->dtpInicial->Size = System::Drawing::Size(188, 30);
 			this->dtpInicial->TabIndex = 93;
 			this->dtpInicial->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
 			// 
@@ -430,11 +437,11 @@ namespace MueblesCApantallas {
 			this->dtpFinal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->dtpFinal->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
-			this->dtpFinal->Location = System::Drawing::Point(208, 580);
+			this->dtpFinal->Location = System::Drawing::Point(217, 580);
 			this->dtpFinal->MaxDate = System::DateTime(2060, 12, 31, 0, 0, 0, 0);
 			this->dtpFinal->MinDate = System::DateTime(2020, 12, 1, 0, 0, 0, 0);
 			this->dtpFinal->Name = L"dtpFinal";
-			this->dtpFinal->Size = System::Drawing::Size(184, 30);
+			this->dtpFinal->Size = System::Drawing::Size(188, 30);
 			this->dtpFinal->TabIndex = 94;
 			this->dtpFinal->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
 			// 
@@ -446,7 +453,7 @@ namespace MueblesCApantallas {
 			this->lblFechaIni->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblFechaIni->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblFechaIni->Location = System::Drawing::Point(24, 544);
+			this->lblFechaIni->Location = System::Drawing::Point(22, 544);
 			this->lblFechaIni->Name = L"lblFechaIni";
 			this->lblFechaIni->Size = System::Drawing::Size(142, 23);
 			this->lblFechaIni->TabIndex = 95;
@@ -460,11 +467,29 @@ namespace MueblesCApantallas {
 			this->lblFechaFinal->Font = (gcnew System::Drawing::Font(L"Lucida Sans", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblFechaFinal->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->lblFechaFinal->Location = System::Drawing::Point(206, 544);
+			this->lblFechaFinal->Location = System::Drawing::Point(212, 544);
 			this->lblFechaFinal->Name = L"lblFechaFinal";
 			this->lblFechaFinal->Size = System::Drawing::Size(129, 23);
 			this->lblFechaFinal->TabIndex = 96;
 			this->lblFechaFinal->Text = L"Fecha Final";
+			// 
+			// btnEjecutar
+			// 
+			this->btnEjecutar->BackColor = System::Drawing::Color::Transparent;
+			this->btnEjecutar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnEjecutar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::MediumSeaGreen;
+			this->btnEjecutar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnEjecutar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnEjecutar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnEjecutar->Location = System::Drawing::Point(23, 627);
+			this->btnEjecutar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnEjecutar->Name = L"btnEjecutar";
+			this->btnEjecutar->Size = System::Drawing::Size(382, 50);
+			this->btnEjecutar->TabIndex = 97;
+			this->btnEjecutar->Text = L"Ejecutar";
+			this->btnEjecutar->UseVisualStyleBackColor = false;
+			this->btnEjecutar->Click += gcnew System::EventHandler(this, &ReportesForm::btnEjecutar_Click);
 			// 
 			// ReportesForm
 			// 
@@ -472,6 +497,7 @@ namespace MueblesCApantallas {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->ClientSize = System::Drawing::Size(1157, 688);
+			this->Controls->Add(this->btnEjecutar);
 			this->Controls->Add(this->lblFechaFinal);
 			this->Controls->Add(this->lblFechaIni);
 			this->Controls->Add(this->dtpFinal);
@@ -496,20 +522,25 @@ namespace MueblesCApantallas {
 
 		}
 #pragma endregion
-	private: System::Void tbSemanal_Click(System::Object^ sender, System::EventArgs^ e)
+
+	private: Boolean ejecutarConsulta();
+
+	private: System::Void btnEjecutar_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		this->dtpInicial->CustomFormat = "dd -MMM- yyyy";
-		this->dtpFinal->CustomFormat = "dd -MMM- yyyy";
+		System::Windows::Forms::DialogResult respuesta = MessageBox::Show("Son correctos esos datos a modificar?",
+			"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+		if (respuesta == System::Windows::Forms::DialogResult::Yes)
+		{
+
+			ejecutarConsulta();
+			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+		
+
+		}
+		else
+		{
+			MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		}
 	}
-private: System::Void rbMensual_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	this->dtpInicial->CustomFormat = "MMMM- yyyy";
-	this->dtpFinal->CustomFormat = "MMMM- yyyy";
-}
-private: System::Void radioButton1_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	this->dtpInicial->CustomFormat = "yyyy";
-	this->dtpFinal->CustomFormat = "yyyy";
-}
 };
 }

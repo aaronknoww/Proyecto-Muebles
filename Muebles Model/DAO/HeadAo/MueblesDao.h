@@ -24,18 +24,7 @@ namespace MueblesModel
 		MySqlDataAdapter^ AdaptaSql = gcnew MySqlDataAdapter();
 		MySqlDataReader^ lectorSql;
 
-
-		// Aqui se van a insertar todos los metodos del CRUD.
-
-
-	//	int	idMuebles;
-	//	String^ NombreMueble;
-	//	String^ Descripcion;
-	//	String^ foto1;
-	//	String^ foto2;
-	//		foto1 				longblob DEFAULT NULL,
-	//		foto2				longblob DEFAULT NULL,
-
+		
 	
 
 	};

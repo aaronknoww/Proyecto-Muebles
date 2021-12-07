@@ -5,9 +5,8 @@
 
 void MueblesModel::ProcedimientosDao::procedimientoDeposito(Double monto, String^ fecha)
 {
-	//String^ muestra;
+
 	comandoSql->Connection = abrirConexion();
-	//muestra = "CALL deposito(" + monto + "," + fecha + ");";
 	comandoSql->CommandText = "CALL deposito(" + monto + "," + fecha + ");";
 	comandoSql->ExecuteNonQuery();
 	cerrarConexion();
@@ -106,13 +105,10 @@ void MueblesModel::ProcedimientosDao::procedimientoUpdateMueble(int idmue, Strin
 
 Double MueblesModel::ProcedimientosDao::procedimientoCapitalActual()
 {	
-
-	
 	comandoSql->Connection = abrirConexion();
 	comandoSql->CommandText = "CALL capitalActual(); ";
 	lectorSql = comandoSql->ExecuteReader();
 	lectorSql->Read();
 	return lectorSql->GetDouble(0);
-	
-	
+		
 }

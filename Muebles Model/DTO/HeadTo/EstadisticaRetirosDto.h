@@ -5,7 +5,7 @@ using namespace System;
 namespace MueblesModel
 {
 
-	ref class EstadisticaRetiros
+	public ref class EstadisticaRetirosDto
 	{
 	private:
 		
@@ -15,7 +15,7 @@ namespace MueblesModel
 
 	public:
 		
-		EstadisticaRetiros();
+		EstadisticaRetirosDto();
 
 		//***** SETTERS *****//
 

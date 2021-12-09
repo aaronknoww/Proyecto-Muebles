@@ -21,7 +21,7 @@ MySqlConnection^ MueblesModel::ConexionBd::abrirConexion()
 		conexionSql->Open();
 
 	}
-	catch (Exception^ exp)
+	catch (Exception^ )
 	{
 		std::cout << "no se pudo abrir conexion";
 	}

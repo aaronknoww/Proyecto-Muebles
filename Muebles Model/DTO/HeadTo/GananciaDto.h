@@ -4,7 +4,7 @@ using namespace System;
 
 namespace MueblesModel
 {
-	ref class GananciaDto
+	public ref class GananciaDto
 	{
 	private:
 

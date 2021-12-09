@@ -1,5 +1,12 @@
 #pragma once
+
 #include "MueblesConexion.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/InversionDto.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/GananciaDto.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/EstadisticaComprasDto.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/EstadisticaVentasDto.h"
+#include "/Estudios/Curso MYSQL/Proyecto muebles/Muebles CA/Muebles Model/DTO/HeadTo/EstadisticaRetirosDto.h"
+
 
 // CLASE PARA EJECUTAR TODOS LOS PROCEDIMIENTOS ALMEACENADOS.
 // SE MANDAN LLAMAR DIRECTO DE LA BASE DE DATOS.
@@ -28,7 +35,12 @@ namespace MueblesModel
 		void   procedimientoUpdateGasto(int idmov, Double cantidad, String^ fecha, String^ descripcion);
 		void   procedimientoUpdateMueble(int idmue, String^ nombre, String^ descripcion);
 		Double procedimientoCapitalActual();
-		
+		List<InversionDto^>^ procInversion(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<GananciaDto^>^  procGanancia(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<EstadisticaComprasDto^>^ procEstaditicaComprasDto(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<EstadisticaVentasDto^>^  procEstaditicaVentasDto(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<EstadisticaRetirosDto^>^ procEstadisticaRetirosDto(int periodo, String^ fechaInicial, String^ fechaFinal);
+
 	};
 }
 

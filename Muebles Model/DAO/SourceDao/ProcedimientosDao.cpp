@@ -112,3 +112,177 @@ Double MueblesModel::ProcedimientosDao::procedimientoCapitalActual()
 	return lectorSql->GetDouble(0);
 		
 }
+
+List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversion(int periodo, String^ fechaInicial, String^ fechaFinal)
+{
+	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
+	// fechaInicial-> Fecha de incio para ejecutar la consulta.
+	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
+
+	List<MueblesModel::InversionDto^>^ lista = gcnew List<InversionDto^>;
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL inversion(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+
+
+		lista->Add(gcnew InversionDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+
+		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		lista[i]->setFecha(lectorSql->GetString(1));//-----> Fecha del deposito.
+		lista[i]->setCantidad(lectorSql->GetDouble(2));//----> Se guarda la cantidad.
+		
+
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+
+	return lista;
+}
+
+List<MueblesModel::GananciaDto^>^ MueblesModel::ProcedimientosDao::procGanancia(int periodo, String^ fechaInicial, String^ fechaFinal)
+{
+	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
+	// fechaInicial-> Fecha de incio para ejecutar la consulta.
+	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
+
+	List<MueblesModel::GananciaDto^>^ lista = gcnew List<GananciaDto^>;
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL ganancia(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+
+
+		lista->Add(gcnew GananciaDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+
+		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		lista[i]->setCostoCompra(lectorSql->GetDouble(1));
+		lista[i]->setGastoExtra(lectorSql->GetDouble(2));
+		lista[i]->setGastoTotal(lectorSql->GetDouble(3));
+		lista[i]->setPrecioVenta(lectorSql->GetDouble(4));
+		lista[i]->setGanancia(lectorSql->GetDouble(5));
+
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+
+	return lista;
+}
+
+List<MueblesModel::EstadisticaComprasDto^>^ MueblesModel::ProcedimientosDao::procEstaditicaComprasDto(int periodo, String^ fechaInicial, String^ fechaFinal)
+{
+	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
+	// fechaInicial-> Fecha de incio para ejecutar la consulta.
+	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
+
+	List<MueblesModel::EstadisticaComprasDto^>^ lista = gcnew List<EstadisticaComprasDto^>;
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL estadisticaCompras(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+
+
+		lista->Add(gcnew EstadisticaComprasDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+
+		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		lista[i]->setMueble(lectorSql->GetString(1));
+		lista[i]->setFechaCompra(lectorSql->GetString(2));
+		lista[i]->setCosto(lectorSql->GetDouble(3));
+		lista[i]->setGasto(lectorSql->GetDouble(4));
+		
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+
+	return lista;
+}
+
+List<MueblesModel::EstadisticaVentasDto^>^ MueblesModel::ProcedimientosDao::procEstaditicaVentasDto(int periodo, String^ fechaInicial, String^ fechaFinal)
+{
+	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
+	// fechaInicial-> Fecha de incio para ejecutar la consulta.
+	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
+
+	List<MueblesModel::EstadisticaVentasDto^>^ lista = gcnew List<EstadisticaVentasDto^>;
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL estadisticaVentas(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+
+
+		lista->Add(gcnew EstadisticaVentasDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+
+		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		lista[i]->setMueble(lectorSql->GetString(1));
+		lista[i]->setFechaVenta(lectorSql->GetString(2));
+		lista[i]->setPrecio(lectorSql->GetDouble(3));
+		lista[i]->setGasto(lectorSql->GetDouble(4));
+
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+
+	return lista;
+}
+
+List<MueblesModel::EstadisticaRetirosDto^>^ MueblesModel::ProcedimientosDao::procEstadisticaRetirosDto(int periodo, String^ fechaInicial, String^ fechaFinal)
+{
+	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
+	// fechaInicial-> Fecha de incio para ejecutar la consulta.
+	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
+
+	List<MueblesModel::EstadisticaRetirosDto^>^ lista = gcnew List<EstadisticaRetirosDto^>;
+	comandoSql->Connection = abrirConexion();
+	comandoSql->CommandText = "CALL estadisticaRetiros(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
+	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
+
+	int i = 0; // Se inicializa el iterador;
+
+	while (lectorSql->Read())
+	{
+
+
+		lista->Add(gcnew EstadisticaRetirosDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+
+		
+		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		lista[i]->setFechaRetiro(lectorSql->GetString(1));
+		lista[i]->setCantidad(lectorSql->GetDouble(2));
+
+		i++;
+	}
+	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	cerrarConexion();
+
+
+	return lista;
+}

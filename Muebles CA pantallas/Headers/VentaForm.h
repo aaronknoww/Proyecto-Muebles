@@ -43,13 +43,13 @@ namespace MueblesCApantallas {
 								
 			cargarDgv(inventario);
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cï¿½digo de constructor aquï¿½
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~VentaForm()
 		{
@@ -61,7 +61,7 @@ namespace MueblesCApantallas {
 	
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseï¿½ador necesaria.
 		/// </summary>
 		
 		ProcedimentosController^ procedimiento;
@@ -116,8 +116,8 @@ namespace MueblesCApantallas {
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -670,7 +670,7 @@ namespace MueblesCApantallas {
 	private: System::Void txbFiltrar_TextChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		
-		filtrarDgv(inventario);// Recibe la consulta que se recibió de la base de datos.
+		filtrarDgv(inventario);// Recibe la consulta que se recibiï¿½ de la base de datos.
 		
 	}
 	private: System::Void dgvVistaAlm_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) 

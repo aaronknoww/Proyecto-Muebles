@@ -1,39 +1,39 @@
 #include "C:\Estudios\Curso MYSQL\Proyecto muebles\Muebles CA\Muebles Model\Headers\pch.h"
-#include "..\HeadTo\EstadisticaRetiros.h"
+#include "..\HeadTo\EstadisticaRetirosDto.h"
 
-MueblesModel::EstadisticaRetiros::EstadisticaRetiros()
+MueblesModel::EstadisticaRetirosDto::EstadisticaRetirosDto()
 {
 	_periodo = "";
 	_fechaRetiro = "";
 	_cantidad = 0;
 }
 
-void MueblesModel::EstadisticaRetiros::setPeriodo(String^ periodo)
+void MueblesModel::EstadisticaRetirosDto::setPeriodo(String^ periodo)
 {
 	this->_periodo = periodo;
 }
 
-void MueblesModel::EstadisticaRetiros::setFechaRetiro(String^ fechaRetiro)
+void MueblesModel::EstadisticaRetirosDto::setFechaRetiro(String^ fechaRetiro)
 {
 	this->_fechaRetiro = fechaRetiro;
 }
 
-void MueblesModel::EstadisticaRetiros::setCantidad(Double cantidad)
+void MueblesModel::EstadisticaRetirosDto::setCantidad(Double cantidad)
 {
 	this->_cantidad = cantidad;
 }
 
-String^ MueblesModel::EstadisticaRetiros::getPeriodo()
+String^ MueblesModel::EstadisticaRetirosDto::getPeriodo()
 {
 	return this->_periodo;
 }
 
-String^ MueblesModel::EstadisticaRetiros::getFechaRetiro()
+String^ MueblesModel::EstadisticaRetirosDto::getFechaRetiro()
 {
 	return this->_fechaRetiro;
 }
 
-Double MueblesModel::EstadisticaRetiros::getCantidad()
+Double MueblesModel::EstadisticaRetirosDto::getCantidad()
 {
 	return this->_cantidad;
 }

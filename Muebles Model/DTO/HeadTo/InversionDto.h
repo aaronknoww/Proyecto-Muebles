@@ -3,7 +3,7 @@ using namespace System;
 
 namespace MueblesModel
 {
-	ref class InversionDto
+	public ref class InversionDto
 	{
 	private:
 

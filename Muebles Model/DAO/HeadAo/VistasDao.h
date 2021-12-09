@@ -5,7 +5,7 @@
 
 
 
-// Aquí se mandan llamar todas las VISTAS creadas en la Base de Datos, en MySQL.
+// Aqui se mandan llamar todas las VISTAS creadas en la Base de Datos, en MySQL.
 
 
 using namespace System;

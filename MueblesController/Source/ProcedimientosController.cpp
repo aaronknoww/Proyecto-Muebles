@@ -67,16 +67,11 @@ Boolean MueblesController::ProcedimentosController::comprar(String^ nombre, Stri
 	ProcedimientosDao proCompra;
 	
 	Double resultado;
-	//System::Collections::Generic::array<System::String^>^ tipos fecha->GetDateTimeFormats();
-	
+
 	auto tipos = fecha->GetDateTimeFormats();
 	String^ formato = tipos[80];// Se obtiene un formato que concuerda con un datetime de mysql 
-	
-	
 
 	resultado = resultado.Parse(costo);
-
-	
 
 	try
 	{

@@ -3,7 +3,7 @@
 #include "Fila.h"
 
 
-//Aquí se guardan los datos obtenidos despues de ejecutar las vistas almacenadas en la base de datos.
+//Aquï¿½ se guardan los datos obtenidos despues de ejecutar las vistas almacenadas en la base de datos.
 //Despues esos datos pueden ser enviados al VIEW para ser utilizados.
 
 using namespace System;
@@ -34,8 +34,8 @@ namespace MueblesController
 	public:
 		VistasController();
 
-		List<Fila^>^ comprasRealizadasCtr(); //---> Ejecuta vista comprasRealizadas y los datos los convierte a texto.
-		List<Fila^>^ vistaInventarioCtr(); //---> Ejecuta vista comprasRealizadas y los datos los convierte a texto.
+		List<Fila^>^ comprasRealizadasCtr(); //--> Ejecuta vista comprasRealizadas y los datos los convierte a texto.
+		List<Fila^>^ vistaInventarioCtr(); //----> Ejecuta vista comprasRealizadas y los datos los convierte a texto.
 		List<Fila^>^ vistaDepositosCtr();
 		List<Fila^>^ vistaRetirosCtr(); 
 		List<Fila^>^ vistaVentasCtr();

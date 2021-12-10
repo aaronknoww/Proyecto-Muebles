@@ -1,7 +1,7 @@
 #pragma once
 
 // Clase para poder crear un objeto que equivale a una fila de una tabla. 
-// Solo conendra datos de tipo String.
+// Solo conentendra datos de tipo String.
 
 using namespace System;
 

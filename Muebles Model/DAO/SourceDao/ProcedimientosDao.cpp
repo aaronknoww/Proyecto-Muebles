@@ -3,6 +3,11 @@
 #include "..\HeadAo\ProcedimientosDao.h"
 
 
+MueblesModel::ProcedimientosDao::ProcedimientosDao()
+{
+	listaInversion = gcnew List<InversionDto^>;
+}
+
 void MueblesModel::ProcedimientosDao::procedimientoDeposito(Double monto, String^ fecha)
 {
 
@@ -113,13 +118,13 @@ Double MueblesModel::ProcedimientosDao::procedimientoCapitalActual()
 		
 }
 
-List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversion(int periodo, String^ fechaInicial, String^ fechaFinal)
+List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversionDto(int periodo, String^ fechaInicial, String^ fechaFinal)
 {
 	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
 	// fechaInicial-> Fecha de incio para ejecutar la consulta.
 	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
 
-	List<MueblesModel::InversionDto^>^ lista = gcnew List<InversionDto^>;
+	//List<MueblesModel::InversionDto^>^ lista = gcnew List<InversionDto^>;
 	comandoSql->Connection = abrirConexion();
 	comandoSql->CommandText = "CALL inversion(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
 	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
@@ -130,12 +135,20 @@ List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversio
 	{
 
 
-		lista->Add(gcnew InversionDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
+		listaInversion->Add(gcnew InversionDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
 		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
 
-		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
-		lista[i]->setFecha(lectorSql->GetString(1));//-----> Fecha del deposito.
-		lista[i]->setCantidad(lectorSql->GetDouble(2));//----> Se guarda la cantidad.
+		try
+		{
+			listaInversion[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+
+		}
+		catch (Exception^)
+		{
+			listaInversion[i]->setPeriodo("Total General");
+		}
+		listaInversion[i]->setFecha(lectorSql->GetString(1));//-----> Fecha del deposito.
+		listaInversion[i]->setCantidad(lectorSql->GetDouble(2));//----> Se guarda la cantidad.
 		
 
 		i++;
@@ -144,10 +157,10 @@ List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversio
 	cerrarConexion();
 
 
-	return lista;
+	return listaInversion;
 }
 
-List<MueblesModel::GananciaDto^>^ MueblesModel::ProcedimientosDao::procGanancia(int periodo, String^ fechaInicial, String^ fechaFinal)
+List<MueblesModel::GananciaDto^>^ MueblesModel::ProcedimientosDao::procGananciaDto(int periodo, String^ fechaInicial, String^ fechaFinal)
 {
 	// periodo------> Ingresa un entero que representa: 1.- semana, 2.-mes y 3.- anio. Esto es el periodo en que se va a mostrar la consulta.
 	// fechaInicial-> Fecha de incio para ejecutar la consulta.

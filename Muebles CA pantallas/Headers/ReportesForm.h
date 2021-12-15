@@ -5,10 +5,12 @@ namespace MueblesCApantallas {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	using namespace MueblesController;
 	/// <summary>
 	/// Resumen de ReportesForm
 	/// </summary>
@@ -19,16 +21,18 @@ namespace MueblesCApantallas {
 		{
 			InitializeComponent();
 			
-			this->dtpFinal->MaxDate = DateTime::Now; //--> Para que la fecha maxima de una consulta sea la actual.
-			
+			lista = gcnew List<RepFila^>;
+			procedimientos = gcnew ProcedimentosController;
+			this->dtpFinal->MaxDate = DateTime::Now; //-----> Para que la fecha maxima de una consulta sea la actual.
+			periodo = 0;
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cï¿½digo de constructor aquï¿½
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~ReportesForm()
 		{
@@ -37,28 +41,34 @@ namespace MueblesCApantallas {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ lblTituloDgv;
-	protected:
-	public: System::Windows::Forms::Label^ lblGetFecha;
+	
 	private:
+		/// <summary>
+		/// Variable del diseï¿½ador necesaria.
+		/// </summary>
+		
+		int periodo;
+		ProcedimentosController^ procedimientos;
+		List<RepFila^>^ lista;//--------------------> lista de objetos para poder guardar cualquier resultado de consultas
+		System::ComponentModel::Container ^components;
+
+		
+	
+	
+	
+	
+	
+	private: System::Windows::Forms::Label^ lblTituloDgv;
+	private: System::Windows::Forms::Label^ lblGetFecha;
 	private: System::Windows::Forms::Label^ labelFecha;
-	public:
 	private: System::Windows::Forms::Label^ lblGetDinero;
 	private: System::Windows::Forms::Label^ labelCapital;
 	private: System::Windows::Forms::DataGridView^ dgvVistaAlm;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nombreMue;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ desMueble;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ fecha;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ costoCompra;
-
 
 
 
 
 	private: System::Windows::Forms::GroupBox^ gbOpciones;
-
-
-
 	private: System::Windows::Forms::GroupBox^ gbPeriodo;
 	private: System::Windows::Forms::DateTimePicker^ dtpInicial;
 	private: System::Windows::Forms::DateTimePicker^ dtpFinal;
@@ -72,35 +82,45 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::RadioButton^ rbSemanal;
 	private: System::Windows::Forms::Label^ lblFechaIni;
 	private: System::Windows::Forms::Label^ lblFechaFinal;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col0;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Col4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Col5;
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Button^ btnEjecutar;
 
-	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
-		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lblTituloDgv = (gcnew System::Windows::Forms::Label());
 			this->lblGetFecha = (gcnew System::Windows::Forms::Label());
 			this->labelFecha = (gcnew System::Windows::Forms::Label());
 			this->lblGetDinero = (gcnew System::Windows::Forms::Label());
 			this->labelCapital = (gcnew System::Windows::Forms::Label());
 			this->dgvVistaAlm = (gcnew System::Windows::Forms::DataGridView());
-			this->nombreMue = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->desMueble = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->costoCompra = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->gbOpciones = (gcnew System::Windows::Forms::GroupBox());
 			this->rbRetiros = (gcnew System::Windows::Forms::RadioButton());
 			this->rbVentas = (gcnew System::Windows::Forms::RadioButton());
@@ -116,6 +136,12 @@ namespace MueblesCApantallas {
 			this->lblFechaIni = (gcnew System::Windows::Forms::Label());
 			this->lblFechaFinal = (gcnew System::Windows::Forms::Label());
 			this->btnEjecutar = (gcnew System::Windows::Forms::Button());
+			this->col0 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Col4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Col5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbOpciones->SuspendLayout();
 			this->gbPeriodo->SuspendLayout();
@@ -210,68 +236,38 @@ namespace MueblesCApantallas {
 			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
 			this->dgvVistaAlm->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dgvVistaAlm->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dgvVistaAlm->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
-				this->nombreMue,
-					this->desMueble, this->fecha, this->costoCompra
+			this->dgvVistaAlm->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+				this->col0, this->col1,
+					this->col2, this->col3, this->Col4, this->Col5
 			});
 			this->dgvVistaAlm->EnableHeadersVisualStyles = false;
 			this->dgvVistaAlm->GridColor = System::Drawing::Color::DarkGoldenrod;
 			this->dgvVistaAlm->Location = System::Drawing::Point(418, 186);
 			this->dgvVistaAlm->Name = L"dgvVistaAlm";
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::WindowFrame;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle4->BackColor = System::Drawing::SystemColors::WindowFrame;
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::SystemColors::InactiveCaption;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::InactiveCaption;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle4->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvVistaAlm->RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this->dgvVistaAlm->RowHeadersVisible = false;
 			this->dgvVistaAlm->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			dataGridViewCellStyle5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
+			dataGridViewCellStyle5->ForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(180)),
 				static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(137)));
-			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->dgvVistaAlm->RowsDefaultCellStyle = dataGridViewCellStyle5;
 			this->dgvVistaAlm->RowTemplate->Height = 24;
 			this->dgvVistaAlm->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvVistaAlm->Size = System::Drawing::Size(729, 424);
 			this->dgvVistaAlm->TabIndex = 78;
-			// 
-			// nombreMue
-			// 
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->nombreMue->DefaultCellStyle = dataGridViewCellStyle2;
-			this->nombreMue->HeaderText = L"Nombre";
-			this->nombreMue->MaxInputLength = 30;
-			this->nombreMue->MinimumWidth = 6;
-			this->nombreMue->Name = L"nombreMue";
-			// 
-			// desMueble
-			// 
-			this->desMueble->HeaderText = L"Descripcion";
-			this->desMueble->MaxInputLength = 60;
-			this->desMueble->MinimumWidth = 6;
-			this->desMueble->Name = L"desMueble";
-			// 
-			// fecha
-			// 
-			this->fecha->HeaderText = L"Costo Final";
-			this->fecha->MaxInputLength = 10;
-			this->fecha->MinimumWidth = 6;
-			this->fecha->Name = L"fecha";
-			// 
-			// costoCompra
-			// 
-			this->costoCompra->HeaderText = L"Fecha";
-			this->costoCompra->MaxInputLength = 60;
-			this->costoCompra->MinimumWidth = 6;
-			this->costoCompra->Name = L"costoCompra";
 			// 
 			// gbOpciones
 			// 
@@ -491,6 +487,50 @@ namespace MueblesCApantallas {
 			this->btnEjecutar->UseVisualStyleBackColor = false;
 			this->btnEjecutar->Click += gcnew System::EventHandler(this, &ReportesForm::btnEjecutar_Click);
 			// 
+			// col0
+			// 
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->col0->DefaultCellStyle = dataGridViewCellStyle2;
+			this->col0->HeaderText = L"Col0";
+			this->col0->MaxInputLength = 30;
+			this->col0->MinimumWidth = 6;
+			this->col0->Name = L"col0";
+			// 
+			// col1
+			// 
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->col1->DefaultCellStyle = dataGridViewCellStyle3;
+			this->col1->HeaderText = L"Col1";
+			this->col1->MaxInputLength = 60;
+			this->col1->MinimumWidth = 6;
+			this->col1->Name = L"col1";
+			// 
+			// col2
+			// 
+			this->col2->HeaderText = L"Col2";
+			this->col2->MaxInputLength = 10;
+			this->col2->MinimumWidth = 6;
+			this->col2->Name = L"col2";
+			// 
+			// col3
+			// 
+			this->col3->HeaderText = L"Col3";
+			this->col3->MaxInputLength = 60;
+			this->col3->MinimumWidth = 6;
+			this->col3->Name = L"col3";
+			// 
+			// Col4
+			// 
+			this->Col4->HeaderText = L"Col4";
+			this->Col4->MinimumWidth = 6;
+			this->Col4->Name = L"Col4";
+			// 
+			// Col5
+			// 
+			this->Col5->HeaderText = L"Col5";
+			this->Col5->MinimumWidth = 6;
+			this->Col5->Name = L"Col5";
+			// 
 			// ReportesForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -523,7 +563,9 @@ namespace MueblesCApantallas {
 		}
 #pragma endregion
 
-	private: Boolean ejecutarConsulta();
+	private: System::Boolean ejecutarConsulta();
+    private: System::Void	 cargarInversionDgv();
+    private: System::Void	 limpiarDgv();
 
 	private: System::Void btnEjecutar_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -531,15 +573,12 @@ namespace MueblesCApantallas {
 			"Opciones", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 		if (respuesta == System::Windows::Forms::DialogResult::Yes)
 		{
-
 			ejecutarConsulta();
 			MessageBox::Show("La operacion se ejecuto con existo.", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
-		
-
 		}
 		else
 		{
-			MessageBox::Show("Elige la fila que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			MessageBox::Show("Elige las Opciones que deseas", "Elegir", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 		}
 	}
 };

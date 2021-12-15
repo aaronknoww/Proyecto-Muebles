@@ -11,7 +11,7 @@ namespace MueblesModel
 		property String^ _periodo;
 		property Double  _costoCompra;
 		property Double	_gastoExtra;
-		property Double	_gatoTotal;
+		property Double	_gastoTotal;
 		property Double	_precioVenta;
 		property Double	_ganancia;
 
@@ -33,7 +33,7 @@ namespace MueblesModel
 		String^ getPeriodo();
 		Double  getCostoCompra();
 		Double	getGastoExtra();
-		Double	getGatoTotal();
+		Double	getGastoTotal();
 		Double	getPrecioVenta();
 		Double	getGanancia();
 	};

@@ -19,9 +19,15 @@ namespace MueblesModel
 {
 	public ref class ProcedimientosDao:ConexionBd
 	{
-		
+	private:
+		List<InversionDto^>^ listaInversion;
+
+
 
 	public:
+
+		ProcedimientosDao();
+
 		void   procedimientoDeposito(Double monto, String^ fecha);
 		void   procedimientoRetiro(Double monto, String^ fecha );
 		void   procedimientoCompra(String^ nombre, String^ descripcion, String^ fecha,Double costo, String^ descompra);
@@ -35,8 +41,8 @@ namespace MueblesModel
 		void   procedimientoUpdateGasto(int idmov, Double cantidad, String^ fecha, String^ descripcion);
 		void   procedimientoUpdateMueble(int idmue, String^ nombre, String^ descripcion);
 		Double procedimientoCapitalActual();
-		List<InversionDto^>^ procInversion(int periodo, String^ fechaInicial, String^ fechaFinal);
-		List<GananciaDto^>^  procGanancia(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<InversionDto^>^ procInversionDto(int periodo, String^ fechaInicial, String^ fechaFinal);
+		List<GananciaDto^>^  procGananciaDto(int periodo, String^ fechaInicial, String^ fechaFinal);
 		List<EstadisticaComprasDto^>^ procEstaditicaComprasDto(int periodo, String^ fechaInicial, String^ fechaFinal);
 		List<EstadisticaVentasDto^>^  procEstaditicaVentasDto(int periodo, String^ fechaInicial, String^ fechaFinal);
 		List<EstadisticaRetirosDto^>^ procEstadisticaRetirosDto(int periodo, String^ fechaInicial, String^ fechaFinal);

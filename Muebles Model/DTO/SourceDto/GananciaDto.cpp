@@ -12,7 +12,7 @@ MueblesModel::GananciaDto::GananciaDto()
     _periodo = "";
     _costoCompra = 0;
     _gastoExtra = 0;
-    _gatoTotal = 0;
+    _gastoTotal = 0;
     _precioVenta = 0;
     _ganancia = 0;
 }
@@ -34,7 +34,7 @@ void MueblesModel::GananciaDto::setGastoExtra(Double gastoExtra)
 
 void MueblesModel::GananciaDto::setGastoTotal(Double gastoTotal)
 {
-    this->_gatoTotal = gastoTotal;
+    this->_gastoTotal = gastoTotal;
 }
 
 void MueblesModel::GananciaDto::setPrecioVenta(Double precioVenta)
@@ -66,9 +66,9 @@ Double MueblesModel::GananciaDto::getGastoExtra()
     return this->_gastoExtra;
 }
 
-Double MueblesModel::GananciaDto::getGatoTotal()
+Double MueblesModel::GananciaDto::getGastoTotal()
 {
-    return this->_gatoTotal;
+    return this->_gastoTotal;
 }
 
 Double MueblesModel::GananciaDto::getPrecioVenta()

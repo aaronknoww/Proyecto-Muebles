@@ -72,7 +72,7 @@ String^ MueblesController::RepFila::getMueble()
 
 String^ MueblesController::RepFila::getFecha()
 {
-	this->_fecha;
+	return this->_fecha;
 }
 
 String^ MueblesController::RepFila::getCosto()

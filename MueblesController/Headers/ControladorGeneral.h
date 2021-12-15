@@ -19,7 +19,7 @@ namespace MueblesController
 		
 	public:
 		ControladorGeneral();
-		Boolean esNumero(Char); //-----------------> Regresa true si recibe algun número.
+		Boolean esNumero(Char); //-----------------> Regresa true si recibe algun nï¿½mero.
 		String^ suma(String^, String^);//----------> Suma dos valores string, para eso se utilizan Double.
 		String^ resta(String^, String^);//---------> Resta dos valores string, para eso los combierte en Double.
 		Boolean vacio(String^);//------------------> Recibe una cadena e indica si esta se encuentra vacia.

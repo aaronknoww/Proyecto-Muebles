@@ -3,6 +3,7 @@
 
 MueblesController::ProcedimentosController::ProcedimentosController()
 {
+	procedimiento = gcnew ProcedimientosDao();
 	return;
 }
 
@@ -257,4 +258,95 @@ Boolean MueblesController::ProcedimentosController::updateMueble(String^ idmue, 
 	}
 
 	return true;
+}
+
+List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procInversionCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
+{
+	//ProcedimientosDao^ procedimiento= gcnew ProcedimientosDao;
+	//ProcedimientosDao procedimiento;
+	List<RepFila^>^ listaG = gcnew List<RepFila^>;
+
+	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
+	auto tipo2 = fechaFinal->GetDateTimeFormats();
+	String^ fechaIni = tipo1[80];//---------------------> Se asigna el formato que se ajusta al de la base de datos.
+	String^ fechaFin = tipo2[80];
+
+	
+	try
+	{
+
+		int i = 0;
+	
+		
+		for each (InversionDto^ renglon in procedimiento->procInversionDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		{
+			//El procedimiento que se esta ejecutando regresa una lista de datos
+			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.
+
+			listaG->Add(gcnew RepFila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+			
+			listaG[i]->setPeriodo(renglon->getPeriodo());
+			listaG[i]->setFecha(renglon->getFecha());
+			listaG[i]->setCantidad(renglon->getCantidad().ToString("N2"));
+
+			i++;
+		}
+		return listaG;
+
+
+	}
+	catch (Exception^)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		listaG->Clear();
+		return listaG;
+	}
+
+	
+}
+
+List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procGananciasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
+{
+	ProcedimientosDao^ procedimiento;
+	List<RepFila^>^ listaG = gcnew List<RepFila^>;
+
+	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
+	auto tipo2 = fechaFinal->GetDateTimeFormats();
+	String^ fechaIni = tipo1[80];//---------------------> Se asigna el formato que se ajusta al de la base de datos.
+	String^ fechaFin = tipo2[80];
+
+
+	try
+	{
+
+		int i = 0;
+	
+	
+		for each (GananciaDto ^ renglon in procedimiento->procGananciaDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		{
+			//El procedimiento que se esta ejecutando regresa una lista de datos
+			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.
+
+			listaG->Add(gcnew RepFila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+			listaG[i]->setPeriodo(renglon->getPeriodo());
+			listaG[i]->setCosto(renglon->getCostoCompra().ToString("N2"));
+			listaG[i]->setGasto(renglon->getGastoExtra().ToString("N2"));
+			listaG[i]->setGastoTotal(renglon->getGastoTotal().ToString("N2"));
+			listaG[i]->setPrecio(renglon->getPrecioVenta().ToString("N2"));
+			listaG[i]->setGanacia(renglon->getGanancia().ToString("N2"));
+	
+			i++;
+		}
+		return listaG;
+
+
+	}
+	catch (Exception^)
+	{
+	
+		listaG->Clear();
+		return listaG;
+	}
+
 }

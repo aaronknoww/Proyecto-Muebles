@@ -1,5 +1,7 @@
 #pragma once
 #include "ControladorGeneral.h"
+#include "RepFila.h"
+
 using namespace System;
 using namespace System::Windows;
 using namespace System::ComponentModel;
@@ -19,8 +21,10 @@ namespace MueblesController
 	{
 	private:
 		ControladorGeneral f; //------> Para acceder a las funciones de controlador general.
+		ProcedimientosDao^ procedimiento;
 
 	public:
+
 		ProcedimentosController();
 		String^ getCapitalActual();
 		Boolean depositar(String^, DateTime^);//---> Manda llamar al stored procedure deposito. Utilizando Model DAO
@@ -34,6 +38,9 @@ namespace MueblesController
 		Boolean otrosGastos(String^ idmue, String^ cantidad, DateTime^ fecha, String^ descripcion);
 		Boolean updateGasto(String^ id, String^ cantidad, DateTime^ fecha, String^ descripcion);
 		Boolean updateMueble(String^ idmue, String^ nombre, String^ descripcion);
+
+		List<RepFila^>^ procInversionCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
+		List<RepFila^>^ procGananciasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
 	};
 
 }

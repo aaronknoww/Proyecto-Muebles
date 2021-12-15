@@ -12,5 +12,27 @@ Muebles CA pantallas/Muebles CA pantallas.vcxproj.filters
 Muebles CA pantallas/Muebles CA pantallas.vcxproj.user
 Muebles CA pantallas/Imagenes de sistema/
 Codigo auxiliar.txt
+Muebles Model/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+Muebles Model/Debug/Muebles Model.Build.CppClean.log
+Muebles Model/Debug/Muebles Model.log
+Muebles Model/Debug/Muebles Model.tlog/CL.command.1.tlog
+Muebles Model/Debug/Muebles Model.tlog/CopyLocal.read.1u.tlog
+Muebles Model/Debug/Muebles Model.tlog/CopyLocal.write.1u.tlog
+Muebles Model/Debug/Muebles Model.tlog/Muebles Model.lastbuildstate
+Muebles Model/Debug/Muebles Model.tlog/metagen.write.1.tlog
+Muebles Model/Debug/Muebles Model.tlog/unsuccessfulbuild
+Muebles Model/Debug/Muebles Model.vcxproj.FileListAbsolute.txt
+Muebles Model/Debug/vc142.pdb
+MueblesController/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+MueblesController/Debug/MueblesC.452BBAF1.tlog/CL.command.1.tlog
+MueblesController/Debug/MueblesC.452BBAF1.tlog/CopyLocal.read.1u.tlog
+MueblesController/Debug/MueblesC.452BBAF1.tlog/CopyLocal.write.1u.tlog
+MueblesController/Debug/MueblesC.452BBAF1.tlog/MueblesController.lastbuildstate
+MueblesController/Debug/MueblesC.452BBAF1.tlog/metagen.write.1.tlog
+MueblesController/Debug/MueblesC.452BBAF1.tlog/unsuccessfulbuild
+MueblesController/Debug/MueblesController.Build.CppClean.log
+MueblesController/Debug/MueblesController.log
+MueblesController/Debug/MueblesController.vcxproj.FileListAbsolute.txt
+MueblesController/Debug/vc142.pdb
 Codigo de C++ para MySQL.txt
 

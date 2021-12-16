@@ -6,7 +6,7 @@ System::Boolean MueblesCApantallas::ReportesForm::ejecutarConsulta()
     if (rbSemanal->Checked)
     {
         periodo = 1;
-        this->col0->HeaderText = "Semana";
+        this->col0->HeaderText = "Semana";//--> La columna 0 de todas las consultas va a cambiar segun el texto enlazado al perido.
     }
     else if (rbMensual->Checked)
     {
@@ -49,7 +49,7 @@ System::Boolean MueblesCApantallas::ReportesForm::ejecutarConsulta()
 
 System::Void MueblesCApantallas::ReportesForm::cargarInversionDgv()
 {
-
+    limpiarDgv();
     lista->Clear();
     lista = procedimientos->procInversionCtr(periodo, dtpInicial->Value, dtpFinal->Value);
     this->dgvVistaAlm->ColumnCount = 3; //Se indica el numero de columnas de que se van a utlizar.
@@ -58,7 +58,8 @@ System::Void MueblesCApantallas::ReportesForm::cargarInversionDgv()
     this->col1->HeaderText = "Fecha de Inversion";
     this->col2->HeaderText = "Cantidad";
 
-    this->dgvVistaAlm->RowsDefaultCellStyle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+
+    this->dgvVistaAlm->RowsDefaultCellStyle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
         static_cast<System::Byte>(0)));
     
     this->dgvVistaAlm->ColumnHeadersDefaultCellStyle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -82,6 +83,8 @@ System::Void MueblesCApantallas::ReportesForm::cargarInversionDgv()
 
     }
 
+    
+    delete procedimientos;
     return System::Void();
 }
 

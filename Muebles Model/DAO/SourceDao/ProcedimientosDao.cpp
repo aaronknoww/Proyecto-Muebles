@@ -124,7 +124,7 @@ List<MueblesModel::InversionDto^>^ MueblesModel::ProcedimientosDao::procInversio
 	// fechaInicial-> Fecha de incio para ejecutar la consulta.
 	// fechaFinal---> Fecha hasta donde se va ejecutar la consulta.
 
-	//List<MueblesModel::InversionDto^>^ lista = gcnew List<InversionDto^>;
+	listaInversion->Clear();
 	comandoSql->Connection = abrirConexion();
 	comandoSql->CommandText = "CALL inversion(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
 	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.

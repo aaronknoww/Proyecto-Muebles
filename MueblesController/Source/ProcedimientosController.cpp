@@ -307,7 +307,7 @@ List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::p
 
 List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procGananciasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
 {
-	ProcedimientosDao^ procedimiento;
+	ProcedimientosDao^ procedimientop;
 	List<RepFila^>^ listaG = gcnew List<RepFila^>;
 
 	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
@@ -322,7 +322,7 @@ List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::p
 		int i = 0;
 	
 	
-		for each (GananciaDto ^ renglon in procedimiento->procGananciaDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		for each (GananciaDto ^ renglon in procedimientop->procGananciaDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
 		{
 			//El procedimiento que se esta ejecutando regresa una lista de datos
 			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.

@@ -25,6 +25,8 @@ namespace MueblesCApantallas {
 			procedimientos = gcnew ProcedimentosController;
 			this->dtpFinal->MaxDate = DateTime::Now; //-----> Para que la fecha maxima de una consulta sea la actual.
 			periodo = 0;
+			this->dgvVistaAlm->ColumnCount = 6;// El maximo de columnas a utilizar.
+			
 			//
 			//TODO: agregar c�digo de constructor aqu�
 			//
@@ -88,6 +90,12 @@ namespace MueblesCApantallas {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Col4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Col5;
+
+
+
+
+
+
 
 
 
@@ -495,6 +503,7 @@ namespace MueblesCApantallas {
 			this->col0->MaxInputLength = 30;
 			this->col0->MinimumWidth = 6;
 			this->col0->Name = L"col0";
+			this->col0->Visible = false;
 			// 
 			// col1
 			// 
@@ -504,6 +513,7 @@ namespace MueblesCApantallas {
 			this->col1->MaxInputLength = 60;
 			this->col1->MinimumWidth = 6;
 			this->col1->Name = L"col1";
+			this->col1->Visible = false;
 			// 
 			// col2
 			// 
@@ -511,6 +521,7 @@ namespace MueblesCApantallas {
 			this->col2->MaxInputLength = 10;
 			this->col2->MinimumWidth = 6;
 			this->col2->Name = L"col2";
+			this->col2->Visible = false;
 			// 
 			// col3
 			// 
@@ -518,18 +529,21 @@ namespace MueblesCApantallas {
 			this->col3->MaxInputLength = 60;
 			this->col3->MinimumWidth = 6;
 			this->col3->Name = L"col3";
+			this->col3->Visible = false;
 			// 
 			// Col4
 			// 
 			this->Col4->HeaderText = L"Col4";
 			this->Col4->MinimumWidth = 6;
 			this->Col4->Name = L"Col4";
+			this->Col4->Visible = false;
 			// 
 			// Col5
 			// 
 			this->Col5->HeaderText = L"Col5";
 			this->Col5->MinimumWidth = 6;
 			this->Col5->Name = L"Col5";
+			this->Col5->Visible = false;
 			// 
 			// ReportesForm
 			// 
@@ -565,6 +579,10 @@ namespace MueblesCApantallas {
 
 	private: System::Boolean ejecutarConsulta();
     private: System::Void	 cargarInversionDgv();
+    private: System::Void	 cargarGananciaDgv();
+    private: System::Void	 cargarComprasDgv(); // Se carga la consulta EstaditicaCompras
+    private: System::Void	 cargarVentasDgv(); // Se carga la consulta EstaditicaVentas
+    private: System::Void	 cargarRetirosDgv(); // Se carga la consulta EstaditicaRetiros
     private: System::Void	 limpiarDgv();
 
 	private: System::Void btnEjecutar_Click(System::Object^ sender, System::EventArgs^ e)

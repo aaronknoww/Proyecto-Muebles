@@ -207,6 +207,8 @@ List<MueblesModel::EstadisticaComprasDto^>^ MueblesModel::ProcedimientosDao::pro
 	comandoSql->CommandText = "CALL estadisticaCompras(" + periodo + "," + fechaInicial + "," + fechaFinal + ");";
 	lectorSql = comandoSql->ExecuteReader();//-----> Se lee el comando o consulta.
 
+	// call estadisticaCompras(1, '2021/01/01 19:35:05','2021/10/30 19:35:05');
+
 	int i = 0; // Se inicializa el iterador;
 
 	while (lectorSql->Read())
@@ -214,9 +216,18 @@ List<MueblesModel::EstadisticaComprasDto^>^ MueblesModel::ProcedimientosDao::pro
 
 
 		lista->Add(gcnew EstadisticaComprasDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
-		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+	
+			// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
+		try // Evita que cuando esta consulta reciba un nulo de la base de datos, se detenga el programa.
+		{
+			lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		}
+		catch (Exception^)
+		{
+			lista[i]->setPeriodo("Total General");
+		}
 
-		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		
 		lista[i]->setMueble(lectorSql->GetString(1));
 		lista[i]->setFechaCompra(lectorSql->GetString(2));
 		lista[i]->setCosto(lectorSql->GetDouble(3));
@@ -251,7 +262,15 @@ List<MueblesModel::EstadisticaVentasDto^>^ MueblesModel::ProcedimientosDao::proc
 		lista->Add(gcnew EstadisticaVentasDto); //Se crea un objeto DTO, que equivale a solo una fila de la consulta.
 		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
 
-		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		try // Evita que cuando esta consulta reciba un nulo de la base de datos, se detenga el programa.
+		{
+			lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		}
+		catch (Exception^)
+		{
+			lista[i]->setPeriodo("Total General");
+		}
+
 		lista[i]->setMueble(lectorSql->GetString(1));
 		lista[i]->setFechaVenta(lectorSql->GetString(2));
 		lista[i]->setPrecio(lectorSql->GetDouble(3));
@@ -287,13 +306,21 @@ List<MueblesModel::EstadisticaRetirosDto^>^ MueblesModel::ProcedimientosDao::pro
 		// Se llenan los datos del objeto creado con los datos que provienen de la consulta.
 
 		
-		lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		try // Evita que cuando esta consulta reciba un nulo de la base de datos, se detenga el programa.
+		{
+			lista[i]->setPeriodo(lectorSql->GetString(0));//---> Ingresa el numero de semana, nombre de mes o anio.
+		}
+		catch (Exception^)
+		{
+			lista[i]->setPeriodo("Total General");
+		}
+
 		lista[i]->setFechaRetiro(lectorSql->GetString(1));
 		lista[i]->setCantidad(lectorSql->GetDouble(2));
 
 		i++;
 	}
-	lectorSql->Close();//--------------------------> Se cierra el lector de de la consulta.
+	lectorSql->Close();//----------> Se cierra el lector de de la consulta.
 	cerrarConexion();
 
 

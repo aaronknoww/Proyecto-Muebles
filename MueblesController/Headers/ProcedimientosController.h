@@ -41,6 +41,9 @@ namespace MueblesController
 
 		List<RepFila^>^ procInversionCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
 		List<RepFila^>^ procGananciasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
+		List<RepFila^>^ procEstaditicaComprasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
+		List<RepFila^>^ procEstaditicaVentasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
+		List<RepFila^>^ procEstaditicaRetirosCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal);
 	};
 
 }

@@ -307,7 +307,7 @@ List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::p
 
 List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procGananciasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
 {
-	ProcedimientosDao^ procedimientop;
+	ProcedimientosDao^ procedimientop = gcnew ProcedimientosDao;
 	List<RepFila^>^ listaG = gcnew List<RepFila^>;
 
 	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
@@ -349,4 +349,135 @@ List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::p
 		return listaG;
 	}
 
+}
+
+List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procEstaditicaComprasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
+{
+	ProcedimientosDao^ procedimientop = gcnew ProcedimientosDao; //Se crea un puntero de manera local.
+	
+	List<RepFila^>^ listaG = gcnew List<RepFila^>;
+
+	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
+	auto tipo2 = fechaFinal->GetDateTimeFormats();
+	String^ fechaIni = tipo1[80];//---------------------> Se asigna el formato que se ajusta al de la base de datos.
+	String^ fechaFin = tipo2[80];
+
+
+	try
+	{
+
+		int i = 0;
+
+
+		for each (EstadisticaComprasDto^ renglon in procedimientop->procEstaditicaComprasDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		{
+			//El procedimiento que se esta ejecutando regresa una lista de datos
+			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.
+
+			listaG->Add(gcnew RepFila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+			listaG[i]->setPeriodo(renglon->getPeriodo());
+			listaG[i]->setMueble(renglon->getMueble());
+			listaG[i]->setFecha(renglon->getFechaCompra());
+			listaG[i]->setCosto(renglon->getPrecio().ToString("N2"));
+			listaG[i]->setGasto(renglon->getGasto().ToString("N2"));
+			
+			i++;
+		}
+		return listaG;
+
+
+	}
+	catch (Exception^)
+	{
+
+		listaG->Clear();
+		return listaG;
+	}
+}
+
+List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procEstaditicaVentasCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
+{
+	ProcedimientosDao^ procedimientop = gcnew ProcedimientosDao; //Se crea un puntero de manera local.
+
+	List<RepFila^>^ listaG = gcnew List<RepFila^>;
+
+	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
+	auto tipo2 = fechaFinal->GetDateTimeFormats();
+	String^ fechaIni = tipo1[80];//---------------------> Se asigna el formato que se ajusta al de la base de datos.
+	String^ fechaFin = tipo2[80];
+
+
+	try
+	{
+
+		int i = 0;
+
+
+		for each (EstadisticaVentasDto ^ renglon in procedimientop->procEstaditicaVentasDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		{
+			//El procedimiento que se esta ejecutando regresa una lista de datos
+			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.
+
+			listaG->Add(gcnew RepFila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+			listaG[i]->setPeriodo(renglon->getPeriodo());
+			listaG[i]->setMueble(renglon->getMueble());
+			listaG[i]->setFecha(renglon->getFechaCompra());
+			listaG[i]->setPrecio(renglon->getPrecio().ToString("N2"));
+			listaG[i]->setGasto(renglon->getGasto().ToString("N2"));
+			
+			i++;
+		}
+		return listaG;
+
+
+	}
+	catch (Exception^)
+	{
+
+		listaG->Clear();
+		return listaG;
+	}
+}
+
+List<MueblesController::RepFila^>^ MueblesController::ProcedimentosController::procEstaditicaRetirosCtr(int periodo, DateTime^ fechaInicial, DateTime^ fechaFinal)
+{
+	List<RepFila^>^ listaG = gcnew List<RepFila^>;
+
+	auto tipo1 = fechaInicial->GetDateTimeFormats();//--> Se cargan todos los formatos de fechas.
+	auto tipo2 = fechaFinal->GetDateTimeFormats();
+	String^ fechaIni = tipo1[80];//---------------------> Se asigna el formato que se ajusta al de la base de datos.
+	String^ fechaFin = tipo2[80];
+
+
+	try
+	{
+
+		int i = 0;
+
+
+		for each (EstadisticaRetirosDto ^ renglon in procedimiento->procEstadisticaRetirosDto(periodo, f.cadenaSql(fechaIni), f.cadenaSql(fechaFin)))
+		{
+			//El procedimiento que se esta ejecutando regresa una lista de datos
+			//Con el foreach se recorre cada objeto de la lista que regreso el procedimiento.
+
+			listaG->Add(gcnew RepFila); // Se crea un objeto fila para poder guardar los datos que llegan de la consulta.
+
+			listaG[i]->setPeriodo(renglon->getPeriodo());
+			listaG[i]->setFecha(renglon->getFechaRetiro());
+			listaG[i]->setCantidad(renglon->getCantidad().ToString("N2"));
+
+			i++;
+		}
+		return listaG;
+
+
+	}
+	catch (Exception^)
+	{
+		// Si hay algun error con la insercion en la base de datos, entra a esta instruccion.
+		listaG->Clear();
+		return listaG;
+	}
 }

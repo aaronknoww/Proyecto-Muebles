@@ -24,9 +24,10 @@ namespace MueblesCApantallas {
 			lista = gcnew List<RepFila^>;
 			procedimientos = gcnew ProcedimentosController;
 			this->dtpFinal->MaxDate = DateTime::Now; //-----> Para que la fecha maxima de una consulta sea la actual.
+			this->lblGetFecha->Text = DateTime::Now.ToShortDateString();
 			periodo = 0;
 			this->dgvVistaAlm->ColumnCount = 6;// El maximo de columnas a utilizar.
-			
+			this->lblGetDinero->Text = procedimientos->getCapitalActual();
 			//
 			//TODO: agregar c�digo de constructor aqu�
 			//
@@ -129,6 +130,12 @@ namespace MueblesCApantallas {
 			this->lblGetDinero = (gcnew System::Windows::Forms::Label());
 			this->labelCapital = (gcnew System::Windows::Forms::Label());
 			this->dgvVistaAlm = (gcnew System::Windows::Forms::DataGridView());
+			this->col0 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->col3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Col4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Col5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->gbOpciones = (gcnew System::Windows::Forms::GroupBox());
 			this->rbRetiros = (gcnew System::Windows::Forms::RadioButton());
 			this->rbVentas = (gcnew System::Windows::Forms::RadioButton());
@@ -144,12 +151,6 @@ namespace MueblesCApantallas {
 			this->lblFechaIni = (gcnew System::Windows::Forms::Label());
 			this->lblFechaFinal = (gcnew System::Windows::Forms::Label());
 			this->btnEjecutar = (gcnew System::Windows::Forms::Button());
-			this->col0 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->col1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->col2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->col3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Col4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Col5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvVistaAlm))->BeginInit();
 			this->gbOpciones->SuspendLayout();
 			this->gbPeriodo->SuspendLayout();
@@ -204,7 +205,7 @@ namespace MueblesCApantallas {
 			this->lblGetDinero->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->lblGetDinero->Font = (gcnew System::Drawing::Font(L"Rockwell", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblGetDinero->ForeColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->lblGetDinero->ForeColor = System::Drawing::Color::MediumSeaGreen;
 			this->lblGetDinero->Location = System::Drawing::Point(583, 66);
 			this->lblGetDinero->Name = L"lblGetDinero";
 			this->lblGetDinero->Size = System::Drawing::Size(155, 33);
@@ -277,6 +278,56 @@ namespace MueblesCApantallas {
 			this->dgvVistaAlm->Size = System::Drawing::Size(729, 424);
 			this->dgvVistaAlm->TabIndex = 78;
 			// 
+			// col0
+			// 
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->col0->DefaultCellStyle = dataGridViewCellStyle2;
+			this->col0->HeaderText = L"Col0";
+			this->col0->MaxInputLength = 30;
+			this->col0->MinimumWidth = 6;
+			this->col0->Name = L"col0";
+			this->col0->Visible = false;
+			// 
+			// col1
+			// 
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			this->col1->DefaultCellStyle = dataGridViewCellStyle3;
+			this->col1->HeaderText = L"Col1";
+			this->col1->MaxInputLength = 60;
+			this->col1->MinimumWidth = 6;
+			this->col1->Name = L"col1";
+			this->col1->Visible = false;
+			// 
+			// col2
+			// 
+			this->col2->HeaderText = L"Col2";
+			this->col2->MaxInputLength = 10;
+			this->col2->MinimumWidth = 6;
+			this->col2->Name = L"col2";
+			this->col2->Visible = false;
+			// 
+			// col3
+			// 
+			this->col3->HeaderText = L"Col3";
+			this->col3->MaxInputLength = 60;
+			this->col3->MinimumWidth = 6;
+			this->col3->Name = L"col3";
+			this->col3->Visible = false;
+			// 
+			// Col4
+			// 
+			this->Col4->HeaderText = L"Col4";
+			this->Col4->MinimumWidth = 6;
+			this->Col4->Name = L"Col4";
+			this->Col4->Visible = false;
+			// 
+			// Col5
+			// 
+			this->Col5->HeaderText = L"Col5";
+			this->Col5->MinimumWidth = 6;
+			this->Col5->Name = L"Col5";
+			this->Col5->Visible = false;
+			// 
 			// gbOpciones
 			// 
 			this->gbOpciones->BackColor = System::Drawing::Color::Transparent;
@@ -287,7 +338,7 @@ namespace MueblesCApantallas {
 			this->gbOpciones->Controls->Add(this->rbInversion);
 			this->gbOpciones->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->gbOpciones->ForeColor = System::Drawing::Color::CornflowerBlue;
+			this->gbOpciones->ForeColor = System::Drawing::Color::Peru;
 			this->gbOpciones->Location = System::Drawing::Point(23, 177);
 			this->gbOpciones->Name = L"gbOpciones";
 			this->gbOpciones->Size = System::Drawing::Size(382, 203);
@@ -300,6 +351,7 @@ namespace MueblesCApantallas {
 			this->rbRetiros->AutoSize = true;
 			this->rbRetiros->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbRetiros->ForeColor = System::Drawing::Color::BurlyWood;
 			this->rbRetiros->Location = System::Drawing::Point(12, 154);
 			this->rbRetiros->Name = L"rbRetiros";
 			this->rbRetiros->Size = System::Drawing::Size(111, 33);
@@ -313,6 +365,7 @@ namespace MueblesCApantallas {
 			this->rbVentas->AutoSize = true;
 			this->rbVentas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbVentas->ForeColor = System::Drawing::Color::BurlyWood;
 			this->rbVentas->Location = System::Drawing::Point(12, 125);
 			this->rbVentas->Name = L"rbVentas";
 			this->rbVentas->Size = System::Drawing::Size(107, 33);
@@ -326,6 +379,7 @@ namespace MueblesCApantallas {
 			this->rbCompras->AutoSize = true;
 			this->rbCompras->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbCompras->ForeColor = System::Drawing::Color::BurlyWood;
 			this->rbCompras->Location = System::Drawing::Point(12, 96);
 			this->rbCompras->Name = L"rbCompras";
 			this->rbCompras->Size = System::Drawing::Size(132, 33);
@@ -339,6 +393,7 @@ namespace MueblesCApantallas {
 			this->rbGanancia->AutoSize = true;
 			this->rbGanancia->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbGanancia->ForeColor = System::Drawing::Color::BurlyWood;
 			this->rbGanancia->Location = System::Drawing::Point(12, 66);
 			this->rbGanancia->Name = L"rbGanancia";
 			this->rbGanancia->Size = System::Drawing::Size(135, 33);
@@ -353,6 +408,7 @@ namespace MueblesCApantallas {
 			this->rbInversion->Checked = true;
 			this->rbInversion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbInversion->ForeColor = System::Drawing::Color::BurlyWood;
 			this->rbInversion->Location = System::Drawing::Point(12, 35);
 			this->rbInversion->Name = L"rbInversion";
 			this->rbInversion->Size = System::Drawing::Size(131, 33);
@@ -369,7 +425,7 @@ namespace MueblesCApantallas {
 			this->gbPeriodo->Controls->Add(this->rbMensual);
 			this->gbPeriodo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->gbPeriodo->ForeColor = System::Drawing::Color::CornflowerBlue;
+			this->gbPeriodo->ForeColor = System::Drawing::Color::Peru;
 			this->gbPeriodo->Location = System::Drawing::Point(23, 400);
 			this->gbPeriodo->Name = L"gbPeriodo";
 			this->gbPeriodo->Size = System::Drawing::Size(382, 130);
@@ -383,6 +439,7 @@ namespace MueblesCApantallas {
 			this->rbSemanal->Checked = true;
 			this->rbSemanal->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbSemanal->ForeColor = System::Drawing::Color::Tan;
 			this->rbSemanal->Location = System::Drawing::Point(12, 30);
 			this->rbSemanal->Name = L"rbSemanal";
 			this->rbSemanal->Size = System::Drawing::Size(129, 33);
@@ -396,6 +453,7 @@ namespace MueblesCApantallas {
 			this->radioButton1->AutoSize = true;
 			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->radioButton1->ForeColor = System::Drawing::Color::Tan;
 			this->radioButton1->Location = System::Drawing::Point(12, 85);
 			this->radioButton1->Name = L"radioButton1";
 			this->radioButton1->Size = System::Drawing::Size(94, 33);
@@ -409,6 +467,7 @@ namespace MueblesCApantallas {
 			this->rbMensual->AutoSize = true;
 			this->rbMensual->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->rbMensual->ForeColor = System::Drawing::Color::Tan;
 			this->rbMensual->Location = System::Drawing::Point(12, 57);
 			this->rbMensual->Name = L"rbMensual";
 			this->rbMensual->Size = System::Drawing::Size(125, 33);
@@ -431,7 +490,7 @@ namespace MueblesCApantallas {
 			this->dtpInicial->Name = L"dtpInicial";
 			this->dtpInicial->Size = System::Drawing::Size(188, 30);
 			this->dtpInicial->TabIndex = 93;
-			this->dtpInicial->Value = System::DateTime(2021, 12, 25, 23, 59, 59, 0);
+			this->dtpInicial->Value = System::DateTime(2021, 1, 1, 0, 0, 0, 0);
 			// 
 			// dtpFinal
 			// 
@@ -494,56 +553,6 @@ namespace MueblesCApantallas {
 			this->btnEjecutar->Text = L"Ejecutar";
 			this->btnEjecutar->UseVisualStyleBackColor = false;
 			this->btnEjecutar->Click += gcnew System::EventHandler(this, &ReportesForm::btnEjecutar_Click);
-			// 
-			// col0
-			// 
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->col0->DefaultCellStyle = dataGridViewCellStyle2;
-			this->col0->HeaderText = L"Col0";
-			this->col0->MaxInputLength = 30;
-			this->col0->MinimumWidth = 6;
-			this->col0->Name = L"col0";
-			this->col0->Visible = false;
-			// 
-			// col1
-			// 
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			this->col1->DefaultCellStyle = dataGridViewCellStyle3;
-			this->col1->HeaderText = L"Col1";
-			this->col1->MaxInputLength = 60;
-			this->col1->MinimumWidth = 6;
-			this->col1->Name = L"col1";
-			this->col1->Visible = false;
-			// 
-			// col2
-			// 
-			this->col2->HeaderText = L"Col2";
-			this->col2->MaxInputLength = 10;
-			this->col2->MinimumWidth = 6;
-			this->col2->Name = L"col2";
-			this->col2->Visible = false;
-			// 
-			// col3
-			// 
-			this->col3->HeaderText = L"Col3";
-			this->col3->MaxInputLength = 60;
-			this->col3->MinimumWidth = 6;
-			this->col3->Name = L"col3";
-			this->col3->Visible = false;
-			// 
-			// Col4
-			// 
-			this->Col4->HeaderText = L"Col4";
-			this->Col4->MinimumWidth = 6;
-			this->Col4->Name = L"Col4";
-			this->Col4->Visible = false;
-			// 
-			// Col5
-			// 
-			this->Col5->HeaderText = L"Col5";
-			this->Col5->MinimumWidth = 6;
-			this->Col5->Name = L"Col5";
-			this->Col5->Visible = false;
 			// 
 			// ReportesForm
 			// 

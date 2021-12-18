@@ -42,7 +42,7 @@ namespace MueblesCApantallas {
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estï¿½n usando.
 		/// </summary>
 		~RetiroForm()
 		{
@@ -92,8 +92,8 @@ namespace MueblesCApantallas {
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// Mï¿½todo necesario para admitir el Diseï¿½ador. No se puede modificar
+		/// el contenido de este mï¿½todo con el editor de cï¿½digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -490,7 +490,7 @@ namespace MueblesCApantallas {
 			{
 				if (procedimiento->retiro(this->textBoxRetiro->Text, fechaActual))
 				{
-					MessageBox::Show("Se retiró correctamente", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
+					MessageBox::Show("Se retirï¿½ correctamente", "Correcto", MessageBoxButtons::OK, MessageBoxIcon::None);
 
 					this->lblGetDinero->Text = procedimiento->getCapitalActual();
 					this->lblGetActual->Text = this->lblGetDinero->Text;
